@@ -1,0 +1,4409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AERIALARC - Official Website | Digital Innovation Solutions</title>
+  <meta name="description" content="AERIALARC creates cutting-edge digital tools and solutions. Explore our innovative products for username generation, security, analytics, and more.">
+  <meta name="keywords" content="digital innovation, username generator, secure vault, analytics dashboard, technology solutions">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* CSS Variables - Black, Grey & Gold Theme */
+    :root {
+      --primary-color: #D4AF37;
+      --primary-dark: #B8941E;
+      --secondary-color: #C5B358;
+      --secondary-dark: #A89543;
+      --accent-color: #FFD700;
+      --accent-dark: #DAA520;
+      --bg-dark: #000000;
+      --bg-card: rgba(20, 20, 20, 0.95);
+      --text-primary: #FFFFFF;
+      --text-secondary: #E5E5E5;
+      --text-muted: #AAAAAA;
+      --border-color: rgba(212, 175, 55, 0.3);
+      --shadow-primary: 0 10px 30px rgba(212, 175, 55, 0.25);
+      --shadow-secondary: 0 10px 30px rgba(197, 179, 88, 0.25);
+      --shadow-accent: 0 10px 30px rgba(255, 215, 0, 0.25);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: transparent;
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      position: relative;
+    }
+
+    /* Prevent scroll when mobile UI overlays open */
+    body.no-scroll {
+      overflow: hidden !important;
+      position: fixed;
+      width: 100%;
+    }
+
+    /* Responsive images */
+    img, .product-img img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Touch-friendly buttons */
+    .btn, .ai-suggestion-btn, .operator-transfer-btn {
+      min-height: 48px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    /* Mobile menu link sizing */
+    .mobile-menu a {
+      font-size: 1.05rem;
+      padding: 12px 0;
+      display: block;
+    }
+
+    .mobile-contact {
+      padding: 14px 16px;
+      font-size: 1rem;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4 {
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 5rem);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--primary-dark) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--text-primary);
+    }
+
+    h3 {
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: var(--primary-color);
+    }
+
+    p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.8;
+    }
+
+    /* Header & Navigation - COMPACT DESIGN WITHOUT LOGO */
+    header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: auto;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 50px;
+      z-index: 1000;
+      transition: var(--transition);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      max-width: 90%;
+    }
+
+    header.scrolled {
+      top: 10px;
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      padding: 12px 30px;
+    }
+
+    /* Navigation - Compact Style */
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 8px 0;
+      position: relative;
+      transition: var(--transition);
+      display: block;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    nav ul li a:hover {
+      color: var(--primary-color);
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      transition: width 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .contact-info-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      padding: 10px 20px;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .contact-info-top:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-primary);
+    }
+
+    /* Shopping Basket Button */
+    .basket-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+      padding: 10px 18px;
+      border-radius: 50px;
+      color: #000;
+      font-weight: 700;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      text-decoration: none;
+      white-space: nowrap;
+      cursor: pointer;
+      border: none;
+      position: relative;
+    }
+
+    .basket-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-secondary);
+    }
+
+    .basket-icon {
+      font-size: 1.1rem;
+      position: relative;
+    }
+
+    .basket-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: var(--primary-color);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 800;
+      box-shadow: 0 2px 8px rgba(47, 47, 47, 0.5);
+    }
+
+    .basket-count.hidden {
+      display: none;
+    }
+
+    /* Basket Panel */
+    .basket-panel {
+      position: fixed;
+      top: 0;
+      right: -450px;
+      width: 450px;
+      height: 100vh;
+      background: rgba(10, 10, 10, 0.98);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 2px solid var(--primary-color);
+      box-shadow: -10px 0 50px rgba(78, 78, 78, 0.3);
+      z-index: 2000;
+      transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .basket-panel.active {
+      right: 0;
+    }
+
+    .basket-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1999;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .basket-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .basket-header {
+      padding: 25px 30px;
+      border-bottom: 1px solid rgba(99, 99, 99, 0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .basket-header h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      text-shadow: 0 0 10px rgba(148, 148, 148, 0.5);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .basket-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .basket-close-btn:hover {
+      background: rgba(0, 0, 0, 0.3);
+      transform: rotate(90deg);
+    }
+
+    .basket-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 30px;
+    }
+
+    .basket-empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .basket-empty i {
+      font-size: 4rem;
+      color: rgba(120, 120, 120, 0.3);
+      margin-bottom: 20px;
+    }
+
+    .basket-empty p {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .basket-item {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(132, 132, 132, 0.2);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      margin-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      transition: var(--transition);
+    }
+
+    .basket-item:hover {
+      background: rgba(77, 77, 77, 0.1);
+      border-color: var(--primary-color);
+      box-shadow: 0 5px 20px rgba(68, 68, 68, 0.2);
+    }
+
+    .basket-item-details {
+      flex: 1;
+    }
+
+    .basket-item-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+    }
+
+    .basket-item-platform {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 5px;
+    }
+
+    .basket-item-price {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--secondary-color);
+      text-shadow: 0 0 10px rgba(158, 158, 158, 0.5);
+    }
+
+    .basket-item-remove {
+      background: rgba(104, 104, 104, 0.2);
+      border: 1px solid var(--primary-color);
+      color: var(--primary-color);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1rem;
+    }
+
+    .basket-item-remove:hover {
+      background: var(--primary-color);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .basket-footer {
+      padding: 25px 30px;
+      border-top: 2px solid rgba(212, 175, 55, 0.3);
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .basket-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+      font-weight: 800;
+    }
+
+    .basket-total-label {
+      color: var(--text-secondary);
+    }
+
+    .basket-total-amount {
+      color: var(--primary-color);
+      text-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+      font-size: 1.5rem;
+    }
+
+    .basket-checkout-btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      border: none;
+      border-radius: var(--radius-md);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 800;
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .basket-checkout-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .basket-checkout-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Mobile Menu Button */
+    .mobile-menu-btn {
+      display: none;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1.3rem;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      transition: var(--transition);
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .mobile-menu-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Hero Section - Adjusted for compact header */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 140px 0 100px;
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    /* Video Background Styles */
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+      background: #000000;
+    }
+
+    .video-background video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    .video-background::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      animation: fadeInUp 0.8s ease;
+      margin-top: 20px;
+    }
+
+    .hero h1 {
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.4s forwards;
+      max-width: 700px;
+    }
+
+    /* Speed Indicator */
+    .speed-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 10px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease forwards;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .speed-indicator i {
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Buttons */
+    .hero-btns {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 40px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 0.6s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 18px 40px;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      min-width: 220px;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .btn:hover::before {
+      width: 400px;
+      height: 400px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: var(--shadow-primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+      color: #000;
+      font-weight: 800;
+      box-shadow: var(--shadow-secondary);
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+      color: white;
+      box-shadow: var(--shadow-accent);
+    }
+
+    .btn-accent:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(77, 93, 251, 0.3);
+    }
+
+    .btn-coming-soon {
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: not-allowed;
+    }
+
+    .btn-coming-soon:hover {
+      transform: none;
+      box-shadow: none;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Mobile Menu */
+    .mobile-menu {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: none;
+      z-index: 999;
+      border: 1px solid rgba(143, 143, 143, 0.2);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideDown 0.3s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+
+    .mobile-menu.active {
+      display: block;
+    }
+
+    .mobile-menu ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mobile-menu ul li {
+      margin-bottom: 0;
+    }
+
+    .mobile-menu ul li a {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 0;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .mobile-menu ul li a i {
+      width: 20px;
+      text-align: center;
+      color: var(--primary-color);
+    }
+
+    .mobile-menu ul li a:hover {
+      color: var(--primary-color);
+      padding-left: 10px;
+    }
+
+    .mobile-contact {
+      margin-top: 20px;
+      padding: 20px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      border-radius: var(--radius-md);
+      color: white;
+      font-weight: 600;
+      text-align: center;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    /* Enhanced AI Chat Widget Styles */
+    .ai-chat-widget {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 10050; /* ensure widget sits above other elements */
+      font-family: 'Inter', sans-serif;
+      pointer-events: auto;
+    }
+
+    .ai-chat-button {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(30, 30, 30, 0.95) 100%);
+      color: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+      transition: var(--transition);
+      border: 2px solid var(--primary-color);
+      opacity: 0.95;
+      backdrop-filter: blur(10px);
+    }
+
+    .ai-chat-button:hover {
+      transform: scale(1.1);
+      opacity: 1;
+      box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
+      background: linear-gradient(135deg, rgba(0, 0, 0, 1) 0%, rgba(40, 40, 40, 1) 100%);
+    }
+
+    .ai-chat-button.active {
+      transform: rotate(180deg);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: #000;
+    }
+
+    .ai-chat-container {
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 450px;
+      height: 600px;
+      background: white;
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      max-height: 0;
+      transition: opacity 0.28s ease, transform 0.28s ease, max-height 0.28s ease;
+    }
+
+    /* Show chat container when active (smooth) */
+    .ai-chat-container.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      max-height: 1000px; /* large enough for animation */
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ai-chat-header {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      position: relative;
+    }
+
+    .ai-chat-header h4 {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    .ai-chat-header p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .ai-status-indicator {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 10px;
+      height: 10px;
+      background: var(--secondary-color);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      display: none;
+    }
+
+    .ai-color-picker {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      border: 2px solid white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .ai-color-picker:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .ai-color-options {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      color: black;
+      border-radius: 12px;
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .ai-color-options.dark {
+      background: #1a202c;
+      color: white;
+    }
+
+    .ai-color-options.active {
+      display: flex;
+    }
+
+    .color-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .color-option:hover {
+      transform: scale(1.15);
+      border-color: rgba(0,0,0,0.3);
+    }
+
+    .color-option.selected {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary-color);
+    }
+
+    .ai-theme-picker {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+      border: 2px solid white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .ai-theme-picker:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .ai-theme-picker.light {
+      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    }
+
+    .ai-theme-options {
+      position: absolute;
+      top: 60px;
+      left: 20px;
+      background: white;
+      color: black;
+      border-radius: 12px;
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .ai-theme-options.dark {
+      background: #1a202c;
+      color: white;
+    }
+
+    .ai-theme-options.active {
+      display: flex;
+    }
+
+    .theme-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #f3f4f6;
+      color: #1a202c;
+    }
+
+    .ai-theme-options.dark .theme-option {
+      background: #2d3748;
+      color: white;
+    }
+
+    .theme-option:hover {
+      background: #e5e7eb;
+    }
+
+    .ai-theme-options.dark .theme-option:hover {
+      background: #4a5568;
+    }
+
+    .theme-option.selected {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .theme-icon {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ai-color-picker {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      border: 2px solid white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 16px;
+    }
+
+    .ai-color-picker:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .ai-color-options {
+      position: absolute;
+      top: 60px;
+      right: 20px;
+      background: white;
+      border-radius: 12px;
+      padding: 12px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      z-index: 1000;
+    }
+
+    .ai-color-options.active {
+      display: flex;
+    }
+
+    .color-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .color-option:hover {
+      transform: scale(1.15);
+      border-color: rgba(0,0,0,0.3);
+    }
+
+    .color-option.selected {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 2px white, 0 0 0 4px var(--primary-color);
+    }
+
+    .ai-quick-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .ai-quick-action {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15));
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      white-space: nowrap;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .ai-quick-action:hover {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.25));
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .ai-quick-action:active {
+      transform: translateY(-1px) scale(1.02);
+    }
+
+    .ai-chat-messages {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      background: #f8f9fa;
+      scroll-behavior: smooth;
+    }
+
+    .ai-message {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      animation: messageSlideIn 0.3s ease-out;
+    }
+
+    @keyframes messageSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .ai-message.bot {
+      align-items: flex-start;
+    }
+
+    .ai-message.user {
+      align-items: flex-end;
+    }
+
+    .message-bubble {
+      max-width: 85%;
+      padding: 14px 18px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      transition: all 0.2s ease;
+    }
+
+    .message-bubble:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .bot .message-bubble {
+      background: white;
+      color: #2d3748;
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom-left-radius: 6px;
+    }
+
+    .user .message-bubble {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-bottom-right-radius: 6px;
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    }
+
+    .message-time {
+      font-size: 0.7rem;
+      color: #999;
+      margin-top: 5px;
+    }
+
+    .ai-message-special {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.12) 0%, rgba(118, 75, 162, 0.12) 100%);
+      border: 1.5px solid rgba(102, 126, 234, 0.3);
+      border-radius: 16px;
+      padding: 18px;
+      margin: 12px 0;
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+      backdrop-filter: blur(10px);
+    }
+
+    .ai-feature-list {
+      list-style: none;
+      padding-left: 0;
+      margin: 12px 0;
+    }
+
+    .ai-feature-list li {
+      padding: 8px 0;
+      position: relative;
+      padding-left: 28px;
+      line-height: 1.6;
+    }
+
+    .ai-feature-list li:before {
+      content: "✓";
+      color: #667eea;
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+      font-size: 1.1rem;
+      background: rgba(102, 126, 234, 0.15);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .ai-suggestion-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .ai-suggestion-btn {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      color: #5a67d8;
+      border: 1.5px solid rgba(102, 126, 234, 0.4);
+      padding: 10px 18px;
+      border-radius: 24px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+      backdrop-filter: blur(5px);
+    }
+
+    .ai-suggestion-btn:hover {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.25), rgba(118, 75, 162, 0.25));
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+      border-color: rgba(102, 126, 234, 0.6);
+    }
+
+    .ai-suggestion-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .operator-search-loader {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+      border-radius: 12px;
+      border: 1px solid rgba(102, 126, 234, 0.2);
+    }
+
+    .loader-spinner {
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(102, 126, 234, 0.2);
+      border-top-color: #667eea;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .operator-search-loader span {
+      color: #667eea;
+      font-weight: 500;
+    }
+
+    .ai-chat-input-area {
+      padding: 20px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      background: linear-gradient(to bottom, #fafafa, white);
+      position: relative;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .ai-chat-input-area.dark {
+      background: linear-gradient(to bottom, #1a202c, #0f1419);
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .ai-typing-indicator {
+      position: absolute;
+      top: -30px;
+      left: 24px;
+      font-size: 0.85rem;
+      color: #718096;
+      display: none;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+
+    .ai-typing-indicator.active {
+      display: flex;
+    }
+
+    .ai-typing-dots {
+      display: flex;
+      gap: 4px;
+    }
+
+    .ai-typing-dots span {
+      width: 7px;
+      height: 7px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      border-radius: 50%;
+      animation: typing 1.4s infinite;
+    }
+
+    .ai-typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+    .ai-typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(-6px); opacity: 1; box-shadow: 0 3px 8px rgba(102, 126, 234, 0.4); }
+    }
+
+    .ai-chat-input-wrapper {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .ai-chat-input {
+      flex: 1;
+      padding: 14px 18px;
+      border: 2px solid rgba(0, 0, 0, 0.1);
+      border-radius: 24px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: white;
+      color: #2d3748;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .ai-chat-input-area.dark .ai-chat-input {
+      background: #2d3748;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .ai-chat-input:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 4px 20px rgba(102, 126, 234, 0.2), 0 0 0 4px rgba(102, 126, 234, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .ai-chat-input::placeholder {
+      color: #a0aec0;
+    }
+
+    .ai-chat-input-area.dark .ai-chat-input::placeholder {
+      color: #718096;
+    }
+
+    .ai-chat-send {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 14px rgba(102, 126, 234, 0.4);
+      font-size: 1.1rem;
+    }
+
+    .ai-chat-send:hover {
+      transform: scale(1.1) rotate(15deg);
+      box-shadow: 0 6px 24px rgba(102, 126, 234, 0.5);
+      background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+
+    .ai-chat-send:active {
+      transform: scale(1.05) rotate(10deg);
+    }
+
+    .ai-chat-send:disabled {
+      background: linear-gradient(135deg, #cbd5e0 0%, #a0aec0 100%);
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+      opacity: 0.6;
+    }
+
+    .ai-command-hint {
+      font-size: 0.8rem;
+      color: #a0aec0;
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .ai-chat-input-area.dark .ai-command-hint {
+      color: #718096;
+    }
+
+    .operator-transfer {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: var(--radius-md);
+      padding: 15px;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .operator-transfer p {
+      margin: 0 0 10px 0;
+      color: #333;
+      font-size: 0.95rem;
+    }
+
+    .operator-transfer-btn {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+      color: #000;
+      border: none;
+      padding: 8px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .operator-transfer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 100px 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      padding: 40px 30px;
+      text-align: center;
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .feature-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary-color);
+      box-shadow: var(--shadow-primary);
+    }
+
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 25px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: white;
+    }
+
+    /* Products Section */
+    .products {
+      padding: 100px 0;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(40, 40, 40, 0.1) 100%);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      border: 1px solid var(--border-color);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .product-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--shadow-primary);
+      border-color: var(--primary-color);
+    }
+
+    .product-img {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: var(--primary-color);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-img::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(40, 40, 40, 0.3) 100%);
+    }
+
+    .product-content {
+      padding: 30px;
+    }
+
+    .product-tag {
+      display: inline-block;
+      padding: 6px 16px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    .product-tag.gaming {
+      background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-dark) 100%);
+    }
+
+    .product-tag.tool {
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--secondary-dark) 100%);
+    }
+
+    .product-tag.coming-soon {
+      background: linear-gradient(135deg, #666 0%, #999 100%);
+    }
+
+    .product-price {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--secondary-color);
+      margin: 15px 0;
+    }
+
+    .product-price span {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .coming-soon-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+
+    .coming-soon-badge i {
+      font-size: 0.7rem;
+      animation: pulse 2s infinite;
+    }
+
+    /* Rocket League Specific Cards */
+    .rl-card .product-img {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+
+    .mod-card .product-img {
+      background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+    }
+
+    .account-card .product-img {
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    }
+
+    /* About Section */
+    .about {
+      padding: 100px 0;
+      background: linear-gradient(180deg, rgba(77, 93, 251, 0.03) 0%, rgba(0, 255, 136, 0.03) 100%);
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .stat {
+      text-align: center;
+      padding: 25px 20px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .stat.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .stat:hover {
+      transform: translateY(-5px);
+      background: rgba(212, 175, 55, 0.2);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: var(--text-secondary);
+    }
+
+    .about-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .visual-container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .visual-circle {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        var(--primary-color) 0%,
+        var(--primary-dark) 25%,
+        var(--secondary-color) 50%,
+        var(--secondary-dark) 75%,
+        var(--primary-color) 100%
+      );
+      animation: rotate 10s linear infinite;
+    }
+
+    .visual-circle::after {
+      content: '';
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      right: 15px;
+      bottom: 15px;
+      background: var(--bg-dark);
+      border-radius: 50%;
+    }
+
+    .visual-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3.5rem;
+      color: var(--primary-color);
+      z-index: 1;
+    }
+
+    /* Contact Section - Updated */
+    .contact {
+      padding: 100px 0;
+      background: linear-gradient(180deg, rgba(0, 255, 136, 0.03) 0%, transparent 100%);
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    .contact-item.visible {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      min-width: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+    }
+
+    .contact-details h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+    }
+
+    .availability-info {
+      margin-top: 15px;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--secondary-color);
+    }
+
+    .availability-info p {
+      font-size: 0.95rem;
+      margin-bottom: 5px;
+      color: var(--text-secondary);
+    }
+
+    .contact-form {
+      background: var(--bg-card);
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-color);
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
+
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    /* Footer */
+    footer {
+      padding: 80px 0 30px;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 1px solid var(--border-color);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr repeat(3, 1fr);
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+
+    .footer-logos-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 40px;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+    
+    .footer-logo {
+      width: 300px;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0.9;
+    }
+    
+    .footer-logo:hover {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+
+    .footer-about p {
+      color: var(--text-muted);
+      margin-bottom: 25px;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-icon:hover {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      transform: translateY(-3px);
+    }
+
+    .footer-heading {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+
+    .footer-links ul {
+      list-style: none;
+    }
+
+    .footer-links ul li {
+      margin-bottom: 12px;
+    }
+
+    .footer-links ul li a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .footer-links ul li a:hover {
+      color: var(--primary-color);
+      transform: translateX(5px);
+    }
+
+    .footer-links ul li a i {
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .footer-links ul li a:hover i {
+      opacity: 1;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Back to Top */
+    .back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: var(--transition);
+      z-index: 999;
+      text-decoration: none;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .about-content,
+      .contact-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .footer-content {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+
+      h1 {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+      }
+
+      h2 {
+        font-size: clamp(1.8rem, 6vw, 2.8rem);
+      }
+
+      /* Mobile Menu - Hide desktop nav and show hamburger */
+      nav ul,
+      .contact-info-top {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background: rgba(255,255,255,0.03);
+      }
+
+      /* Full-screen mobile menu when active */
+      .mobile-menu.active {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        padding: 80px 20px 20px;
+        background: rgba(2,6,23,0.98);
+        z-index: 10050;
+        display: block;
+        overflow-y: auto;
+      }
+
+      .mobile-menu ul {
+        gap: 18px;
+      }
+
+      .header-container {
+        padding: 12px 16px;
+        justify-content: space-between;
+      }
+
+      .hero {
+        padding: 110px 0 50px;
+        text-align: center;
+      }
+
+      .hero p {
+        font-size: 1.05rem;
+        max-width: 44ch;
+        margin: 0 auto;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 100%;
+        padding: 14px 18px;
+        min-height: 52px;
+        font-size: 1rem;
+        border-radius: 12px;
+      }
+
+      /* Stack products and make cards full-width */
+      .products-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+      }
+
+      .product-card {
+        width: 100%;
+        padding: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+      }
+
+      .product-img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 8px;
+      }
+
+      .product-content {
+        width: 100%;
+      }
+
+      .product-price {
+        font-size: 1rem;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+
+      /* AI Chat Mobile - compact and touch-friendly */
+      .ai-chat-widget {
+        bottom: 16px;
+        right: 16px;
+      }
+
+      .ai-chat-container {
+        position: fixed;
+        left: 8px;
+        right: 8px;
+        bottom: 72px;
+        width: auto;
+        max-width: none;
+        height: 60vh;
+        border-radius: 12px;
+        z-index: 10040;
+      }
+
+      .ai-chat-container.active {
+        height: auto;
+        max-height: 80vh;
+      }
+
+      .ai-chat-button {
+        width: 56px;
+        height: 56px;
+        z-index: 10060;
+        border-radius: 50%;
+      }
+
+      .ai-chat-input, .ai-chat-send {
+        font-size: 1rem;
+        padding: 12px;
+      }
+
+      .back-to-top {
+        bottom: 90px;
+        right: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 90px 0 30px;
+      }
+
+      h1 {
+        font-size: clamp(1.8rem, 10vw, 2.6rem);
+      }
+
+      .speed-indicator {
+        font-size: 0.95rem;
+        padding: 6px 16px;
+      }
+
+      .btn {
+        padding: 14px 20px;
+        min-width: auto;
+        font-size: 0.95rem;
+      }
+
+      .feature-card,
+      .product-content,
+      .contact-form {
+        padding: 20px 16px;
+      }
+
+      .header-container {
+        padding: 10px 12px 10px 12px;
+      }
+
+      .mobile-menu {
+        width: 100%;
+      }
+
+      /* AI chat becomes full-width bottom sheet on small screens */
+      .ai-chat-container {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 60vh;
+        border-radius: 12px 12px 0 0;
+        max-height: 85vh;
+        z-index: 10060;
+      }
+
+      .ai-chat-container.active {
+        height: 60vh;
+      }
+
+      .ai-chat-button {
+        width: 52px;
+        height: 52px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================
+       VIDEO BACKGROUND - PUT YOUR VIDEO FILE HERE
+       ============================================= -->
+  <!-- REPLACE 'YOUR-VIDEO-FILE.mp4' ON LINE 2264 WITH YOUR VIDEO PATH -->
+  <div class="video-background">
+    <video autoplay muted loop playsinline>
+      <source src="/Video/background.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <!-- ============================================= -->
+
+  <!-- ULTRA-ENHANCED AI Chat Widget -->
+  <div class="ai-chat-widget" aria-live="polite">
+    <button type="button" class="ai-chat-button" id="aiChatButton" onclick="toggleChat()" aria-controls="aiChatContainer" aria-expanded="false" aria-label="Open AI chat">
+      <i class="fas fa-robot"></i>
+    </button>
+    
+    <div class="ai-chat-container" id="aiChatContainer" tabindex="-1" role="dialog" aria-modal="false">
+      <div class="ai-chat-header">
+        <h4>AERIALARC AI Assistant</h4>
+        <p>Advanced Intelligence • Instant Support</p>
+        <div class="ai-status-indicator"></div>
+        <div class="ai-theme-picker" id="aiThemePicker" title="Change theme">
+          <i class="fas fa-moon"></i>
+        </div>
+        <div class="ai-theme-options" id="aiThemeOptions">
+          <div class="theme-option" data-theme="light">
+            <div class="theme-icon"><i class="fas fa-sun"></i></div>
+            <span>Light</span>
+          </div>
+          <div class="theme-option selected" data-theme="dark">
+            <div class="theme-icon"><i class="fas fa-moon"></i></div>
+            <span>Dark</span>
+          </div>
+        </div>
+        <div class="ai-color-picker" id="aiColorPicker" title="Change chat color">
+          <i class="fas fa-palette"></i>
+        </div>
+        <div class="ai-color-options" id="aiColorOptions">
+          <div class="color-option" data-color="#f8f9fa" data-theme="light" style="background: #f8f9fa;" title="Light Gray"></div>
+          <div class="color-option" data-color="#e3f2fd" data-theme="light" style="background: #e3f2fd;" title="Light Blue"></div>
+          <div class="color-option" data-color="#f3e5f5" data-theme="light" style="background: #f3e5f5;" title="Light Purple"></div>
+          <div class="color-option" data-color="#e8f5e9" data-theme="light" style="background: #e8f5e9;" title="Light Green"></div>
+          <div class="color-option" data-color="#fff3e0" data-theme="light" style="background: #fff3e0;" title="Light Orange"></div>
+          <div class="color-option" data-color="#fce4ec" data-theme="light" style="background: #fce4ec;" title="Light Pink"></div>
+          <div class="color-option" data-color="#1a202c" data-theme="dark" style="background: #1a202c; display: none;" title="Dark Gray"></div>
+          <div class="color-option" data-color="#1e3a5f" data-theme="dark" style="background: #1e3a5f; display: none;" title="Dark Blue"></div>
+          <div class="color-option" data-color="#2d1b4e" data-theme="dark" style="background: #2d1b4e; display: none;" title="Dark Purple"></div>
+          <div class="color-option" data-color="#1a3a2e" data-theme="dark" style="background: #1a3a2e; display: none;" title="Dark Green"></div>
+          <div class="color-option" data-color="#3d2817" data-theme="dark" style="background: #3d2817; display: none;" title="Dark Brown"></div>
+          <div class="color-option" data-color="#3a1a28" data-theme="dark" style="background: #3a1a28; display: none;" title="Dark Red"></div>
+        </div>
+        <div class="ai-quick-actions">
+          <button class="ai-quick-action" data-action="products">🚀 Products</button>
+          <button class="ai-quick-action" data-action="pricing">💰 Pricing</button>
+          <button class="ai-quick-action" data-action="order">🛒 Order Now</button>
+          <button class="ai-quick-action" data-action="support">🛠️ Support</button>
+        </div>
+      </div>
+      
+      <div class="ai-chat-messages" id="aiChatMessages">
+        <!-- Messages will be inserted here -->
+      </div>
+      
+      <div class="ai-chat-input-area">
+        <div class="ai-typing-indicator" id="aiTypingIndicator">
+          <div class="ai-typing-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span>AI is thinking...</span>
+        </div>
+        <div class="ai-chat-input-wrapper">
+          <input type="text" class="ai-chat-input" id="aiChatInput" placeholder="Ask about products, pricing, or support..." maxlength="500">
+          <button class="ai-chat-send" id="aiChatSend">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+        <div class="ai-command-hint">
+          Try: /help for commands • /price bronze • /compare boosting accounts
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Basket Overlay -->
+  <div class="basket-overlay" id="basketOverlay"></div>
+
+  <!-- Shopping Basket Panel -->
+  <div class="basket-panel" id="basketPanel">
+    <div class="basket-header">
+      <h3>
+        <i class="fas fa-shopping-basket"></i>
+        Shopping Basket
+      </h3>
+      <button class="basket-close-btn" id="basketCloseBtn">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="basket-items" id="basketItems">
+      <div class="basket-empty" id="basketEmpty">
+        <i class="fas fa-shopping-basket"></i>
+        <p>Your basket is empty</p>
+      </div>
+    </div>
+    
+    <div class="basket-footer" id="basketFooter" style="display: none;">
+      <div class="basket-total">
+        <span class="basket-total-label">Total:</span>
+        <span class="basket-total-amount" id="basketTotalAmount">$0.00</span>
+      </div>
+      <button class="basket-checkout-btn" id="basketCheckoutBtn">
+        <i class="fas fa-credit-card"></i> Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- Back to Top Button -->
+  <a href="#home" class="back-to-top" id="backToTop">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <!-- Header - COMPACT DARK PINK RECTANGLE WITHOUT LOGO -->
+  <header id="header">
+    <div class="header-container">
+      <!-- Navigation Only - No Logo -->
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#products" id="productsNav">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a class="contact-nav" id="contactNav">Contact</a></li>
+        </ul>
+      </nav>
+      
+      <button class="basket-btn" id="basketBtn" aria-label="Shopping basket">
+        <span class="basket-icon">
+          <i class="fas fa-shopping-basket"></i>
+          <span class="basket-count hidden" id="basketCount">0</span>
+        </span>
+        <span>Basket</span>
+      </button>
+      
+      <a class="contact-info-top" id="contactTop">
+        <i class="fas fa-phone-alt"></i>
+        +973 3420 3541
+      </a>
+      
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle mobile menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul>
+        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#features"><i class="fas fa-star"></i> Features</a></li>
+        <li><a href="#products" id="mobileProductsNav"><i class="fas fa-box"></i> Products</a></li>
+        <li><a href="#about"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a class="mobile-contact-nav" id="mobileContactNav"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+      <div class="mobile-contact" id="mobileContactBtn">
+        <i class="fas fa-phone-alt"></i>
+        +973 3420 3541
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <div class="speed-indicator">
+          <i class="fas fa-bolt"></i>
+          SPEED • PERFORMANCE • INNOVATION
+        </div>
+        
+        <h1>AERIALARC</h1>
+        
+        <p>AERIALARC pioneers the future of technology with cutting-edge solutions that blend performance, security, and elegant design. We're transforming ideas into reality for a smarter digital world.</p>
+        
+        <div class="hero-btns">
+          <a href="#products" class="btn btn-primary">
+            <i class="fas fa-rocket"></i>
+            EXPLORE PRODUCTS
+          </a>
+          <button class="btn btn-secondary" id="heroContactBtn">
+            <i class="fas fa-play-circle"></i>
+            CONTACT US
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-title">
+        <h2>Why Choose AERIALARC</h2>
+        <p class="section-subtitle">Discover what sets us apart in the digital landscape</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <h3>Lightning Fast</h3>
+          <p>Our solutions are optimized for maximum speed and performance, ensuring seamless user experiences even under heavy loads.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Secure & Reliable</h3>
+          <p>Security is our top priority. We implement enterprise-grade protection to keep your data safe and operations running smoothly.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-palette"></i>
+          </div>
+          <h3>Modern Design</h3>
+          <p>We combine aesthetics with functionality to create visually stunning interfaces that are intuitive and enjoyable to use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section -->
+  <section class="products" id="products">
+    <div class="container">
+      <div class="section-title">
+        <h2>Our Products</h2>
+        <p class="section-subtitle">Explore our suite of innovative digital solutions</p>
+      </div>
+      
+      <div class="products-grid">
+        <!-- Rocket League Boosting -->
+        <div class="product-card rl-card">
+          <div class="product-img">
+            <i class="fas fa-chart-line"></i>
+          </div>
+          <div class="product-content">
+            <span class="product-tag gaming">Gaming</span>
+            <h3>Rocket League Boosting</h3>
+            <p>Professional Rocket League boosting services to help you reach your desired rank. Fast, secure, and guaranteed results with experienced players.</p>
+            <div class="product-price">
+              From $9.00 <span>/ rank</span>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 10px;" onclick="window.location.href='RLboosting.html'" data-product="boosting">
+              <i class="fas fa-gamepad"></i>
+              Order Now
+            </button>
+          </div>
+        </div>
+        
+        <!-- Rocket League Accounts -->
+        <div class="product-card account-card">
+          <div class="product-img">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <div class="product-content">
+            <span class="product-tag gaming">Gaming</span>
+            <h3>Rocket League Accounts</h3>
+            <p>Premium Rocket League accounts with exclusive items, high ranks, and special cosmetics. Ready to play with instant delivery.</p>
+            <div class="product-price">
+              From $80.00 <span>/ account</span>
+            </div>
+            <button class="btn btn-primary" style="margin-top: 10px;" onclick="window.location.href='Alter WEB/RLAccounts.html'" data-product="accounts">
+              <i class="fas fa-user-check"></i>
+              View Accounts
+            </button>
+          </div>
+        </div>
+        
+        <!-- NitroMOD -->
+        <div class="product-card mod-card">
+          <div class="product-img">
+            <i class="fas fa-tools"></i>
+          </div>
+          <div class="product-content">
+            <span class="product-tag tool">Tools</span>
+            <h3>NitroMOD</h3>
+            <p>Advanced Rocket League modification tool with premium features including spawn drops, ball predictions, and boost management.</p>
+            <div class="product-price">
+              $14.99 <span>/ lifetime</span>
+            </div>
+            <div class="ai-message-special" style="margin: 15px 0; padding: 10px; background: rgba(0,255,136,0.1); border-color: rgba(0,255,136,0.3);">
+              <strong>Premium Features:</strong>
+              <ul class="ai-feature-list" style="margin-top: 8px;">
+                <li>Spawn drops & items</li>
+                <li>Ball predictions</li>
+                <li>Boost spawn timers</li>
+                <li>Boost overlay</li>
+                <li>Custom titles</li>
+              </ul>
+            </div>
+            <a href="Alter WEB/nitromod.html" class="btn btn-accent" style="margin-top: 10px;" data-product="nitromod">
+              <i class="fas fa-download"></i>
+              Buy NitroMOD
+            </a>
+          </div>
+        </div>
+        
+        <!-- Username Generator - Coming Soon -->
+        <div class="product-card">
+          <div class="product-img">
+            <i class="fas fa-user-circle"></i>
+          </div>
+          <div class="product-content">
+            <span class="product-tag coming-soon">Coming Soon</span>
+            <h3>Username Generator</h3>
+            <p>Generate unique, available usernames across multiple platforms with our advanced AI algorithm. Perfect for gamers and content creators.</p>
+            <div class="coming-soon-badge">
+              <i class="fas fa-clock"></i>
+              Coming Soon
+            </div>
+            <button class="btn btn-coming-soon" style="margin-top: 15px; width: 100%;" disabled>
+              <i class="fas fa-hourglass-half"></i>
+              Coming Soon
+            </button>
+          </div>
+        </div>
+        
+        <!-- Secure Vault - Coming Soon -->
+        <div class="product-card">
+          <div class="product-img">
+            <i class="fas fa-lock"></i>
+          </div>
+          <div class="product-content">
+            <span class="product-tag coming-soon">Coming Soon</span>
+            <h3>Secure Vault</h3>
+            <p>Advanced encryption system for storing sensitive information with military-grade protection. Your data's security is our top priority.</p>
+            <div class="coming-soon-badge">
+              <i class="fas fa-clock"></i>
+              Coming Soon
+            </div>
+            <button class="btn btn-coming-soon" style="margin-top: 15px; width: 100%;" disabled>
+              <i class="fas fa-hourglass-half"></i>
+              Coming Soon
+            </button>
+          </div>
+        </div>
+        
+        <!-- Insight Dashboard - Coming Soon -->
+        <div class="product-card">
+          <div class="product-img">
+            <i class="fas fa-chart-network"></i>
+          </div>
+          <div class="product-content">
+            <span class="product-tag coming-soon">Coming Soon</span>
+            <h3>Insight Dashboard</h3>
+            <p>Comprehensive analytics platform with real-time data visualization and actionable insights. Make data-driven decisions with ease.</p>
+            <div class="coming-soon-badge">
+              <i class="fas fa-clock"></i>
+              Coming Soon
+            </div>
+            <button class="btn btn-coming-soon" style="margin-top: 15px; width: 100%;" disabled>
+              <i class="fas fa-hourglass-half"></i>
+              Coming Soon
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="section-title">
+        <h2>About AERIALARC</h2>
+        <p class="section-subtitle">Our journey and vision for the future</p>
+      </div>
+      
+      <div class="about-content">
+        <div class="about-text">
+          <p><strong>Founded in 2025</strong>, AERIALARC emerged with a mission to revolutionize the digital landscape through innovative solutions that empower users and businesses alike.</p>
+          
+          <p>We believe technology should be accessible, powerful, and beautiful. That's why every product we develop is designed with the user at the center, ensuring intuitive experiences and tangible value.</p>
+          
+          <p>From gaming enhancements to productivity tools, we're committed to delivering excellence in every aspect of our work.</p>
+          
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-number">3+</div>
+              <div class="stat-label">Active Products</div>
+            </div>
+            
+            <div class="stat">
+              <div class="stat-number">500+</div>
+              <div class="stat-label">Happy Customers</div>
+            </div>
+            
+            <div class="stat">
+              <div class="stat-number">Fri-Sat</div>
+              <div class="stat-label">Available Support</div>
+            </div>
+            
+            <div class="stat">
+              <div class="stat-number">100%</div>
+              <div class="stat-label">Satisfaction Focus</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="about-visual">
+          <div class="visual-container">
+            <div class="visual-circle"></div>
+            <div class="visual-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-about">
+          <p>Founded in 2025, AERIALARC is a digital innovation company creating cutting-edge tools and solutions for gamers and tech enthusiasts.</p>
+          <div class="social-icons">
+            <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" aria-label="Discord"><i class="fab fa-discord"></i></a>
+            <a href="#" class="social-icon" aria-label="Twitch"><i class="fab fa-twitch"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-heading">Quick Links</h4>
+          <ul>
+            <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+            <li><a href="#features"><i class="fas fa-chevron-right"></i> Features</a></li>
+            <li><a href="#products" id="footerProductsNav"><i class="fas fa-chevron-right"></i> Products</a></li>
+            <li><a href="#about"><i class="fas fa-chevron-right"></i> About</a></li>
+            <li><a class="footer-contact-nav" id="footerContactNav"><i class="fas fa-chevron-right"></i> Contact</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-heading">Products</h4>
+          <ul>
+            <li><a data-product="boosting"><i class="fas fa-chevron-right"></i> Rocket League Boosting</a></li>
+            <li><a data-product="accounts"><i class="fas fa-chevron-right"></i> Rocket League Accounts</a></li>
+            <li><a href="Alter WEB/nitromod.html" data-product="nitromod"><i class="fas fa-chevron-right"></i> NitroMOD Pro</a></li>
+            <li><a><i class="fas fa-chevron-right"></i> Username Generator (Soon)</a></li>
+            <li><a><i class="fas fa-chevron-right"></i> Secure Vault (Soon)</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links">
+          <h4 class="footer-heading">Support</h4>
+          <ul>
+            <li><a class="footer-contact-nav"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+            <li><a><i class="fas fa-chevron-right"></i> Business Hours</a></li>
+            <li><a class="contact-phone"><i class="fas fa-chevron-right"></i> Call: +973 3420 3541</a></li>
+            <li><a class="contact-email"><i class="fas fa-chevron-right"></i> Email Support</a></li>
+            <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Company Logos Section -->
+      <div class="footer-logos-container">
+        <img src="/image/AERIALARC-SHOP-LOGO.png" alt="AERIALARC Shop" class="footer-logo">
+        <img src="/image/AERIALARC-DEVELOPERS.png" alt="AERIALARC Developers" class="footer-logo">
+        <img src="/image/iAERIALARC.png" alt="iAERIALARC" class="footer-logo">
+        <img src="/image/AERIALARC-LEGAL-GROUP.png" alt="AERIALARC Legal Group" class="footer-logo">
+        <img src="/image/nitromod-logo-section.png" alt="NitroMod" class="footer-logo">
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 AERIALARC. All rights reserved. | Support Hours: Friday 12:00 PM - Saturday 9:00 PM (GMT+3)</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ============================================
+    // ULTRA-ENHANCED AI CHAT SYSTEM
+    // ============================================
+    
+    let aiChatButton = document.getElementById('aiChatButton');
+    let aiChatContainer = document.getElementById('aiChatContainer');
+    const aiChatMessages = document.getElementById('aiChatMessages');
+    const aiChatInput = document.getElementById('aiChatInput');
+    const aiChatSend = document.getElementById('aiChatSend');
+    const aiTypingIndicator = document.getElementById('aiTypingIndicator');
+
+    // AI State Management
+    let aiState = {
+      context: {
+        name: null,
+        interests: [],
+        budget: null,
+        lastProduct: null,
+        conversationStage: 'welcome',
+        emotion: 'neutral',
+        queryCount: 0,
+        lastQueryTime: Date.now()
+      },
+      memory: [],
+      conversationHistory: [],
+      aiMood: 'helpful',
+      isProcessing: false,
+      waitingForOperatorResponse: false
+    };
+    
+    // Enhanced AI Knowledge Base
+    const aiKnowledge = {
+      products: {
+        boosting: {
+          name: "Rocket League Boosting",
+          price: "From $9.00 per rank",
+          description: "Professional boosting service with experienced GC players",
+          features: [
+            "24-72 hour completion",
+            "VPN protection",
+            "Live updates",
+            "Satisfaction guarantee",
+            "All ranks available",
+            "Secure account handling"
+          ],
+          ranks: {
+            "bronze": "$9.00 - $12.00",
+            "silver": "$12.00 - $18.00", 
+            "gold": "$18.00 - $25.00",
+            "platinum": "$25.00 - $35.00",
+            "diamond": "$35.00 - $50.00",
+            "champion": "$50.00 - $75.00",
+            "grand champion": "$75.00 - $120.00"
+          },
+          timeEstimates: {
+            "bronze": "12-24 hours",
+            "silver": "18-36 hours", 
+            "gold": "24-48 hours",
+            "platinum": "36-72 hours",
+            "diamond": "48-96 hours",
+            "champion": "72-120 hours"
+          }
+        },
+        accounts: {
+          name: "Rocket League Accounts",
+          price: "From $80.00",
+          description: "Premium accounts with exclusive items and instant delivery",
+          types: {
+            "basic": "$80.00 - Platinum rank, 50+ items",
+            "premium": "$99.99 - Diamond rank, 150+ items",
+            "elite": "$129.99 - Champion rank, 300+ items",
+            "collector": "$199.99 - GC rank, 500+ items"
+          },
+          features: [
+            "Instant delivery",
+            "Exclusive black market items",
+            "Email changeable",
+            "No recovery info",
+            "Region unlocked"
+          ]
+        },
+        nitromod: {
+          name: "NitroMOD Pro",
+          price: "$14.99 lifetime",
+          description: "Advanced Rocket League modification tool with premium features",
+          premiumFeatures: [
+            "Spawn drops & items",
+            "Ball predictions",
+            "Boost spawn timers",
+            "Boost overlay",
+            "Custom titles",
+            "Performance tweaks",
+            "Custom decals",
+            "Engine sounds",
+            "Safe & undetectable",
+            "Regular updates"
+          ],
+          benefits: [
+            "Gain competitive advantage",
+            "Customize your experience", 
+            "See hidden game data",
+            "Improve gameplay",
+            "Stand out with custom items"
+          ],
+          installation: "5-minute setup, no technical skills needed"
+        }
+      },
+      pricing: {
+        bundles: {
+          "boosting+account": "Save 15% when buying both",
+          "nitromod+boosting": "Get NitroMOD for $9.99 with boosting purchase",
+          "all-three": "Save 25% on complete package"
+        },
+        payment: {
+          methods: ["PayPal", "Credit/Debit Card", "Cryptocurrency", "Gift Cards"],
+          security: "All payments are encrypted and secure",
+          guarantee: "24-hour refund policy"
+        }
+      },
+      support: {
+        hours: "Friday 12:00 PM - Saturday 9:00 PM (GMT+3)",
+        response: "24-48 hours during support hours",
+        emergency: "aerialarc.supp@gmail.com for urgent matters",
+        aiAvailability: "24/7 instant responses"
+      }
+    };
+    
+    // AI Commands System
+    const aiCommands = {
+      '/help': 'Show all available commands',
+      '/price [rank/product]': 'Get detailed pricing',
+      '/compare [products]': 'Compare products side-by-side',
+      '/time [service]': 'Check delivery/processing time',
+      '/features [product]': 'Show complete feature list',
+      '/order [product]': 'Start order process',
+      '/support': 'Contact human support',
+      '/clear': 'Clear conversation',
+      '/joke': 'Get a gaming joke',
+      '/status': 'Check service status',
+      '/guide': 'Get setup/usage guide',
+      '/recommend': 'Get personalized recommendations',
+      '/calculate': 'Calculate total price',
+      '/faq': 'See frequently asked questions'
+    };
+
+    // Bootstrap AI help widget
+    (function(){
+      var serverBase = (window.location.protocol === 'file:') ? 'http://localhost:3000' : window.location.origin;
+      var s = document.createElement('script');
+      s.src = serverBase + '/assets/ai-widget.js';
+      s.defer = true;
+      document.body.appendChild(s);
+    })();
+
+    // AI Personality Responses
+    const aiPersonality = {
+      greeting: [
+        "🤖 **AERIALARC AI Assistant Online**\n\nHello! I'm your intelligent assistant here to help you with:\n\n🚀 **Products** - Boosting, Accounts, NitroMOD\n💰 **Pricing** - Instant quotes & calculations\n⚡ **Support** - Technical help & troubleshooting\n🎯 **Recommendations** - Personalized suggestions\n\nHow can I assist you today?",
+        "🎮 **Welcome to AERIALARC!**\n\nI'm your AI assistant, ready to help you with:\n\n• Rocket League Boosting (From $9.00)\n• Premium RL Accounts\n• NitroMOD ($14.99)\n• Technical Support\n• Order Assistance\n\nWhat brings you here today?",
+        "⚡ **AERIALARC AI Activated**\n\nHello! I can help you with:\n\n📊 **Product Comparisons** - Find what's best\n💳 **Price Calculations** - Get exact quotes\n🔧 **Setup Guides** - Easy installation help\n🛒 **Order Process** - Step-by-step guidance\n\nAsk me anything or try /help for commands!"
+      ],
+      helpful: [
+        "I'd be happy to help with that!",
+        "Let me assist you with this...",
+        "I can definitely help you with that!",
+        "Here's what I can tell you about that:"
+      ],
+      enthusiastic: [
+        "Awesome question! Let me break this down for you... 🚀",
+        "Great choice! Here's everything you need to know... ⚡",
+        "Perfect! I've got all the details for you... 🎮",
+        "Excellent question! Let me provide the complete picture... 💡"
+      ],
+      technical: [
+        "From a technical perspective... 🔧",
+        "Here are the technical details... ⚙️",
+        "Let me explain how this works technically... 📐",
+        "Technically speaking, here's what you need to know... 🔬"
+      ]
+    };
+    
+    // Initialize AI
+    function initAI() {
+      setTimeout(() => {
+        const greeting = aiPersonality.greeting[Math.floor(Math.random() * aiPersonality.greeting.length)];
+        addAIMessage(greeting);
+        
+        // Add quick suggestions
+        setTimeout(() => {
+          addSuggestionButtons([
+            "Show me boosting prices",
+            "Tell me about NitroMOD",
+            "How to order?",
+            "Need support"
+          ]);
+        }, 500);
+      }, 1000);
+    }
+    
+    // Toggle chat
+    function toggleChat() {
+      try {
+        // debug
+        console.log('toggleChat invoked', { aiChatButtonExists: !!aiChatButton, aiChatContainerExists: !!aiChatContainer });
+        if (!aiChatContainer || !aiChatButton) {
+          console.warn('AI chat elements missing -- re-querying', { aiChatContainer, aiChatButton });
+          // try to re-query DOM without reassigning consts (we use let for these)
+          aiChatButton = document.getElementById('aiChatButton');
+          aiChatContainer = document.getElementById('aiChatContainer');
+          if (!aiChatContainer || !aiChatButton) return;
+        }
+
+        const willOpen = !aiChatContainer.classList.contains('active');
+        aiChatContainer.classList.toggle('active');
+        aiChatButton.classList.toggle('active');
+        aiChatButton.innerHTML = willOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-robot"></i>';
+        aiChatButton.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+        aiChatButton.setAttribute('aria-label', willOpen ? 'Close AI chat' : 'Open AI chat');
+        aiChatContainer.setAttribute('aria-modal', willOpen ? 'true' : 'false');
+
+        console.log('toggleChat result', { willOpen });
+
+        if (willOpen) {
+          // focus input for keyboard users
+          setTimeout(() => {
+            if (aiChatInput) aiChatInput.focus();
+            if (aiChatMessages) aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+          }, 120);
+        } else {
+          aiChatButton.focus();
+        }
+      } catch (err) {
+        console.error('toggleChat error', err);
+      }
+    }
+    
+    // Send message
+    async function sendMessage() {
+      const message = aiChatInput.value.trim();
+      if (!message || aiState.isProcessing) return;
+      
+      // Add user message
+      addUserMessage(message);
+      aiChatInput.value = '';
+      aiState.context.queryCount++;
+      aiState.context.lastQueryTime = Date.now();
+      
+      // Disable input
+      aiChatInput.disabled = true;
+      aiChatSend.disabled = true;
+      aiState.isProcessing = true;
+      aiTypingIndicator.classList.add('active');
+      
+      // Process and respond
+      setTimeout(async () => {
+        const response = await processMessage(message);
+        
+        // Add AI response
+        addAIMessage(response.text);
+        
+        // Add any special content
+        if (response.specialContent) {
+          addSpecialContent(response.specialContent);
+        }
+        
+        // Add suggestions if provided
+        if (response.suggestions) {
+          addSuggestionButtons(response.suggestions);
+        }
+        
+        // Add operator transfer if needed
+        if (response.askForOperator) {
+          addOperatorTransfer();
+        }
+        
+        // Handle operator search
+        if (response.searchForOperator) {
+          setTimeout(() => {
+            showOperatorSearchLoader();
+          }, 500);
+        }
+        
+        // Handle end chat
+        if (response.endChat) {
+          aiChatInput.disabled = true;
+          aiChatSend.disabled = true;
+        }
+        
+        // Re-enable input (unless chat ended)
+        if (!response.endChat) {
+          aiChatInput.disabled = false;
+          aiChatSend.disabled = false;
+        }
+        aiState.isProcessing = false;
+        aiTypingIndicator.classList.remove('active');
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+        if (!response.endChat) {
+          aiChatInput.focus();
+        }
+      }, 800 + Math.random() * 700);
+    }
+    
+    // Process message with advanced AI
+    async function processMessage(message) {
+      const lowerMsg = message.toLowerCase();
+      
+      // Check if user responded to operator question
+      if (aiState.waitingForOperatorResponse) {
+        if (lowerMsg.match(/yes|yeah|sure|ok|please|yep|y\b/)) {
+          aiState.waitingForOperatorResponse = false;
+          return {
+            text: '🔍 Looking for an available operator...',
+            searchForOperator: true
+          };
+        } else if (lowerMsg.match(/no|nope|nah|n\b|cancel/)) {
+          aiState.waitingForOperatorResponse = false;
+          return {
+            text: 'Understood. If you need any help in the future, feel free to reach out. Have a great day! 👋',
+            endChat: true
+          };
+        }
+      }
+      
+      // AI is under construction - always show this message for any user query
+      aiState.waitingForOperatorResponse = true;
+      return {
+        text: '🚧 **AI Assistant Under Construction**\n\nOur AI support system is currently being developed and is not yet operational.\n\nWould you like to connect with a human operator?',
+        suggestions: ['Yes, connect me', 'No, thanks']
+      };
+    }
+    
+    // Intent detection
+    function determineIntent(message) {
+      if (message.match(/hello|hi|hey|greetings|what's up|howdy/i)) return 'greeting';
+      if (message.match(/price|cost|how much|pricing|expensive|cheap|\$/i)) return 'pricing';
+      if (message.match(/boost|boosting|rank|mmr|division|ssl|gc/i)) return 'product_info';
+      if (message.match(/account|smurf|alt|second account/i)) return 'product_info';
+      if (message.match(/nitro|mod|custom|decal|sound|skin|spawn|prediction|overlay/i)) return 'product_info';
+      if (message.match(/order|buy|purchase|checkout|payment|pay/i)) return 'order';
+      if (message.match(/help|support|issue|problem|not working|error|fix/i)) return 'support';
+      if (message.match(/install|setup|download|how to|tutorial|guide|use/i)) return 'technical';
+      if (message.match(/compare|difference|vs|versus|better|which one/i)) return 'comparison';
+      if (message.match(/recommend|suggest|which|should i|what.*good|best for/i)) return 'recommendation';
+      if (message.match(/joke|funny|humor|haha|lol|lmao/i)) return 'fun';
+      return 'general';
+    }
+    
+    // Command handler
+    function handleCommand(command) {
+      const parts = command.split(' ');
+      const cmd = parts[0].toLowerCase();
+      const args = parts.slice(1);
+      
+      switch(cmd) {
+        case '/help':
+          return {
+            text: generateCommandHelp(),
+            suggestions: ["/price boosting", "/features nitromod", "/order", "/support"]
+          };
+          
+        case '/price':
+          return handlePriceCommand(args);
+          
+        case '/compare':
+          return handleCompareCommand(args);
+          
+        case '/time':
+          return handleTimeCommand(args);
+          
+        case '/features':
+          return handleFeaturesCommand(args);
+          
+        case '/order':
+          return handleOrderCommand(args);
+          
+        case '/support':
+          return {
+            text: "🛎️ **Human Support Request**\n\nI'll connect you with our support team. Meanwhile:\n\n📞 **Call:** +973 3420 3541\n📧 **Email:** aerialarc.supp@gmail.com\n⏰ **Hours:** Friday 12:00 PM - Saturday 9:00 PM (GMT+3)\n\nOur team responds within 24-48 hours during support hours.",
+            askForOperator: true,
+            suggestions: ["Ask AI instead", "Check pricing", "Product info"]
+          };
+          
+        case '/clear':
+          aiChatMessages.innerHTML = '';
+          aiState.conversationHistory = [];
+          return {
+            text: "✨ **Conversation Cleared!**\n\nHow can I help you now?",
+            suggestions: ["Show products", "Need pricing", "Technical help"]
+          };
+          
+        case '/joke':
+          return {
+            text: getRandomJoke()
+          };
+          
+        case '/status':
+          return {
+            text: "📊 **Service Status**\n\n✅ **All Services Operational**\n\n• **Boosting:** Normal queue (24-72h)\n• **Accounts:** In stock, instant delivery\n• **NitroMOD:** Latest v2.1.3 available\n• **Support:** AI 24/7, Human Friday 12:00 PM - Saturday 9:00 PM (GMT+3)\n• **Payments:** All methods working\n\nEverything is running smoothly! 🚀"
+          };
+          
+        case '/guide':
+          return {
+            text: "📚 **Setup Guides**\n\nChoose a guide:\n\n• **Boosting:** How our service works\n• **Accounts:** Account transfer process\n• **NitroMOD:** Installation & setup\n• **Payment:** How to pay securely\n\nWhich guide would you like?"
+          };
+          
+        case '/recommend':
+          return {
+            text: "🎯 **Personalized Recommendations**\n\nTo give you the best recommendation, tell me:\n\n1. Your **budget** range\n2. Your main **goal** (rank up, new account, customization)\n3. Your current **rank** (if applicable)\n\nOr ask me about specific products!",
+            suggestions: ["Budget: $20-50", "Goal: Reach Diamond", "Show me options"]
+          };
+          
+        case '/calculate':
+          return {
+            text: "🧮 **Price Calculator**\n\nI can calculate:\n\n• **Boosting:** Multiple ranks/bundles\n• **Accounts:** Different types\n• **Bundles:** Combined services\n• **Custom:** Your specific needs\n\nWhat would you like me to calculate?",
+            suggestions: ["Calculate Diamond boost", "Account + boosting", "Custom package"]
+          };
+          
+        case '/faq':
+          return {
+            text: "❓ **Frequently Asked Questions**\n\n**Q: Is boosting safe?**\nA: Yes! We use VPNs and never ask for passwords.\n\n**Q: How fast is delivery?**\nA: Boosting 24-72h, Accounts instant, NitroMOD 5min.\n\n**Q: Payment methods?**\nA: PayPal, Cards, Crypto, Gift Cards.\n\n**Q: Refund policy?**\nA: 24-hour refund for unstarted services.\n\nNeed more details on any question?"
+          };
+          
+        default:
+          return {
+            text: `🤔 **Unknown Command:** ${cmd}\n\nType /help to see all available commands.`,
+            suggestions: ["/help", "What can you do?", "Show me products"]
+          };
+      }
+    }
+    
+    // Price command handler
+    function handlePriceCommand(args) {
+      if (args.length === 0) {
+        return {
+          text: "💰 **Price Overview**\n\n**Rocket League Boosting:** From $9.00\n• Bronze: $9.00-$12.00\n• Silver: $12.00-$18.00\n• Gold: $18.00-$25.00\n• Platinum: $25.00-$35.00\n• Diamond: $35.00-$50.00\n• Champion: $50.00-$75.00\n• Grand Champion: $75.00-$120.00\n\n**RL Accounts:** From $80.00\n**NitroMOD Pro:** $14.99 lifetime\n\nFor specific pricing: /price [rank] or /price [product]",
+          suggestions: ["/price diamond", "/price accounts", "/price nitromod"]
+        };
+      }
+      
+      const query = args.join(' ').toLowerCase();
+      
+      // Boosting prices
+      if (query.includes('boost')) {
+        return {
+          text: generateBoostingPrices(),
+          specialContent: generatePriceTable('boosting')
+        };
+      }
+      
+      // Account prices
+      if (query.includes('account')) {
+        return {
+          text: generateAccountPrices(),
+          specialContent: generatePriceTable('accounts')
+        };
+      }
+      
+      // NitroMOD price
+      if (query.includes('nitro') || query.includes('mod')) {
+        return {
+          text: "🎮 **NitroMOD Pro Pricing**\n\n💰 **Price:** $14.99 (One-time, lifetime access)\n\n✅ **Includes:**\n• All premium features\n• Lifetime updates\n• 24/7 support\n• No subscription fees\n\n💡 **Best Value:** Get competitive edge for less than $15!",
+          suggestions: ["Show NitroMOD features", "How to install?", "Order NitroMOD"]
+        };
+      }
+      
+      // Specific rank price
+      const ranks = Object.keys(aiKnowledge.products.boosting.ranks);
+      const matchedRank = ranks.find(rank => query.includes(rank));
+      
+      if (matchedRank) {
+        const price = aiKnowledge.products.boosting.ranks[matchedRank];
+        const time = aiKnowledge.products.boosting.timeEstimates[matchedRank];
+        
+        return {
+          text: `🎮 **${matchedRank.charAt(0).toUpperCase() + matchedRank.slice(1)} Boosting**\n\n💰 **Price:** ${price}\n⏱️ **Time:** ${time}\n✅ **Features:**\n• Secure VPN protection\n• Experienced GC players\n• Live progress updates\n• Satisfaction guarantee\n\nNeed multiple ranks? I can calculate bundle prices!`,
+          suggestions: [`Calculate ${matchedRank} to champion`, "Order now", "Compare with accounts"]
+        };
+      }
+      
+      return {
+        text: `💰 I found pricing for: "${query}"\n\nTry:\n• /price boosting\n• /price accounts\n• /price [specific rank]\n• /price nitromod`,
+        suggestions: ["/price boosting", "/price diamond", "/price accounts"]
+      };
+    }
+    
+    // Generate boosting prices
+    function generateBoostingPrices() {
+      let text = "🚀 **Rocket League Boosting Prices**\n\n";
+      const ranks = aiKnowledge.products.boosting.ranks;
+      
+      for (const [rank, price] of Object.entries(ranks)) {
+        text += `• **${rank.charAt(0).toUpperCase() + rank.slice(1)}:** ${price}\n`;
+      }
+      
+      text += "\n⏱️ **Time Estimates:**\n";
+      const times = aiKnowledge.products.boosting.timeEstimates;
+      for (const [rank, time] of Object.entries(times)) {
+        text += `• ${rank.charAt(0).toUpperCase() + rank.slice(1)}: ${time}\n`;
+      }
+      
+      text += "\n💡 **Bundle Deals:**\n• Multiple ranks: Save 10-15%\n• Boosting + Account: Save 15%\n• All services: Save up to 25%";
+      
+      return text;
+    }
+    
+    // Generate account prices
+    function generateAccountPrices() {
+      let text = "👤 **Rocket League Account Prices**\n\n";
+      const types = aiKnowledge.products.accounts.types;
+      
+      for (const [type, info] of Object.entries(types)) {
+        text += `• **${type.charAt(0).toUpperCase() + type.slice(1)}:** ${info}\n`;
+      }
+      
+      text += "\n⚡ **All Accounts Include:**\n• Instant delivery\n• Email changeable\n• No recovery info\n• Region unlocked\n• Exclusive items";
+      
+      return text;
+    }
+    
+    // Generate price table
+    function generatePriceTable(type) {
+      if (type === 'boosting') {
+        return `<div class="ai-message-special">
+          <h4>🎮 Boosting Price Table</h4>
+          <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+            <tr style="background:rgba(255,59,141,0.1);">
+              <th style="padding:8px; text-align:left;">Rank</th>
+              <th style="padding:8px; text-align:left;">Price</th>
+              <th style="padding:8px; text-align:left;">Time</th>
+            </tr>
+            <tr><td>Bronze</td><td>$9.00-$12.00</td><td>12-24h</td></tr>
+            <tr><td>Silver</td><td>$12.00-$18.00</td><td>18-36h</td></tr>
+            <tr><td>Gold</td><td>$18.00-$25.00</td><td>24-48h</td></tr>
+            <tr><td>Platinum</td><td>$25.00-$35.00</td><td>36-72h</td></tr>
+            <tr><td>Diamond</td><td>$35.00-$50.00</td><td>48-96h</td></tr>
+            <tr><td>Champion</td><td>$50.00-$75.00</td><td>72-120h</td></tr>
+          </table>
+        </div>`;
+      }
+      
+      if (type === 'accounts') {
+        return `<div class="ai-message-special">
+          <h4>👤 Account Price Table</h4>
+          <table style="width:100%; border-collapse:collapse; margin-top:10px;">
+            <tr style="background:rgba(255,59,141,0.1);">
+              <th style="padding:8px; text-align:left;">Type</th>
+              <th style="padding:8px; text-align:left;">Price</th>
+              <th style="padding:8px; text-align:left;">Features</th>
+            </tr>
+            <tr><td>Basic</td><td>$80.00</td><td>Platinum, 50+ items</td></tr>
+            <tr><td>Premium</td><td>$99.99</td><td>Diamond, 150+ items</td></tr>
+            <tr><td>Elite</td><td>$129.99</td><td>Champion, 300+ items</td></tr>
+            <tr><td>Collector</td><td>$199.99</td><td>GC, 500+ items</td></tr>
+          </table>
+        </div>`;
+      }
+      
+      return '';
+    }
+    
+    // Handle other commands similarly...
+    function handleCompareCommand(args) {
+      if (args.length < 2) {
+        return {
+          text: "⚖️ **Product Comparison**\n\nCompare two products:\n\n• /compare boosting accounts\n• /compare boosting nitromod\n• /compare accounts nitromod\n\nExample: /compare boosting accounts"
+        };
+      }
+      
+      const p1 = args[0].toLowerCase();
+      const p2 = args[1].toLowerCase();
+      
+      let comparison = `⚖️ **${p1} vs ${p2}**\n\n`;
+      
+      if ((p1.includes('boost') && p2.includes('account')) || 
+          (p2.includes('boost') && p1.includes('account'))) {
+        comparison += "**Boosting is better for:**\n• Improving your current rank\n• Keeping your items & friends\n• Building skill gradually\n\n**Accounts are better for:**\n• Starting fresh with high rank\n• Getting exclusive items\n• Having multiple accounts\n\n💰 **Price Comparison:**\n• Boosting: From $9.00\n• Accounts: From $80.00";
+      } else if ((p1.includes('boost') && p2.includes('nitro')) ||
+                 (p2.includes('boost') && p1.includes('nitro'))) {
+        comparison += "**Boosting is better for:**\n• Increasing rank permanently\n• Getting season rewards\n• Improving MMR long-term\n\n**NitroMOD is better for:**\n• Gaining competitive advantage\n• Customizing gameplay\n• Real-time game enhancements\n\n💰 **Price Comparison:**\n• Boosting: From $9.00\n• NitroMOD: $14.99 lifetime";
+      } else if ((p1.includes('account') && p2.includes('nitro')) ||
+                 (p2.includes('account') && p1.includes('nitro'))) {
+        comparison += "**Accounts are better for:**\n• Starting with high rank/items\n• Having backup accounts\n• Item collection\n\n**NitroMOD is better for:**\n• Enhancing current account\n• Competitive gameplay tools\n• Customization options\n\n💰 **Price Comparison:**\n• Accounts: From $80.00\n• NitroMOD: $14.99 lifetime";
+      }
+      
+      return { text: comparison };
+    }
+    
+    // Intent handlers
+    function handleGreeting() {
+      const responses = [
+        "Hello again! How can I assist you today? 🚀",
+        "Hi there! Ready to enhance your Rocket League experience? 🎮",
+        "Welcome back! What would you like to explore today? ⚡"
+      ];
+      return { text: responses[Math.floor(Math.random() * responses.length)] };
+    }
+    
+    function handlePricing(message) {
+      if (message.includes('nitro') || message.includes('mod')) {
+        return {
+          text: "🎮 **NitroMOD Pro - $14.99**\n\nOne-time payment for lifetime access!\n\n✅ **Premium Features Included:**\n• Spawn drops & items\n• Ball predictions\n• Boost spawn timers\n• Boost overlay\n• Custom titles\n• Performance tweaks\n• Custom decals\n• Engine sounds\n\n💡 **Best Value:** Get all features for less than $15!",
+          suggestions: ["How to install?", "Show all features", "Order now"]
+        };
+      }
+      
+      if (message.includes('boost')) {
+        const rankMatch = message.match(/bronze|silver|gold|platinum|diamond|champion|grand champion|ssl|gc/i);
+        if (rankMatch) {
+          const rank = rankMatch[0].toLowerCase();
+          const price = aiKnowledge.products.boosting.ranks[rank] || "$9.00+";
+          return {
+            text: `💰 **${rank.charAt(0).toUpperCase() + rank.slice(1)} Boosting: ${price}**\n\nIncludes:\n• Secure VPN protection\n• Experienced players\n• Live updates\n• Satisfaction guarantee\n\nReady to rank up?`,
+            suggestions: [`Order ${rank} boost`, "Compare with accounts", "See time estimate"]
+          };
+        }
+        return {
+          text: "🚀 **Boosting starts at just $9.00!**\n\n• Bronze: $9.00-$12.00\n• Silver: $12.00-$18.00\n• Gold: $18.00-$25.00\n• Platinum: $25.00-$35.00\n• Diamond: $35.00-$50.00\n• Champion: $50.00-$75.00\n\nAll ranks available with secure service!",
+          suggestions: ["/price diamond", "How it works?", "Order boosting"]
+        };
+      }
+      
+      return {
+        text: "💰 **AERIALARC Pricing**\n\n• **Boosting:** From $9.00 per rank\n• **Accounts:** From $80.00\n• **NitroMOD Pro:** $14.99 lifetime\n\nWhich product are you interested in?",
+        suggestions: ["Boosting prices", "NitroMOD price", "Account prices"]
+      };
+    }
+    
+    function handleProductInfo(message) {
+      if (message.includes('nitro') || message.includes('mod')) {
+        return {
+          text: "🎮 **NitroMOD Pro - Advanced RL Tool**\n\n**Price:** $14.99 (Lifetime access)\n\n🔥 **Premium Features:**\n• **Spawn System:** Control item drops\n• **Ball Predictions:** See ball trajectory\n• **Boost Management:** Timers & overlay\n• **Customization:** Decals, sounds, titles\n• **Performance:** Game optimizations\n\n⚡ **Benefits:** Competitive edge, customization, real-time data!",
+          specialContent: `<div class="ai-message-special">
+            <h4>🎮 NitroMOD Feature Details</h4>
+            <ul class="ai-feature-list">
+              <li><strong>Spawn Drops:</strong> Control item spawns in matches</li>
+              <li><strong>Ball Predictions:</strong> Visual trajectory indicators</li>
+              <li><strong>Boost Timers:</strong> Exact boost pad respawn times</li>
+              <li><strong>Boost Overlay:</strong> Visual boost management HUD</li>
+              <li><strong>Custom Titles:</strong> Create unique player titles</li>
+              <li><strong>Performance Tweaks:</strong> Optimize game settings</li>
+              <li><strong>Custom Decals:</strong> Import custom car designs</li>
+              <li><strong>Engine Sounds:</strong> Custom audio packages</li>
+            </ul>
+            <p style="margin-top:10px;"><strong>💰 Only $14.99 for lifetime access!</strong></p>
+          </div>`,
+          suggestions: ["How to install?", "Order NitroMOD", "Compare with boosting"]
+        };
+      }
+      
+      if (message.includes('boost')) {
+        return {
+          text: "🚀 **Rocket League Boosting**\n\n**Price:** From $9.00 per rank\n**Time:** 24-72 hours completion\n\n✅ **Features:**\n• All ranks available\n• Secure VPN protection\n• Experienced GC players\n• Live progress updates\n• Satisfaction guarantee\n\n⚡ **Fast, Secure, Guaranteed!**",
+          suggestions: ["See prices", "How it works?", "Order now"]
+        };
+      }
+      
+      if (message.includes('account')) {
+        return {
+          text: "👤 **Rocket League Accounts**\n\n**Price:** From $80.00\n**Delivery:** Instant\n\n🎮 **Features:**\n• Exclusive black market items\n• High ranks (Platinum to GC)\n• Email changeable\n• No recovery info\n• Region unlocked\n\n⚡ **Ready to play immediately!**",
+          suggestions: ["Account prices", "Order account", "Compare with boosting"]
+        };
+      }
+      
+      return {
+        text: "🎮 **Our Products:**\n\n1. **Boosting** - Rank up your account\n2. **Accounts** - Premium RL accounts\n3. **NitroMOD** - Advanced game tool\n\nWhich product would you like to know more about?",
+        suggestions: ["Tell me about boosting", "NitroMOD features", "Account details"]
+      };
+    }
+    
+    function handleOrder(message) {
+      return {
+        text: "🛒 **How to Order:**\n\n1. **Choose Product** - Boosting, Account, or NitroMOD\n2. **Provide Details** - Rank, account type, etc.\n3. **Contact Us** - Use AI chat or contact form\n4. **Payment** - We'll send secure payment link\n5. **Processing** - Service begins immediately\n6. **Completion** - Get notified when done!\n\n💡 **Pro Tip:** Tell me what you want, and I'll guide you through the process!",
+        suggestions: ["I want boosting", "Order NitroMOD", "Get an account"]
+      };
+    }
+    
+    function handleSupport(message) {
+      return {
+        text: "🛠️ **Support Options:**\n\n🤖 **AI Support (24/7):**\n• Product questions\n• Pricing info\n• Order process\n• Basic troubleshooting\n\n👨‍💼 **Human Support:** Friday 12:00 PM - Saturday 9:00 PM (GMT+3)\n• Account issues\n• Payment problems\n• Complex technical issues\n• Refund requests\n\n📞 **Contact:** +973 3420 3541\n📧 **Email:** aerialarc.supp@gmail.com",
+        suggestions: ["Technical issue", "Payment problem", "Account help"]
+      };
+    }
+    
+    function handleTechnical(message) {
+      if (message.includes('nitro') || message.includes('mod') || message.includes('install')) {
+        return {
+          text: "🔧 **NitroMOD Installation:**\n\n1. **Purchase** - Get NitroMOD Pro ($14.99)\n2. **Download** - Instant download link\n3. **Extract** - Unzip to preferred location\n4. **Run Installer** - Follow setup wizard\n5. **Launch RL** - Start Rocket League\n6. **Enjoy!** - Features activate automatically\n\n⏱️ **Total Time:** 5-10 minutes\n✅ **No technical skills needed!**",
+          suggestions: ["Order NitroMOD", "System requirements?", "Troubleshooting"]
+        };
+      }
+      
+      return {
+        text: "🔧 **Technical Support**\n\nI can help with:\n• NitroMOD installation & setup\n• Account access issues\n• Game compatibility\n• Performance optimization\n• Troubleshooting errors\n\nWhat specific technical issue are you having?",
+        suggestions: ["NitroMOD install guide", "Game not working", "Performance issues"]
+      };
+    }
+    
+    function handleComparison(message) {
+      return {
+        text: "⚖️ **Product Comparisons:**\n\n**Boosting vs Accounts:**\n• Boosting: Improve YOUR account\n• Accounts: Get NEW high-rank account\n\n**Boosting vs NitroMOD:**\n• Boosting: Permanent rank increase\n• NitroMOD: Gameplay enhancements\n\n**Accounts vs NitroMOD:**\n• Accounts: Fresh start with items\n• NitroMOD: Enhance current account\n\nWhich comparison would you like?",
+        suggestions: ["Compare boosting/accounts", "Boosting vs NitroMOD", "All three comparison"]
+      };
+    }
+    
+    function handleRecommendation(message) {
+      // Simple recommendation based on keywords
+      if (message.includes('rank') || message.includes('mmr') || message.includes('div')) {
+        return {
+          text: "🎯 **For Rank Improvement:**\n\n🚀 **Boosting is perfect for you!**\n\n• Keep your current items & friends\n• Learn from higher-level gameplay\n• Get season rewards\n• Start from just $9.00!\n\nWould you like specific rank pricing?",
+          suggestions: ["Price for Diamond", "How boosting works", "Order now"]
+        };
+      }
+      
+      if (message.includes('new') || message.includes('fresh') || message.includes('start')) {
+        return {
+          text: "🎯 **For Fresh Start:**\n\n👤 **Accounts are perfect for you!**\n\n• Instant high rank\n• Exclusive items included\n• Ready to play immediately\n• Start from $80.00\n\nWould you like to see account types?",
+          suggestions: ["Account prices", "What items included?", "Order account"]
+        };
+      }
+      
+      if (message.includes('advantage') || message.includes('competitive') || message.includes('edge')) {
+        return {
+          text: "🎯 **For Competitive Edge:**\n\n🎮 **NitroMOD Pro is perfect for you!**\n\n• Ball predictions\n• Boost management\n• Performance tweaks\n• Only $14.99 lifetime\n\nWould you like feature details?",
+          suggestions: ["NitroMOD features", "How to install?", "Order NitroMOD"]
+        };
+      }
+      
+      return {
+        text: "🎯 **Personalized Recommendations**\n\nTell me your goal:\n• **Rank up?** → Boosting\n• **Fresh start?** → Accounts\n• **Competitive edge?** → NitroMOD\n• **Budget?** → Let me know your range\n\nWhat are you looking to achieve?",
+        suggestions: ["Goal: Reach Diamond", "Budget: $20-50", "Show me options"]
+      };
+    }
+    
+    function handleFun(message) {
+      const jokes = [
+        "Why don't Rocket League pros play hide and seek? Because good luck hiding when you're always ball chasing! ⚽😅",
+        "What do you call a Rocket League player who can't aerial? A ground dweller! 🚗⬇️",
+        "Why did the Octane go to therapy? Too much pressure to perform! 🏥😂",
+        "What's a Bronze player's favorite move? The whiff-and-blame! 🙈🎯",
+        "Why are GCs so good at math? They always calculate the perfect angle! 📐✨"
+      ];
+      return { text: jokes[Math.floor(Math.random() * jokes.length)] };
+    }
+    
+    function handleGeneral(message) {
+      return {
+        text: `🤔 I understand you're asking about: "${message}"\n\nI can help with:\n• Product information & pricing\n• Ordering process\n• Technical support\n• Recommendations\n• Comparisons\n\nTry being more specific or use /help for commands!`,
+        suggestions: ["Show me products", "Need pricing", "How to order?"]
+      };
+    }
+    
+    function generateCommandHelp() {
+      let help = "🤖 **Available Commands:**\n\n";
+      for (const [cmd, desc] of Object.entries(aiCommands)) {
+        help += `• **${cmd}** - ${desc}\n`;
+      }
+      help += "\n💡 **Examples:**\n• /price diamond\n• /compare boosting accounts\n• /features nitromod\n• /order boosting\n\nAsk anything else!";
+      return help;
+    }
+    
+    function getRandomJoke() {
+      const jokes = [
+        "🎮 Why did the Rocket League car fail its driving test? It kept doing flips instead of parallel parking! 🚗💫",
+        "⚽ What's a Bronze player's favorite training pack? 'How to miss open nets'! 🥅🙈",
+        "🚀 Why did the GC quit streaming? Too much pressure to be 'calculated'! 📊😅",
+        "🏆 What do you call a team that always forfeits? Early quitters! 🏃‍♂️💨",
+        "🎯 Why are pros so good at predictions? They can see the future... of the ball! 🔮⚽"
+      ];
+      return jokes[Math.floor(Math.random() * jokes.length)];
+    }
+    
+    function updateContext(message) {
+      // Update last product mentioned
+      if (message.includes('boost')) aiState.context.lastProduct = 'boosting';
+      if (message.includes('account')) aiState.context.lastProduct = 'accounts';
+      if (message.includes('nitro') || message.includes('mod')) aiState.context.lastProduct = 'nitromod';
+      
+      // Extract budget if mentioned
+      const budgetMatch = message.match(/\$(\d+)/) || message.match(/(\d+)\s*(dollar|usd)/i);
+      if (budgetMatch) aiState.context.budget = parseInt(budgetMatch[1]);
+      
+      // Update conversation stage
+      aiState.context.conversationStage = 'engaged';
+    }
+    
+    // UI Functions
+    function addUserMessage(text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'ai-message user';
+      
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      bubble.textContent = text;
+      
+      const time = document.createElement('div');
+      time.className = 'message-time';
+      time.textContent = getCurrentTime();
+      
+      messageDiv.appendChild(bubble);
+      messageDiv.appendChild(time);
+      aiChatMessages.appendChild(messageDiv);
+      
+      // Scroll to bottom
+      setTimeout(() => {
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }, 10);
+    }
+    
+    function addAIMessage(text) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'ai-message bot';
+      
+      const bubble = document.createElement('div');
+      bubble.className = 'message-bubble';
+      
+      // Format text with basic markdown
+      let formatted = text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n/g, '<br>');
+      
+      bubble.innerHTML = formatted;
+      
+      const time = document.createElement('div');
+      time.className = 'message-time';
+      time.textContent = getCurrentTime();
+      
+      messageDiv.appendChild(bubble);
+      messageDiv.appendChild(time);
+      aiChatMessages.appendChild(messageDiv);
+      
+      // Scroll to bottom
+      setTimeout(() => {
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }, 10);
+    }
+    
+    function addSpecialContent(html) {
+      const div = document.createElement('div');
+      div.innerHTML = html;
+      aiChatMessages.appendChild(div);
+      
+      setTimeout(() => {
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }, 10);
+    }
+    
+    function addSuggestionButtons(suggestions) {
+      const container = document.createElement('div');
+      container.className = 'ai-suggestion-buttons';
+      
+      suggestions.forEach(text => {
+        const btn = document.createElement('button');
+        btn.className = 'ai-suggestion-btn';
+        btn.textContent = text;
+        btn.addEventListener('click', () => {
+          aiChatInput.value = text;
+          sendMessage();
+        });
+        container.appendChild(btn);
+      });
+      
+      aiChatMessages.appendChild(container);
+      
+      setTimeout(() => {
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }, 10);
+    }
+    
+    function addOperatorTransfer() {
+      const div = document.createElement('div');
+      div.className = 'operator-transfer';
+      div.innerHTML = `
+        <p>Need to speak with a human operator?</p>
+        <button class="operator-transfer-btn" id="operatorTransferBtn">
+          <i class="fas fa-user-headset"></i> Connect to Human Support
+        </button>
+      `;
+      
+      aiChatMessages.appendChild(div);
+      
+      setTimeout(() => {
+        const btn = document.getElementById('operatorTransferBtn');
+        if (btn) {
+          btn.addEventListener('click', () => {
+            const message = "👨‍💼 **Connecting to Human Support**\n\nI've notified our support team. An operator will contact you as soon as possible during our support hours (Friday 12:00 PM - Saturday 9:00 PM (GMT+3)).\n\nFor immediate assistance:\n• Call: +973 3420 3541\n• Email: aerialarc.supp@gmail.com\n\nThank you for your patience!";
+            addAIMessage(message);
+            div.remove();
+          });
+        }
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }, 100);
+    }
+    
+    function showOperatorSearchLoader() {
+      // Create loader container
+      const loaderDiv = document.createElement('div');
+      loaderDiv.className = 'ai-message';
+      loaderDiv.innerHTML = `
+        <div class="operator-search-loader">
+          <div class="loader-spinner"></div>
+          <span>Searching for available operator...</span>
+        </div>
+      `;
+      
+      aiChatMessages.appendChild(loaderDiv);
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      
+      // After 15 seconds, show no operators available message
+      setTimeout(() => {
+        loaderDiv.remove();
+        const noOperatorMessage = `❌ **No Operators Available**\n\nWe're sorry, but there are no operators available at the moment.\n\n📧 Please send an email to: **aerialarc.supp@gmail.com**\n\nOur support team will respond as soon as possible during our business hours (Friday 12:00 PM - Saturday 9:00 PM GMT+3).\n\nThank you for your patience!`;
+        addAIMessage(noOperatorMessage);
+        
+        // Disable chat after showing message
+        setTimeout(() => {
+          aiChatInput.disabled = true;
+          aiChatSend.disabled = true;
+        }, 1000);
+      }, 15000);
+    }
+    
+    function getCurrentTime() {
+      const now = new Date();
+      return `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+    }
+    
+    // ============================================
+    // WEBSITE FUNCTIONALITY
+    // ============================================
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      // Check if returning from receipt page and clear basket
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('from') === 'receipt' || document.referrer.includes('receipt.html')) {
+        localStorage.removeItem('rlAccountBasket');
+        sessionStorage.removeItem('checkoutItems');
+        shoppingBasket = [];
+      }
+      
+      initAI();
+      initWebsite();
+    });
+    
+    function initWebsite() {
+      // Mobile menu
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      
+      mobileMenuBtn.addEventListener('click', () => {
+        const opened = mobileMenu.classList.toggle('active');
+        mobileMenuBtn.innerHTML = opened ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        mobileMenuBtn.setAttribute('aria-expanded', opened ? 'true' : 'false');
+        document.body.classList.toggle('no-scroll', opened);
+        // focus first link for accessibility
+        if (opened) {
+          const firstLink = mobileMenu.querySelector('a');
+          if (firstLink) firstLink.focus();
+        }
+      });
+      
+      // Close mobile menu on link click
+      document.querySelectorAll('.mobile-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.remove('active');
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+          mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          document.body.classList.remove('no-scroll');
+        });
+      });
+      
+      // Header scroll effect
+      const header = document.getElementById('header');
+      const backToTop = document.getElementById('backToTop');
+      
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+          header.classList.add('scrolled');
+          backToTop.classList.add('visible');
+        } else {
+          header.classList.remove('scrolled');
+          backToTop.classList.remove('visible');
+        }
+      });
+      
+      // Smooth scrolling for non-product links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          const href = this.getAttribute('href');
+          if (href === '#products') {
+            e.preventDefault();
+            document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+            return;
+          }
+          
+          if (href === '#') return;
+          
+          e.preventDefault();
+          const targetElement = document.querySelector(href);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 100,
+              behavior: 'smooth'
+            });
+          }
+        });
+      });
+      
+      // Contact navigation - open AI chat
+      (function bindContactHandlers(){
+        const contacts = Array.from(document.querySelectorAll('.contact-nav, #contactTop, #heroContactBtn, .mobile-contact-nav, #mobileContactBtn, .footer-contact-nav'));
+        // Also bind any anchor whose text contains "contact" (case-insensitive)
+        document.querySelectorAll('a').forEach(a => {
+          if (/\bcontact\b/i.test(a.textContent) && !a.dataset.aiContactBound) {
+            contacts.push(a);
+          }
+        });
+
+        contacts.forEach(el => {
+          if (el.dataset.aiContactBound) return;
+          el.dataset.aiContactBound = '1';
+          el.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!aiChatContainer.classList.contains('active')) {
+              toggleChat();
+            }
+            // Auto-type contact message
+            setTimeout(() => {
+              aiChatInput.value = "I want to contact you about a product/service";
+              sendMessage();
+            }, 300);
+          });
+        });
+      })();
+      
+      // Products navigation - scroll to products, don't open contact form
+      document.querySelectorAll('#productsNav, #mobileProductsNav, #footerProductsNav').forEach(el => {
+        el.addEventListener('click', (e) => {
+          e.preventDefault();
+          document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+      
+      // Product buttons - open AI chat with product query (or navigate to product page)
+      document.querySelectorAll('[data-product]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const product = btn.dataset.product;
+          // Direct navigation for Boosting product
+          if (product === 'boosting') {
+            window.location.href = 'Alter WEB/ChooseRLBoosting.html';
+            return;
+          }
+          // Direct navigation to NitroMOD page
+          if (product === 'nitromod') {
+            window.location.href = 'Alter WEB/nitromod.html';
+            return;
+          }
+
+          if (!aiChatContainer.classList.contains('active')) {
+            toggleChat();
+          }
+          // Auto-query about the product
+          setTimeout(() => {
+            let query = '';
+            switch(product) {
+              case 'accounts':
+                query = "I want information about Rocket League accounts";
+                break;
+              case 'nitromod':
+                query = "Tell me all about NitroMOD Pro features and pricing";
+                break;
+            }
+            aiChatInput.value = query;
+            sendMessage();
+          }, 300);
+        });
+      });
+      
+      // Contact form
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          const name = document.getElementById('name').value;
+          const email = document.getElementById('email').value;
+          const product = document.getElementById('product').value;
+          
+          alert(`Thank you, ${name}! Your inquiry about ${product || 'our products'} has been received. We'll get back to you at ${email} within 24-48 hours during our support hours (Friday 12:00 PM - Saturday 9:00 PM).`);
+          contactForm.reset();
+        });
+      }
+      
+      // Close chat when clicking outside
+      document.addEventListener('click', (e) => {
+        if (aiChatContainer.classList.contains('active') && 
+            !aiChatContainer.contains(e.target) && 
+            !aiChatButton.contains(e.target)) {
+          toggleChat();
+        }
+      });
+      
+      // Initialize animations
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+      
+      document.querySelectorAll('.feature-card, .product-card, .stat, .contact-item').forEach(el => {
+        observer.observe(el);
+      });
+      
+      // Back to top
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+    
+    // Event listeners for AI chat
+    aiChatButton.addEventListener('click', toggleChat);
+    aiChatSend.addEventListener('click', sendMessage);
+    aiChatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Close chat on Escape key
+    document.addEventListener('keydown', (e) => {
+      try {
+        if (e.key === 'Escape' && aiChatContainer && aiChatContainer.classList.contains('active')) {
+          toggleChat();
+        }
+      } catch (err) { console.error('Escape handler error', err); }
+    });
+
+    // Expose a safe global toggle and bind fallback click if needed
+    window.toggleChat = function() {
+      try { toggleChat(); } catch (err) { console.error('window.toggleChat failed', err); }
+    };
+
+    // Ensure button exists and bind fallback
+    if (!aiChatButton) {
+      const fallbackBtn = document.querySelector('.ai-chat-button');
+      if (fallbackBtn) fallbackBtn.addEventListener('click', () => window.toggleChat());
+    }
+
+    // Make sure any contact-like anchors open the chat even if loaded later
+    new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        m.addedNodes.forEach(n => {
+          if (n.nodeType === 1 && n.matches && n.matches('a') && /\bcontact\b/i.test(n.textContent)) {
+            n.addEventListener('click', (e) => { e.preventDefault(); window.toggleChat(); setTimeout(()=>{ if (aiChatInput) { aiChatInput.value = 'I want to contact you about a product/service'; sendMessage(); } }, 300); });
+          }
+        });
+      }
+    }).observe(document.body, { childList: true, subtree: true });
+    
+    // Quick actions
+    document.querySelectorAll('.ai-quick-action').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const action = e.target.dataset.action;
+        let query = '';
+        
+        switch(action) {
+          case 'products':
+            query = "Show me all your products with details";
+            break;
+          case 'pricing':
+            query = "Show me pricing for all your services";
+            break;
+          case 'order':
+            // Navigate directly to the Rocket League boosting order page
+            window.location.href = 'Alter WEB/ChooseRLBoosting.html';
+            return;
+          case 'support':
+            query = "I need support with a service";
+            break;
+        }
+        
+        if (query) {
+          if (!aiChatContainer.classList.contains('active')) {
+            toggleChat();
+          }
+          setTimeout(() => {
+            aiChatInput.value = query;
+            sendMessage();
+          }, 300);
+        }
+      });
+    });
+
+    // Theme and Color picker functionality
+    const themePicker = document.getElementById('aiThemePicker');
+    const themeOptions = document.getElementById('aiThemeOptions');
+    const colorPicker = document.getElementById('aiColorPicker');
+    const colorOptions = document.getElementById('aiColorOptions');
+    const chatMessages = document.getElementById('aiChatMessages');
+    let currentTheme = localStorage.getItem('aiChatTheme') || 'light';
+    
+    if (themePicker && themeOptions && colorPicker && colorOptions && chatMessages) {
+      // Theme picker toggle
+      themePicker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        themeOptions.classList.toggle('active');
+        colorOptions.classList.remove('active');
+      });
+
+      // Color picker toggle
+      colorPicker.addEventListener('click', (e) => {
+        e.stopPropagation();
+        colorOptions.classList.toggle('active');
+        themeOptions.classList.remove('active');
+      });
+
+      // Close options when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!colorOptions.contains(e.target) && e.target !== colorPicker) {
+          colorOptions.classList.remove('active');
+        }
+        if (!themeOptions.contains(e.target) && e.target !== themePicker) {
+          themeOptions.classList.remove('active');
+        }
+      });
+
+      // Function to update theme
+      function updateTheme(theme) {
+        currentTheme = theme;
+        localStorage.setItem('aiChatTheme', theme);
+        
+        const aiInputArea = document.querySelector('.ai-chat-input-area');
+        
+        // Update theme picker icon and style
+        const icon = themePicker.querySelector('i');
+        if (theme === 'light') {
+          icon.className = 'fas fa-sun';
+          themePicker.classList.add('light');
+          chatMessages.style.color = '#000000';
+          themeOptions.classList.remove('dark');
+          colorOptions.classList.remove('dark');
+          if (aiInputArea) aiInputArea.classList.remove('dark');
+        } else {
+          icon.className = 'fas fa-moon';
+          themePicker.classList.remove('light');
+          chatMessages.style.color = '#ffffff';
+          themeOptions.classList.add('dark');
+          colorOptions.classList.add('dark');
+          if (aiInputArea) aiInputArea.classList.add('dark');
+        }
+        
+        // Show/hide appropriate color options
+        document.querySelectorAll('.color-option').forEach(opt => {
+          const optTheme = opt.getAttribute('data-theme');
+          opt.style.display = optTheme === theme ? 'block' : 'none';
+        });
+        
+        // Update theme option selected state
+        document.querySelectorAll('.theme-option').forEach(opt => {
+          opt.classList.toggle('selected', opt.getAttribute('data-theme') === theme);
+        });
+        
+        // Set default color for theme if no color is set
+        const savedColor = localStorage.getItem('aiChatBgColor_' + theme);
+        if (savedColor) {
+          chatMessages.style.background = savedColor;
+        } else {
+          const defaultColor = theme === 'light' ? '#f8f9fa' : '#1a202c';
+          chatMessages.style.background = defaultColor;
+          localStorage.setItem('aiChatBgColor_' + theme, defaultColor);
+        }
+      }
+
+      // Handle theme selection
+      document.querySelectorAll('.theme-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const theme = option.getAttribute('data-theme');
+          updateTheme(theme);
+          themeOptions.classList.remove('active');
+        });
+      });
+
+      // Handle color selection
+      document.querySelectorAll('.color-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const color = option.getAttribute('data-color');
+          chatMessages.style.background = color;
+          
+          // Update selected state for current theme colors only
+          document.querySelectorAll(`.color-option[data-theme="${currentTheme}"]`).forEach(opt => opt.classList.remove('selected'));
+          option.classList.add('selected');
+          
+          // Save preference for current theme
+          localStorage.setItem('aiChatBgColor_' + currentTheme, color);
+          
+          colorOptions.classList.remove('active');
+        });
+      });
+
+      // Initialize theme on load
+      updateTheme(currentTheme);
+    }
+
+    // ============================================
+    // SHOPPING BASKET FUNCTIONALITY
+    // ============================================
+    
+    // Initialize basket from localStorage or create new
+    let shoppingBasket = JSON.parse(localStorage.getItem('rlAccountBasket') || '[]');
+    
+    const basketBtn = document.getElementById('basketBtn');
+    const basketPanel = document.getElementById('basketPanel');
+    const basketOverlay = document.getElementById('basketOverlay');
+    const basketCloseBtn = document.getElementById('basketCloseBtn');
+    const basketItems = document.getElementById('basketItems');
+    const basketEmpty = document.getElementById('basketEmpty');
+    const basketFooter = document.getElementById('basketFooter');
+    const basketCount = document.getElementById('basketCount');
+    const basketTotalAmount = document.getElementById('basketTotalAmount');
+    const basketCheckoutBtn = document.getElementById('basketCheckoutBtn');
+    
+    // Toggle basket panel
+    function toggleBasket() {
+      const isActive = basketPanel.classList.toggle('active');
+      basketOverlay.classList.toggle('active');
+      document.body.classList.toggle('no-scroll', isActive);
+      
+      // Hide AI chat and help button when basket is open, show when closed
+      const aiChat = document.getElementById('aiChatContainer');
+      const aiHelpBtn = document.getElementById('ai-help-btn');
+      const aiModal = document.getElementById('ai-help-modal');
+      
+      if (isActive) {
+        if (aiChat) {
+          aiChat.style.visibility = 'hidden';
+          aiChat.style.pointerEvents = 'none';
+        }
+        if (aiHelpBtn) {
+          aiHelpBtn.style.visibility = 'hidden';
+          aiHelpBtn.style.pointerEvents = 'none';
+        }
+        if (aiModal) {
+          aiModal.classList.remove('open');
+        }
+        // Move AI chat button above checkout button
+        if (aiChatButton) {
+          aiChatButton.style.bottom = '180px';
+        }
+        renderBasket();
+      } else {
+        if (aiChat) {
+          aiChat.style.visibility = '';
+          aiChat.style.pointerEvents = '';
+        }
+        if (aiHelpBtn) {
+          aiHelpBtn.style.visibility = '';
+          aiHelpBtn.style.pointerEvents = '';
+        }
+        // Reset AI chat button position
+        if (aiChatButton) {
+          aiChatButton.style.bottom = '';
+        }
+      }
+    }
+    
+    // Close basket
+    function closeBasket() {
+      basketPanel.classList.remove('active');
+      basketOverlay.classList.remove('active');
+      document.body.classList.remove('no-scroll');
+      
+      // Show AI chat and help button when basket is closed
+      const aiChat = document.getElementById('aiChatContainer');
+      const aiHelpBtn = document.getElementById('ai-help-btn');
+      const aiModal = document.getElementById('ai-help-modal');
+      
+      if (aiChat) {
+        aiChat.style.visibility = '';
+        aiChat.style.pointerEvents = '';
+      }
+      if (aiHelpBtn) {
+        aiHelpBtn.style.visibility = '';
+        aiHelpBtn.style.pointerEvents = '';
+      }
+      if (aiModal) {
+        aiModal.classList.remove('open');
+      }
+      // Reset AI chat button position
+      if (aiChatButton) {
+        aiChatButton.style.bottom = '';
+      }
+    }
+    
+    // Add item to basket
+    window.addToBasket = function(product) {
+      // Check if item already exists
+      const existingIndex = shoppingBasket.findIndex(item => item.name === product.name);
+      
+      if (existingIndex > -1) {
+        // Item already in basket - show message
+        showBasketNotification('Item already in basket!', 'warning');
+        return;
+      }
+      
+      // Add new item
+      shoppingBasket.push({
+        name: product.name,
+        price: product.price,
+        priceValue: product.priceValue || parseFloat(product.price.replace('$', '').replace(',', '')),
+        type: product.type || 'product',
+        url: product.url || ''
+      });
+      
+      saveBasket();
+      updateBasketCount();
+      showBasketNotification('Added to basket!', 'success');
+      renderBasket();
+    };
+    
+    // Remove item from basket
+    function removeFromBasket(index) {
+      shoppingBasket.splice(index, 1);
+      saveBasket();
+      updateBasketCount();
+      renderBasket();
+      showBasketNotification('Item removed', 'info');
+    }
+    
+    // Clear entire basket
+    window.clearBasket = function() {
+      if (confirm('Are you sure you want to clear your basket?')) {
+        shoppingBasket = [];
+        saveBasket();
+        updateBasketCount();
+        renderBasket();
+        showBasketNotification('Basket cleared', 'info');
+      }
+    };
+    
+    // Save basket to localStorage
+    function saveBasket() {
+      localStorage.setItem('rlAccountBasket', JSON.stringify(shoppingBasket));
+    }
+    
+    // Update basket count badge
+    function updateBasketCount() {
+      const count = shoppingBasket.length;
+      basketCount.textContent = count;
+      if (count > 0) {
+        basketCount.classList.remove('hidden');
+      } else {
+        basketCount.classList.add('hidden');
+      }
+    }
+    
+    // Calculate total
+    function calculateTotal() {
+      return shoppingBasket.reduce((sum, item) => {
+        // Handle both formats: priceValue (from index.html) or price (from RLAccounts.html)
+        const price = item.priceValue || (typeof item.price === 'number' ? item.price : parseFloat(item.price.replace('$', '').replace(',', '')));
+        return sum + price;
+      }, 0);
+    }
+    
+    // Helper function to get platform icon (for RLAccounts.html compatibility)
+    function getPlatformIcon(platform) {
+      const platformLower = (platform || '').toLowerCase();
+      switch(platformLower) {
+        case 'xbox': return 'fab fa-xbox';
+        case 'playstation': return 'fab fa-playstation';
+        case 'epic games': return 'fas fa-gamepad';
+        case 'steam': return 'fab fa-steam';
+        default: return 'fas fa-gamepad';
+      }
+    }
+    
+    // Render basket items
+    function renderBasket() {
+      if (shoppingBasket.length === 0) {
+        basketEmpty.style.display = 'block';
+        basketFooter.style.display = 'none';
+        basketItems.innerHTML = '';
+        basketItems.appendChild(basketEmpty);
+        return;
+      }
+      
+      basketEmpty.style.display = 'none';
+      basketFooter.style.display = 'block';
+      
+      basketItems.innerHTML = shoppingBasket.map((item, index) => {
+        // Format price correctly for both formats
+        const displayPrice = typeof item.price === 'number' ? '$' + item.price.toFixed(2) : item.price;
+        // Get platform icon if available (from RLAccounts.html items)
+        const platformIcon = item.platform ? getPlatformIcon(item.platform) : '';
+        const platformDisplay = item.platform ? `<div class="basket-item-platform"><i class="${platformIcon}"></i> ${item.platform.charAt(0).toUpperCase() + item.platform.slice(1)}</div>` : '';
+        
+        return `
+        <div class="basket-item">
+          <div class="basket-item-details">
+            <div class="basket-item-name">${item.name}</div>
+            ${platformDisplay}
+            <div class="basket-item-price">${displayPrice}</div>
+          </div>
+          <button class="basket-item-remove" onclick="removeFromBasket(${index})" aria-label="Remove item">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      `;
+      }).join('');
+      
+      // Update total
+      const total = calculateTotal();
+      basketTotalAmount.textContent = '$' + total.toFixed(2);
+    }
+    
+    // Show notification
+    function showBasketNotification(message, type = 'info') {
+      // Remove existing notification
+      const existing = document.querySelector('.basket-notification');
+      if (existing) existing.remove();
+      
+      const notification = document.createElement('div');
+      notification.className = 'basket-notification basket-notification-' + type;
+      notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #D4AF37, #B8941E)' : type === 'warning' ? 'linear-gradient(135deg, #ff9500, #ff6b00)' : 'linear-gradient(135deg, #000000, #1a1a1a)'};
+        color: ${type === 'warning' ? '#000' : '#fff'};
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        z-index: 10000;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        animation: slideInRight 0.4s ease, slideOutRight 0.4s ease 2.6s;
+        pointer-events: none;
+      `;
+      notification.textContent = message;
+      document.body.appendChild(notification);
+      
+      setTimeout(() => notification.remove(), 3000);
+    }
+    
+    // Checkout function
+    function proceedToCheckout() {
+      if (shoppingBasket.length === 0) return;
+      
+      // Create a multi-item checkout
+      // Store basket items in sessionStorage for the payment page
+      sessionStorage.setItem('checkoutItems', JSON.stringify(shoppingBasket));
+      
+      // Calculate total
+      const total = calculateTotal();
+      
+      // Redirect to payment page with basket info
+      window.location.href = 'Alter WEB/PaymentMethods.html?service=Multiple Items&price=' + total.toFixed(2) + '&type=basket';
+    }
+    
+    // Event listeners
+    basketBtn.addEventListener('click', toggleBasket);
+    basketCloseBtn.addEventListener('click', closeBasket);
+    basketOverlay.addEventListener('click', closeBasket);
+    basketCheckoutBtn.addEventListener('click', proceedToCheckout);
+    
+    // Close basket on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && basketPanel.classList.contains('active')) {
+        closeBasket();
+      }
+    });
+    
+    // Initialize basket on page load
+    updateBasketCount();
+    
+    // Add CSS animations for notifications
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes slideInRight {
+        from {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+        to {
+          transform: translateX(400px);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>
