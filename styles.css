@@ -90,23 +90,23 @@
       transition: background 400ms ease, color 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
     }
 
-    body.page-index .dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
-    body.page-index .dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
-    body.page-index .dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
-    body.page-index .dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
+    body.page-index.dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
+    body.page-index.dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
+    body.page-index.dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
+    body.page-index.dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
 
     /* Invert text and important elements for dark mode */
-    body.page-index .dark-mode nav a{ color:#f5f5f5; }
-    body.page-index .dark-mode .hero h1{ color:#ffffff; }
-    body.page-index .dark-mode .hero p{ color:#d0d0d0; }
-    body.page-index .dark-mode .card h3, body.page-index .dark-mode .card p, body.page-index .dark-mode .section-title, body.page-index .dark-mode .section-subtitle, body.page-index .dark-mode footer, body.page-index .dark-mode .product-btn, body.page-index .dark-mode .btn{ color:#e6e6e6; }
-    body.page-index .dark-mode .product-btn{ background:#111111; color:#ffffff; border-color: rgba(255,255,255,0.12); box-shadow:0 10px 30px rgba(0,0,0,0.4); }
+    body.page-index.dark-mode nav a{ color:#f5f5f5; }
+    body.page-index.dark-mode .hero h1{ color:#ffffff; }
+    body.page-index.dark-mode .hero p{ color:#d0d0d0; }
+    body.page-index.dark-mode .card h3, body.page-index.dark-mode .card p, body.page-index.dark-mode .section-title, body.page-index.dark-mode .section-subtitle, body.page-index.dark-mode footer, body.page-index.dark-mode .product-btn, body.page-index.dark-mode .btn{ color:#e6e6e6; }
+    body.page-index.dark-mode .product-btn{ background:#111111; color:#ffffff; border-color: rgba(255,255,255,0.12); box-shadow:0 10px 30px rgba(0,0,0,0.4); }
 
     /* Ensure hero buttons have black text in both themes and readable backgrounds */
     body.page-index #exploreBtn, body.page-index #contactBtn{ color:#111111 !important; }
     /* In dark mode keep text black but make the button backgrounds light so text is readable */
-    body.page-index .dark-mode #exploreBtn{ color:#111111 !important; background: rgba(255,255,255,0.9) !important; border-color: rgba(0,0,0,0.06) !important; }
-    body.page-index .dark-mode #contactBtn{ color:#111111 !important; background: rgba(255,255,255,0.85) !important; border-color: rgba(0,0,0,0.06) !important; }
+    body.page-index.dark-mode #exploreBtn{ color:#111111 !important; background: rgba(255,255,255,0.9) !important; border-color: rgba(0,0,0,0.06) !important; }
+    body.page-index.dark-mode #contactBtn{ color:#111111 !important; background: rgba(255,255,255,0.85) !important; border-color: rgba(0,0,0,0.06) !important; }
 
     body.page-index nav a{
       text-decoration:none;
@@ -244,17 +244,17 @@
     }
 
     /* Dark mode proximity animation styles */
-    body.page-index .dark-mode .btn.proximity-active{
+    body.page-index.dark-mode .btn.proximity-active{
       transform: scale(1.08);
       box-shadow: 0 20px 50px rgba(255,200,100,0.35), 0 0 40px rgba(255,215,0,0.25) !important;
     }
 
-    body.page-index .dark-mode #exploreBtn.proximity-active{
+    body.page-index.dark-mode #exploreBtn.proximity-active{
       background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, #fffacd 100%) !important;
       box-shadow: 0 20px 50px rgba(255,200,100,0.4), 0 0 60px rgba(255,215,0,0.3) !important;
     }
 
-    body.page-index .dark-mode #contactBtn.proximity-active{
+    body.page-index.dark-mode #contactBtn.proximity-active{
       background: rgba(255,255,255,0.95) !important;
       border-color: rgba(255,215,0,0.6) !important;
       box-shadow: 0 20px 50px rgba(255,200,100,0.35), 0 0 40px rgba(255,215,0,0.2) !important;
@@ -516,42 +516,42 @@
     body.page-rank .header-actions{ display:flex; gap:8px; align-items:center; }
     body.page-rank .mode-btn{ padding:6px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; cursor:pointer; font-weight:700; color:#111111; }
     body.page-rank .mode-btn.active{ background:#111111; color:#ffffff; }
-    body.page-rank .dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
-    body.page-rank .dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
-    body.page-rank .dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
-    body.page-rank .dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
+    body.page-rank.dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
+    body.page-rank.dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
+    body.page-rank.dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
+    body.page-rank.dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
 
     /* Dark mode inverted colors for better contrast */
-    body.page-rank .dark-mode nav a{ color:#f5f5f5; }
-    body.page-rank .dark-mode nav a:hover{ color:#d1d1d1; }
-    body.page-rank .dark-mode .hero h1{ color:#ffffff; }
-    body.page-rank .dark-mode .hero p{ color:#d0d0d0; }
-    body.page-rank .dark-mode .section-title{ color:#ffffff; }
-    body.page-rank .dark-mode .section-subtitle{ color:#b0b0b0; }
-    body.page-rank .dark-mode .card{
+    body.page-rank.dark-mode nav a{ color:#f5f5f5; }
+    body.page-rank.dark-mode nav a:hover{ color:#d1d1d1; }
+    body.page-rank.dark-mode .hero h1{ color:#ffffff; }
+    body.page-rank.dark-mode .hero p{ color:#d0d0d0; }
+    body.page-rank.dark-mode .section-title{ color:#ffffff; }
+    body.page-rank.dark-mode .section-subtitle{ color:#b0b0b0; }
+    body.page-rank.dark-mode .card{
       background:rgba(40,40,50,0.8);
       border:1px solid rgba(255,255,255,0.15);
     }
-    body.page-rank .dark-mode .card:hover{
+    body.page-rank.dark-mode .card:hover{
       background:rgba(50,50,65,0.9);
       border-color:rgba(255,255,255,0.25);
       box-shadow:0 30px 60px rgba(0,0,0,0.5);
     }
-    body.page-rank .dark-mode .card h3{ color:#ffffff; }
-    body.page-rank .dark-mode .card p{ color:#d8d8d8; }
-    body.page-rank .dark-mode .product-btn{
+    body.page-rank.dark-mode .card h3{ color:#ffffff; }
+    body.page-rank.dark-mode .card p{ color:#d8d8d8; }
+    body.page-rank.dark-mode .product-btn{
       background:#1a1a24;
       color:#ffffff;
       border:1px solid rgba(255,255,255,0.2);
       box-shadow:0 10px 30px rgba(0,0,0,0.3);
     }
-    body.page-rank .dark-mode .product-btn:hover{
+    body.page-rank.dark-mode .product-btn:hover{
       background:#252535;
       color:#ffffff;
       border-color:rgba(255,255,255,0.3);
       box-shadow:0 18px 40px rgba(255,255,255,0.1);
     }
-    body.page-rank .dark-mode footer{ background:#000000; border-top:1px solid rgba(255,255,255,0.08); color:#909090; }
+    body.page-rank.dark-mode footer{ background:#000000; border-top:1px solid rgba(255,255,255,0.08); color:#909090; }
 
     body.page-rank nav a{
       text-decoration:none;
@@ -865,13 +865,13 @@
         }
 
         /* Dark mode styles */
-        body.page-rankb .dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
-        body.page-rankb .dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
-        body.page-rankb .dark-mode .logo{ color: #f5f5f5; }
-        body.page-rankb .dark-mode .back{ color: #d1d1d1; }
-        body.page-rankb .dark-mode .back:hover{ color: #ffffff; }
-        body.page-rankb .dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
-        body.page-rankb .dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
+        body.page-rankb.dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        body.page-rankb.dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        body.page-rankb.dark-mode .logo{ color: #f5f5f5; }
+        body.page-rankb.dark-mode .back{ color: #d1d1d1; }
+        body.page-rankb.dark-mode .back:hover{ color: #ffffff; }
+        body.page-rankb.dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        body.page-rankb.dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
 
         /* HERO */
 
@@ -918,10 +918,10 @@
             line-height: 1.7;
         }
 
-        body.page-rankb .dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
-        body.page-rankb .dark-mode .hero h1{ color: #ffffff; }
-        body.page-rankb .dark-mode .hero h1 span{ color: #b0b0b0; }
-        body.page-rankb .dark-mode .hero p{ color: #d0d0d0; }
+        body.page-rankb.dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        body.page-rankb.dark-mode .hero h1{ color: #ffffff; }
+        body.page-rankb.dark-mode .hero h1 span{ color: #b0b0b0; }
+        body.page-rankb.dark-mode .hero p{ color: #d0d0d0; }
 
         /* MAIN */
 
@@ -996,13 +996,13 @@
             color: #cccccc;
         }
 
-        body.page-rankb .dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-rankb .dark-mode .selector-title{ color: #ffffff; }
-        body.page-rankb .dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-rankb .dark-mode .mode small{ color: #909090; }
-        body.page-rankb .dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        body.page-rankb .dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
-        body.page-rankb .dark-mode .mode.active small{ color: #444444; }
+        body.page-rankb.dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-rankb.dark-mode .selector-title{ color: #ffffff; }
+        body.page-rankb.dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-rankb.dark-mode .mode small{ color: #909090; }
+        body.page-rankb.dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        body.page-rankb.dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-rankb.dark-mode .mode.active small{ color: #444444; }
 
         /* RANK SELECTORS */
 
@@ -1051,10 +1051,10 @@
             font-size: 24px;
         }
 
-        body.page-rankb .dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
-        body.page-rankb .dark-mode .rank-box label{ color: #909090; }
-        body.page-rankb .dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
-        body.page-rankb .dark-mode .arrow{ color: #707070; }
+        body.page-rankb.dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
+        body.page-rankb.dark-mode .rank-box label{ color: #909090; }
+        body.page-rankb.dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
+        body.page-rankb.dark-mode .arrow{ color: #707070; }
 
         /* PRICE */
 
@@ -1110,12 +1110,12 @@
             box-shadow: 0 14px 40px rgba(0,0,0,0.12);
         }
 
-        body.page-rankb .dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-rankb .dark-mode .price-info small{ color: #909090; }
-        body.page-rankb .dark-mode .price-info strong{ color: #ffffff; }
-        body.page-rankb .dark-mode .price{ color: #ffffff; }
-        body.page-rankb .dark-mode .order-btn{ background: #ffffff; color: #000000; }
-        body.page-rankb .dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-rankb.dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-rankb.dark-mode .price-info small{ color: #909090; }
+        body.page-rankb.dark-mode .price-info strong{ color: #ffffff; }
+        body.page-rankb.dark-mode .price{ color: #ffffff; }
+        body.page-rankb.dark-mode .order-btn{ background: #ffffff; color: #000000; }
+        body.page-rankb.dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
 
         /* PRICING TABLE */
 
@@ -1218,10 +1218,10 @@
             font-size: 15px;
         }
 
-        body.page-rankb .dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-rankb .dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
-        body.page-rankb .dark-mode .feature h3{ color: #ffffff; }
-        body.page-rankb .dark-mode .feature p{ color: #d0d0d0; }
+        body.page-rankb.dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-rankb.dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-rankb.dark-mode .feature h3{ color: #ffffff; }
+        body.page-rankb.dark-mode .feature p{ color: #d0d0d0; }
 
         /* FOOTER */
 
@@ -1234,7 +1234,7 @@
             font-size: 13px;
         }
 
-        body.page-rankb .dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+        body.page-rankb.dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
 
         /* RESPONSIVE */
 
@@ -1303,7 +1303,7 @@
             }
             body.page-rankb .currency-option:hover{ background:rgba(255,255,255,0.03); }
             body.page-rankb .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
-            body.page-rankb .dark-mode .currency-toggle{
+            body.page-rankb.dark-mode .currency-toggle{
                 background:rgba(255,255,255,0.06); color:#f5f5f5;
                 border:1px solid rgba(255,255,255,0.08);
             }
@@ -1403,11 +1403,11 @@
         }
 
         /* Dark mode styles */
-        body.page-rankt .dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
-        body.page-rankt .dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
-        body.page-rankt .dark-mode .logo{ color: #f5f5f5; }
-        body.page-rankt .dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
-        body.page-rankt .dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
+        body.page-rankt.dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        body.page-rankt.dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        body.page-rankt.dark-mode .logo{ color: #f5f5f5; }
+        body.page-rankt.dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        body.page-rankt.dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
 
         /* HERO */
 
@@ -1454,10 +1454,10 @@
             line-height: 1.7;
         }
 
-        body.page-rankt .dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
-        body.page-rankt .dark-mode .hero h1{ color: #ffffff; }
-        body.page-rankt .dark-mode .hero h1 span{ color: #b0b0b0; }
-        body.page-rankt .dark-mode .hero p{ color: #d0d0d0; }
+        body.page-rankt.dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        body.page-rankt.dark-mode .hero h1{ color: #ffffff; }
+        body.page-rankt.dark-mode .hero h1 span{ color: #b0b0b0; }
+        body.page-rankt.dark-mode .hero p{ color: #d0d0d0; }
 
         /* MAIN */
 
@@ -1532,13 +1532,13 @@
             color: #cccccc;
         }
 
-        body.page-rankt .dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-rankt .dark-mode .selector-title{ color: #ffffff; }
-        body.page-rankt .dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-rankt .dark-mode .mode small{ color: #909090; }
-        body.page-rankt .dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        body.page-rankt .dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
-        body.page-rankt .dark-mode .mode.active small{ color: #444444; }
+        body.page-rankt.dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-rankt.dark-mode .selector-title{ color: #ffffff; }
+        body.page-rankt.dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-rankt.dark-mode .mode small{ color: #909090; }
+        body.page-rankt.dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        body.page-rankt.dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-rankt.dark-mode .mode.active small{ color: #444444; }
 
         /* RANK SELECTOR */
 
@@ -1586,10 +1586,10 @@
             border-color: #111111;
         }
 
-        body.page-rankt .dark-mode .rank-btn{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-rankt .dark-mode .rank-btn:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
-        body.page-rankt .dark-mode .rank-btn.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
-        body.page-rankt .dark-mode .rank-label{ color: #909090; }
+        body.page-rankt.dark-mode .rank-btn{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-rankt.dark-mode .rank-btn:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+        body.page-rankt.dark-mode .rank-btn.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-rankt.dark-mode .rank-label{ color: #909090; }
 
         /* TITLE COLOR SELECTOR */
 
@@ -1638,9 +1638,9 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.15);
         }
 
-        body.page-rankt .dark-mode .color-btn{ background: #1a1a24; border-color: rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-rankt .dark-mode .color-btn:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
-        body.page-rankt .dark-mode .color-btn.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-rankt.dark-mode .color-btn{ background: #1a1a24; border-color: rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-rankt.dark-mode .color-btn:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 6px 15px rgba(0,0,0,0.3); }
+        body.page-rankt.dark-mode .color-btn.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
 
         body.page-rankt .price-card{
             margin-top: 25px;
@@ -1694,12 +1694,12 @@
             box-shadow: 0 14px 40px rgba(0,0,0,0.12);
         }
 
-        body.page-rankt .dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-rankt .dark-mode .price-info small{ color: #909090; }
-        body.page-rankt .dark-mode .price-info strong{ color: #ffffff; }
-        body.page-rankt .dark-mode .price{ color: #ffffff; }
-        body.page-rankt .dark-mode .order-btn{ background: #ffffff; color: #000000; }
-        body.page-rankt .dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-rankt.dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-rankt.dark-mode .price-info small{ color: #909090; }
+        body.page-rankt.dark-mode .price-info strong{ color: #ffffff; }
+        body.page-rankt.dark-mode .price{ color: #ffffff; }
+        body.page-rankt.dark-mode .order-btn{ background: #ffffff; color: #000000; }
+        body.page-rankt.dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
 
         /* FEATURES */
 
@@ -1742,10 +1742,10 @@
             font-size: 15px;
         }
 
-        body.page-rankt .dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-rankt .dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
-        body.page-rankt .dark-mode .feature h3{ color: #ffffff; }
-        body.page-rankt .dark-mode .feature p{ color: #d0d0d0; }
+        body.page-rankt.dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-rankt.dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-rankt.dark-mode .feature h3{ color: #ffffff; }
+        body.page-rankt.dark-mode .feature p{ color: #d0d0d0; }
 
         /* FOOTER */
 
@@ -1758,7 +1758,7 @@
             font-size: 13px;
         }
 
-        body.page-rankt .dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+        body.page-rankt.dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
 
         /* RESPONSIVE */
 
@@ -1827,7 +1827,7 @@
             }
             body.page-rankt .currency-option:hover{ background:rgba(255,255,255,0.03); }
             body.page-rankt .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
-            body.page-rankt .dark-mode .currency-toggle{
+            body.page-rankt.dark-mode .currency-toggle{
                 background:rgba(255,255,255,0.06); color:#f5f5f5;
                 border:1px solid rgba(255,255,255,0.08);
             }
@@ -1938,13 +1938,13 @@
         }
 
         /* Dark mode styles */
-        body.page-ranke .dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
-        body.page-ranke .dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
-        body.page-ranke .dark-mode .logo{ color: #f5f5f5; }
-        body.page-ranke .dark-mode .back{ color: #d1d1d1; }
-        body.page-ranke .dark-mode .back:hover{ color: #ffffff; }
-        body.page-ranke .dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
-        body.page-ranke .dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
+        body.page-ranke.dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        body.page-ranke.dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        body.page-ranke.dark-mode .logo{ color: #f5f5f5; }
+        body.page-ranke.dark-mode .back{ color: #d1d1d1; }
+        body.page-ranke.dark-mode .back:hover{ color: #ffffff; }
+        body.page-ranke.dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        body.page-ranke.dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
 
         /* HERO */
 
@@ -1991,10 +1991,10 @@
             line-height: 1.7;
         }
 
-        body.page-ranke .dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
-        body.page-ranke .dark-mode .hero h1{ color: #ffffff; }
-        body.page-ranke .dark-mode .hero h1 span{ color: #b0b0b0; }
-        body.page-ranke .dark-mode .hero p{ color: #d0d0d0; }
+        body.page-ranke.dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        body.page-ranke.dark-mode .hero h1{ color: #ffffff; }
+        body.page-ranke.dark-mode .hero h1 span{ color: #b0b0b0; }
+        body.page-ranke.dark-mode .hero p{ color: #d0d0d0; }
 
         /* MAIN */
 
@@ -2069,13 +2069,13 @@
             color: #cccccc;
         }
 
-        body.page-ranke .dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-ranke .dark-mode .selector-title{ color: #ffffff; }
-        body.page-ranke .dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-ranke .dark-mode .mode small{ color: #909090; }
-        body.page-ranke .dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        body.page-ranke .dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
-        body.page-ranke .dark-mode .mode.active small{ color: #444444; }
+        body.page-ranke.dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-ranke.dark-mode .selector-title{ color: #ffffff; }
+        body.page-ranke.dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-ranke.dark-mode .mode small{ color: #909090; }
+        body.page-ranke.dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        body.page-ranke.dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-ranke.dark-mode .mode.active small{ color: #444444; }
 
         /* RANK SELECTORS */
 
@@ -2124,10 +2124,10 @@
             font-size: 24px;
         }
 
-        body.page-ranke .dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
-        body.page-ranke .dark-mode .rank-box label{ color: #909090; }
-        body.page-ranke .dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
-        body.page-ranke .dark-mode .arrow{ color: #707070; }
+        body.page-ranke.dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
+        body.page-ranke.dark-mode .rank-box label{ color: #909090; }
+        body.page-ranke.dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
+        body.page-ranke.dark-mode .arrow{ color: #707070; }
 
         /* PRICE */
 
@@ -2183,12 +2183,12 @@
             box-shadow: 0 14px 40px rgba(0,0,0,0.12);
         }
 
-        body.page-ranke .dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-ranke .dark-mode .price-info small{ color: #909090; }
-        body.page-ranke .dark-mode .price-info strong{ color: #ffffff; }
-        body.page-ranke .dark-mode .price{ color: #ffffff; }
-        body.page-ranke .dark-mode .order-btn{ background: #ffffff; color: #000000; }
-        body.page-ranke .dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-ranke.dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-ranke.dark-mode .price-info small{ color: #909090; }
+        body.page-ranke.dark-mode .price-info strong{ color: #ffffff; }
+        body.page-ranke.dark-mode .price{ color: #ffffff; }
+        body.page-ranke.dark-mode .order-btn{ background: #ffffff; color: #000000; }
+        body.page-ranke.dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
 
         /* PRICING TABLE */
 
@@ -2291,10 +2291,10 @@
             font-size: 15px;
         }
 
-        body.page-ranke .dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-ranke .dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
-        body.page-ranke .dark-mode .feature h3{ color: #ffffff; }
-        body.page-ranke .dark-mode .feature p{ color: #d0d0d0; }
+        body.page-ranke.dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-ranke.dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-ranke.dark-mode .feature h3{ color: #ffffff; }
+        body.page-ranke.dark-mode .feature p{ color: #d0d0d0; }
 
         /* FOOTER */
 
@@ -2307,7 +2307,7 @@
             font-size: 13px;
         }
 
-        body.page-ranke .dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+        body.page-ranke.dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
 
         /* RESPONSIVE */
 
@@ -2376,7 +2376,7 @@
             }
             body.page-ranke .currency-option:hover{ background:rgba(255,255,255,0.03); }
             body.page-ranke .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
-            body.page-ranke .dark-mode .currency-toggle{
+            body.page-ranke.dark-mode .currency-toggle{
                 background:rgba(255,255,255,0.06); color:#f5f5f5;
                 border:1px solid rgba(255,255,255,0.08);
             }
@@ -2488,13 +2488,13 @@
         }
 
         /* Dark mode styles */
-        body.page-steam .dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
-        body.page-steam .dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
-        body.page-steam .dark-mode .logo{ color: #f5f5f5; }
-        body.page-steam .dark-mode .back{ color: #d1d1d1; }
-        body.page-steam .dark-mode .back:hover{ color: #ffffff; }
-        body.page-steam .dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
-        body.page-steam .dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
+        body.page-steam.dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        body.page-steam.dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        body.page-steam.dark-mode .logo{ color: #f5f5f5; }
+        body.page-steam.dark-mode .back{ color: #d1d1d1; }
+        body.page-steam.dark-mode .back:hover{ color: #ffffff; }
+        body.page-steam.dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        body.page-steam.dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
 
         /* HERO */
 
@@ -2541,10 +2541,10 @@
             line-height: 1.7;
         }
 
-        body.page-steam .dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
-        body.page-steam .dark-mode .hero h1{ color: #ffffff; }
-        body.page-steam .dark-mode .hero h1 span{ color: #b0b0b0; }
-        body.page-steam .dark-mode .hero p{ color: #d0d0d0; }
+        body.page-steam.dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        body.page-steam.dark-mode .hero h1{ color: #ffffff; }
+        body.page-steam.dark-mode .hero h1 span{ color: #b0b0b0; }
+        body.page-steam.dark-mode .hero p{ color: #d0d0d0; }
 
         /* MAIN */
 
@@ -2619,13 +2619,13 @@
             color: #cccccc;
         }
 
-        body.page-steam .dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-steam .dark-mode .selector-title{ color: #ffffff; }
-        body.page-steam .dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-steam .dark-mode .mode small{ color: #909090; }
-        body.page-steam .dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        body.page-steam .dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
-        body.page-steam .dark-mode .mode.active small{ color: #444444; }
+        body.page-steam.dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-steam.dark-mode .selector-title{ color: #ffffff; }
+        body.page-steam.dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-steam.dark-mode .mode small{ color: #909090; }
+        body.page-steam.dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        body.page-steam.dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-steam.dark-mode .mode.active small{ color: #444444; }
 
         /* RANK SELECTORS */
 
@@ -2674,10 +2674,10 @@
             font-size: 24px;
         }
 
-        body.page-steam .dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
-        body.page-steam .dark-mode .rank-box label{ color: #909090; }
-        body.page-steam .dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
-        body.page-steam .dark-mode .arrow{ color: #707070; }
+        body.page-steam.dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
+        body.page-steam.dark-mode .rank-box label{ color: #909090; }
+        body.page-steam.dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
+        body.page-steam.dark-mode .arrow{ color: #707070; }
 
         /* PRICE */
 
@@ -2733,12 +2733,12 @@
             box-shadow: 0 14px 40px rgba(0,0,0,0.12);
         }
 
-        body.page-steam .dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-steam .dark-mode .price-info small{ color: #909090; }
-        body.page-steam .dark-mode .price-info strong{ color: #ffffff; }
-        body.page-steam .dark-mode .price{ color: #ffffff; }
-        body.page-steam .dark-mode .order-btn{ background: #ffffff; color: #000000; }
-        body.page-steam .dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-steam.dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-steam.dark-mode .price-info small{ color: #909090; }
+        body.page-steam.dark-mode .price-info strong{ color: #ffffff; }
+        body.page-steam.dark-mode .price{ color: #ffffff; }
+        body.page-steam.dark-mode .order-btn{ background: #ffffff; color: #000000; }
+        body.page-steam.dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
 
         /* PRICING TABLE */
 
@@ -2841,10 +2841,10 @@
             font-size: 15px;
         }
 
-        body.page-steam .dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-steam .dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
-        body.page-steam .dark-mode .feature h3{ color: #ffffff; }
-        body.page-steam .dark-mode .feature p{ color: #d0d0d0; }
+        body.page-steam.dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-steam.dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-steam.dark-mode .feature h3{ color: #ffffff; }
+        body.page-steam.dark-mode .feature p{ color: #d0d0d0; }
 
         /* FOOTER */
 
@@ -2857,7 +2857,7 @@
             font-size: 13px;
         }
 
-        body.page-steam .dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+        body.page-steam.dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
 
         /* RESPONSIVE */
 
@@ -3069,40 +3069,40 @@ body.page-steam .sell-btn:hover{
     box-shadow: 0 14px 40px rgba(0,0,0,0.12);
 }
 
-body.page-steam .dark-mode .option-card{
+body.page-steam.dark-mode .option-card{
     background: #1a1a24;
     border-color: rgba(255,255,255,0.1);
     color: #d0d0d0;
 }
 
-body.page-steam .dark-mode .option-card:hover{
+body.page-steam.dark-mode .option-card:hover{
     border-color: #fff;
 }
 
-body.page-steam .dark-mode .option-card.active{
+body.page-steam.dark-mode .option-card.active{
     background: #fff;
     color: #000;
     border-color: #fff;
 }
 
-body.page-steam .dark-mode .option-card.active span{
+body.page-steam.dark-mode .option-card.active span{
     color: #444;
 }
 
-body.page-steam .dark-mode .market-summary, body.page-steam .dark-mode .sell-card{
+body.page-steam.dark-mode .market-summary, body.page-steam.dark-mode .sell-card{
     background: rgba(40,40,50,0.8);
     border-color: rgba(255,255,255,0.15);
 }
 
-body.page-steam .dark-mode .summary-price{
+body.page-steam.dark-mode .summary-price{
     color: #fff;
 }
 
-body.page-steam .dark-mode .market-note, body.page-steam .dark-mode .sell-card p{
+body.page-steam.dark-mode .market-note, body.page-steam.dark-mode .sell-card p{
     color: #d0d0d0;
 }
 
-body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
+body.page-steam.dark-mode .check-btn, body.page-steam.dark-mode .sell-btn{
     background: #fff;
     color: #000;
 }
@@ -3152,7 +3152,7 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             }
             body.page-steam .currency-option:hover{ background:rgba(255,255,255,0.03); }
             body.page-steam .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
-            body.page-steam .dark-mode .currency-toggle{
+            body.page-steam.dark-mode .currency-toggle{
                 background:rgba(255,255,255,0.06); color:#f5f5f5;
                 border:1px solid rgba(255,255,255,0.08);
             }
@@ -3222,10 +3222,10 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             body.page-discord .mode-btn{ padding:6px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; cursor:pointer; font-weight:700; color:#111111; }
             body.page-discord .mode-btn.active{ background:#111111; color:#ffffff; }
             body.page-discord .logo img{ transition:opacity 280ms ease, transform 280ms ease; }
-            body.page-discord .dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
-            body.page-discord .dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
-            body.page-discord .dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
-            body.page-discord .dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
+            body.page-discord.dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
+            body.page-discord.dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
+            body.page-discord.dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
+            body.page-discord.dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
 
             body.page-discord nav a{
                 text-decoration:none;
@@ -3556,13 +3556,13 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
         }
 
         /* Dark mode styles */
-        body.page-accr .dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
-        body.page-accr .dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
-        body.page-accr .dark-mode .logo{ color: #f5f5f5; }
-        body.page-accr .dark-mode .back{ color: #d1d1d1; }
-        body.page-accr .dark-mode .back:hover{ color: #ffffff; }
-        body.page-accr .dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
-        body.page-accr .dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
+        body.page-accr.dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        body.page-accr.dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        body.page-accr.dark-mode .logo{ color: #f5f5f5; }
+        body.page-accr.dark-mode .back{ color: #d1d1d1; }
+        body.page-accr.dark-mode .back:hover{ color: #ffffff; }
+        body.page-accr.dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        body.page-accr.dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
 
         /* HERO */
 
@@ -3609,10 +3609,10 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             line-height: 1.7;
         }
 
-        body.page-accr .dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
-        body.page-accr .dark-mode .hero h1{ color: #ffffff; }
-        body.page-accr .dark-mode .hero h1 span{ color: #b0b0b0; }
-        body.page-accr .dark-mode .hero p{ color: #d0d0d0; }
+        body.page-accr.dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        body.page-accr.dark-mode .hero h1{ color: #ffffff; }
+        body.page-accr.dark-mode .hero h1 span{ color: #b0b0b0; }
+        body.page-accr.dark-mode .hero p{ color: #d0d0d0; }
 
         /* MAIN */
 
@@ -3687,13 +3687,13 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             color: #cccccc;
         }
 
-        body.page-accr .dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-accr .dark-mode .selector-title{ color: #ffffff; }
-        body.page-accr .dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-accr .dark-mode .mode small{ color: #909090; }
-        body.page-accr .dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        body.page-accr .dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
-        body.page-accr .dark-mode .mode.active small{ color: #444444; }
+        body.page-accr.dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-accr.dark-mode .selector-title{ color: #ffffff; }
+        body.page-accr.dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-accr.dark-mode .mode small{ color: #909090; }
+        body.page-accr.dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        body.page-accr.dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-accr.dark-mode .mode.active small{ color: #444444; }
 
         /* RANK SELECTORS */
 
@@ -3742,10 +3742,10 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             font-size: 24px;
         }
 
-        body.page-accr .dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
-        body.page-accr .dark-mode .rank-box label{ color: #909090; }
-        body.page-accr .dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
-        body.page-accr .dark-mode .arrow{ color: #707070; }
+        body.page-accr.dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
+        body.page-accr.dark-mode .rank-box label{ color: #909090; }
+        body.page-accr.dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
+        body.page-accr.dark-mode .arrow{ color: #707070; }
 
         /* PRICE */
 
@@ -3801,12 +3801,12 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             box-shadow: 0 14px 40px rgba(0,0,0,0.12);
         }
 
-        body.page-accr .dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-accr .dark-mode .price-info small{ color: #909090; }
-        body.page-accr .dark-mode .price-info strong{ color: #ffffff; }
-        body.page-accr .dark-mode .price{ color: #ffffff; }
-        body.page-accr .dark-mode .order-btn{ background: #ffffff; color: #000000; }
-        body.page-accr .dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-accr.dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-accr.dark-mode .price-info small{ color: #909090; }
+        body.page-accr.dark-mode .price-info strong{ color: #ffffff; }
+        body.page-accr.dark-mode .price{ color: #ffffff; }
+        body.page-accr.dark-mode .order-btn{ background: #ffffff; color: #000000; }
+        body.page-accr.dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
 
         /* PRICING TABLE */
 
@@ -3909,10 +3909,10 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             font-size: 15px;
         }
 
-        body.page-accr .dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-accr .dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
-        body.page-accr .dark-mode .feature h3{ color: #ffffff; }
-        body.page-accr .dark-mode .feature p{ color: #d0d0d0; }
+        body.page-accr.dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-accr.dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-accr.dark-mode .feature h3{ color: #ffffff; }
+        body.page-accr.dark-mode .feature p{ color: #d0d0d0; }
 
         /* FOOTER */
 
@@ -3925,7 +3925,7 @@ body.page-steam .dark-mode .check-btn, body.page-steam .dark-mode .sell-btn{
             font-size: 13px;
         }
 
-        body.page-accr .dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+        body.page-accr.dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
 
         /* RESPONSIVE */
 
@@ -4098,31 +4098,31 @@ body.page-accr .sell-btn:hover{
     box-shadow: 0 14px 40px rgba(0,0,0,0.12);
 }
 
-body.page-accr .dark-mode .empty-card{
+body.page-accr.dark-mode .empty-card{
     background: rgba(40,40,50,0.8);
     border-color: rgba(255,255,255,0.15);
 }
-body.page-accr .dark-mode .empty-icon{
+body.page-accr.dark-mode .empty-icon{
     background: #1a1a24;
     border-color: rgba(255,255,255,0.1);
     color: #aaa;
 }
-body.page-accr .dark-mode .empty-card p, body.page-accr .dark-mode .sell-card p{
+body.page-accr.dark-mode .empty-card p, body.page-accr.dark-mode .sell-card p{
     color: #d0d0d0;
 }
-body.page-accr .dark-mode .status-pill{
+body.page-accr.dark-mode .status-pill{
     background: rgba(255,255,255,0.06);
     border-color: rgba(255,255,255,0.12);
     color: #aaa;
 }
-body.page-accr .dark-mode .sell-card{
+body.page-accr.dark-mode .sell-card{
     background: rgba(40,40,50,0.8);
     border-color: rgba(255,255,255,0.15);
 }
-body.page-accr .dark-mode .sell-card h2{
+body.page-accr.dark-mode .sell-card h2{
     color: #fff;
 }
-body.page-accr .dark-mode .sell-btn{
+body.page-accr.dark-mode .sell-btn{
     background: #fff;
     color: #000;
 }
@@ -4164,7 +4164,7 @@ body.page-accr .dark-mode .sell-btn{
             }
             body.page-accr .currency-option:hover{ background:rgba(255,255,255,0.03); }
             body.page-accr .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
-            body.page-accr .dark-mode .currency-toggle{
+            body.page-accr.dark-mode .currency-toggle{
                 background:rgba(255,255,255,0.06); color:#f5f5f5;
                 border:1px solid rgba(255,255,255,0.08);
             }
@@ -4275,13 +4275,13 @@ body.page-accr .dark-mode .sell-btn{
         }
 
         /* Dark mode styles */
-        body.page-accs .dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
-        body.page-accs .dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
-        body.page-accs .dark-mode .logo{ color: #f5f5f5; }
-        body.page-accs .dark-mode .back{ color: #d1d1d1; }
-        body.page-accs .dark-mode .back:hover{ color: #ffffff; }
-        body.page-accs .dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
-        body.page-accs .dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
+        body.page-accs.dark-mode{ background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        body.page-accs.dark-mode nav{ background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        body.page-accs.dark-mode .logo{ color: #f5f5f5; }
+        body.page-accs.dark-mode .back{ color: #d1d1d1; }
+        body.page-accs.dark-mode .back:hover{ color: #ffffff; }
+        body.page-accs.dark-mode .mode-btn{ color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        body.page-accs.dark-mode .mode-btn.active{ background: #f5f5f5; color: #000000; }
 
         /* HERO */
 
@@ -4328,10 +4328,10 @@ body.page-accr .dark-mode .sell-btn{
             line-height: 1.7;
         }
 
-        body.page-accs .dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
-        body.page-accs .dark-mode .hero h1{ color: #ffffff; }
-        body.page-accs .dark-mode .hero h1 span{ color: #b0b0b0; }
-        body.page-accs .dark-mode .hero p{ color: #d0d0d0; }
+        body.page-accs.dark-mode .badge{ background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        body.page-accs.dark-mode .hero h1{ color: #ffffff; }
+        body.page-accs.dark-mode .hero h1 span{ color: #b0b0b0; }
+        body.page-accs.dark-mode .hero p{ color: #d0d0d0; }
 
         /* MAIN */
 
@@ -4406,13 +4406,13 @@ body.page-accr .dark-mode .sell-btn{
             color: #cccccc;
         }
 
-        body.page-accs .dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-accs .dark-mode .selector-title{ color: #ffffff; }
-        body.page-accs .dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
-        body.page-accs .dark-mode .mode small{ color: #909090; }
-        body.page-accs .dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
-        body.page-accs .dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
-        body.page-accs .dark-mode .mode.active small{ color: #444444; }
+        body.page-accs.dark-mode .selector{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-accs.dark-mode .selector-title{ color: #ffffff; }
+        body.page-accs.dark-mode .mode{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        body.page-accs.dark-mode .mode small{ color: #909090; }
+        body.page-accs.dark-mode .mode:hover{ border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        body.page-accs.dark-mode .mode.active{ background: #ffffff; color: #000000; border-color: #ffffff; }
+        body.page-accs.dark-mode .mode.active small{ color: #444444; }
 
         /* RANK SELECTORS */
 
@@ -4461,10 +4461,10 @@ body.page-accr .dark-mode .sell-btn{
             font-size: 24px;
         }
 
-        body.page-accs .dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
-        body.page-accs .dark-mode .rank-box label{ color: #909090; }
-        body.page-accs .dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
-        body.page-accs .dark-mode .arrow{ color: #707070; }
+        body.page-accs.dark-mode .rank-box{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
+        body.page-accs.dark-mode .rank-box label{ color: #909090; }
+        body.page-accs.dark-mode select{ background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
+        body.page-accs.dark-mode .arrow{ color: #707070; }
 
         /* PRICE */
 
@@ -4520,12 +4520,12 @@ body.page-accr .dark-mode .sell-btn{
             box-shadow: 0 14px 40px rgba(0,0,0,0.12);
         }
 
-        body.page-accs .dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-accs .dark-mode .price-info small{ color: #909090; }
-        body.page-accs .dark-mode .price-info strong{ color: #ffffff; }
-        body.page-accs .dark-mode .price{ color: #ffffff; }
-        body.page-accs .dark-mode .order-btn{ background: #ffffff; color: #000000; }
-        body.page-accs .dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-accs.dark-mode .price-card{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-accs.dark-mode .price-info small{ color: #909090; }
+        body.page-accs.dark-mode .price-info strong{ color: #ffffff; }
+        body.page-accs.dark-mode .price{ color: #ffffff; }
+        body.page-accs.dark-mode .order-btn{ background: #ffffff; color: #000000; }
+        body.page-accs.dark-mode .order-btn:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
 
         /* PRICING TABLE */
 
@@ -4628,10 +4628,10 @@ body.page-accr .dark-mode .sell-btn{
             font-size: 15px;
         }
 
-        body.page-accs .dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
-        body.page-accs .dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
-        body.page-accs .dark-mode .feature h3{ color: #ffffff; }
-        body.page-accs .dark-mode .feature p{ color: #d0d0d0; }
+        body.page-accs.dark-mode .feature{ background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        body.page-accs.dark-mode .feature:hover{ box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        body.page-accs.dark-mode .feature h3{ color: #ffffff; }
+        body.page-accs.dark-mode .feature p{ color: #d0d0d0; }
 
         /* FOOTER */
 
@@ -4644,7 +4644,7 @@ body.page-accr .dark-mode .sell-btn{
             font-size: 13px;
         }
 
-        body.page-accs .dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+        body.page-accs.dark-mode footer{ background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
 
         /* RESPONSIVE */
 
@@ -4713,7 +4713,7 @@ body.page-accr .dark-mode .sell-btn{
             }
             body.page-accs .currency-option:hover{ background:rgba(255,255,255,0.03); }
             body.page-accs .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
-            body.page-accs .dark-mode .currency-toggle{
+            body.page-accs.dark-mode .currency-toggle{
                 background:rgba(255,255,255,0.06); color:#f5f5f5;
                 border:1px solid rgba(255,255,255,0.08);
             }
