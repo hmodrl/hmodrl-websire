@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AERIALARC — Shopping Cart</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body.page-basket{background:#0f0f0f;color:#e8e8e8;font-family:'Inter',system-ui,-apple-system,sans-serif;min-height:100vh;padding-bottom:60px;}
+        body:not(.dark-mode).page-basket{background:#f5f5f5;color:#1a1a1a;}
+        .basket-wrap{max-width:1100px;margin:0 auto;padding:20px 24px;}
+        .breadcrumb{display:flex;align-items:center;gap:8px;font-size:13px;color:#666;margin-bottom:32px;}
+        .breadcrumb a{color:#888;text-decoration:none;transition:color 0.2s;}
+        .breadcrumb a:hover{color:#fff;}
+        .breadcrumb .sep{color:#444;}
+        .breadcrumb .current{color:#fff;font-weight:600;}
+        body:not(.dark-mode) .breadcrumb{color:#999;}
+        body:not(.dark-mode) .breadcrumb a{color:#666;}
+        body:not(.dark-mode) .breadcrumb .current{color:#1a1a1a;}
+        body:not(.dark-mode) .breadcrumb .sep{color:#ccc;}
+        .basket-grid{display:grid;grid-template-columns:1fr 380px;gap:32px;align-items:start;}
+        @media(max-width:860px){.basket-grid{grid-template-columns:1fr;}}
+        .basket-items{display:flex;flex-direction:column;gap:16px;}
+        .basket-card{display:flex;align-items:center;gap:24px;padding:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;transition:all 0.3s ease;animation:cardIn 0.4s ease backwards;}
+        body:not(.dark-mode) .basket-card{background:#fff;border-color:rgba(0,0,0,0.06);box-shadow:0 2px 12px rgba(0,0,0,0.04);}
+        .basket-card:hover{border-color:rgba(255,255,255,0.1);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,0.15);}
+        body:not(.dark-mode) .basket-card:hover{border-color:rgba(0,0,0,0.1);box-shadow:0 8px 30px rgba(0,0,0,0.08);}
+        @keyframes cardIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+        .basket-card:nth-child(1){animation-delay:0s;}
+        .basket-card:nth-child(2){animation-delay:0.06s;}
+        .basket-card:nth-child(3){animation-delay:0.12s;}
+        .basket-card-img{width:80px;height:80px;border-radius:12px;object-fit:cover;background:rgba(255,255,255,0.05);flex-shrink:0;}
+        body:not(.dark-mode) .basket-card-img{background:rgba(0,0,0,0.04);}
+        .basket-card-info{flex:1;min-width:0;}
+        .basket-card-title{font-size:16px;font-weight:700;letter-spacing:-0.2px;margin-bottom:4px;}
+        .basket-card-meta{font-size:13px;color:#888;line-height:1.5;}
+        body:not(.dark-mode) .basket-card-meta{color:#888;}
+        .basket-card-prices{display:flex;align-items:center;gap:10px;margin-top:8px;}
+        .basket-card-price{font-size:17px;font-weight:700;}
+        .basket-card-old{font-size:14px;color:#666;text-decoration:line-through;}
+        .basket-card-right{display:flex;flex-direction:column;align-items:flex-end;gap:16px;flex-shrink:0;}
+        .basket-card-remove{width:32px;height:32px;border-radius:50%;border:none;background:rgba(231,76,60,0.1);color:#e74c3c;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:all 0.3s ease;}
+        .basket-card-remove:hover{background:rgba(231,76,60,0.2);transform:scale(1.1);}
+        .qty-control{display:flex;align-items:center;gap:0;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;}
+        body:not(.dark-mode) .qty-control{border-color:rgba(0,0,0,0.1);}
+        .qty-btn{width:40px;height:40px;border:none;background:rgba(255,255,255,0.06);color:#fff;font-size:18px;font-weight:700;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+        body:not(.dark-mode) .qty-btn{background:rgba(0,0,0,0.04);color:#1a1a1a;}
+        .qty-btn:hover{background:rgba(255,255,255,0.12);}
+        body:not(.dark-mode) .qty-btn:hover{background:rgba(0,0,0,0.08);}
+        .qty-val{width:44px;height:40px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;border-left:1px solid rgba(255,255,255,0.08);border-right:1px solid rgba(255,255,255,0.08);}
+        body:not(.dark-mode) .qty-val{border-color:rgba(0,0,0,0.08);}
+        .basket-summary{position:sticky;top:24px;}
+        .summary-card{padding:28px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;}
+        body:not(.dark-mode) .summary-card{background:#fff;border-color:rgba(0,0,0,0.06);box-shadow:0 2px 12px rgba(0,0,0,0.04);}
+        .summary-title{font-size:18px;font-weight:800;letter-spacing:-0.3px;margin-bottom:24px;}
+        .discount-row{display:flex;gap:0;margin-bottom:28px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;}
+        body:not(.dark-mode) .discount-row{border-color:rgba(0,0,0,0.1);}
+        .discount-input{flex:1;padding:12px 16px;background:rgba(255,255,255,0.04);border:none;color:#fff;font-size:14px;font-family:inherit;outline:none;}
+        body:not(.dark-mode) .discount-input{background:rgba(0,0,0,0.03);color:#1a1a1a;}
+        .discount-input::placeholder{color:#666;}
+        .discount-btn{padding:12px 20px;background:#1a1a1a;color:#fff;border:none;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.3s;font-family:inherit;letter-spacing:0.3px;}
+        body:not(.dark-mode) .discount-btn{background:#1a1a1a;color:#fff;}
+        .discount-btn:hover{background:#333;}
+        .summary-rows{display:flex;flex-direction:column;gap:14px;margin-bottom:24px;}
+        .summary-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;}
+        .summary-row .label{color:#888;}
+        body:not(.dark-mode) .summary-row .label{color:#999;}
+        .summary-row .value{font-weight:700;}
+        .summary-total{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);margin-bottom:24px;}
+        body:not(.dark-mode) .summary-total{border-color:rgba(0,0,0,0.08);}
+        .summary-total .label{font-size:16px;font-weight:700;}
+        .summary-total .value{font-size:22px;font-weight:800;}
+        .checkout-btn{display:block;width:100%;padding:18px;background:#1a1a1a;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;transition:all 0.3s ease;font-family:inherit;letter-spacing:0.3px;}
+        body:not(.dark-mode) .checkout-btn{background:#1a1a1a;color:#fff;}
+        .checkout-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.2);}
+        .checkout-btn:active{transform:translateY(0) scale(0.98);}
+        .empty-basket{text-align:center;padding:80px 20px;color:#666;}
+        .empty-basket h2{font-size:22px;font-weight:700;margin-bottom:8px;color:#999;}
+        body:not(.dark-mode) .empty-basket h2{color:#333;}
+        .empty-basket p{font-size:14px;margin-bottom:24px;}
+        .empty-basket a{display:inline-block;padding:14px 28px;background:#1a1a1a;color:#fff;border-radius:12px;text-decoration:none;font-weight:600;font-size:14px;transition:all 0.3s;}
+        .empty-basket a:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15);}
+        .checkout-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0);backdrop-filter:blur(0px);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:all 0.4s cubic-bezier(.25,.8,.25,1);z-index:10000;padding:20px;}
+        .checkout-modal-overlay.open{background:rgba(0,0,0,0.5);backdrop-filter:blur(12px);opacity:1;visibility:visible;}
+        .checkout-modal{background:#1a1a1a;color:#e8e8e8;border-radius:24px;max-width:480px;width:100%;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,0.5);transform:translateY(20px) scale(0.96);transition:all 0.4s cubic-bezier(.25,.8,.25,1);position:relative;}
+        body:not(.dark-mode) .checkout-modal{background:#fff;color:#1a1a1a;box-shadow:0 32px 80px rgba(0,0,0,0.12);}
+        .checkout-modal-overlay.open .checkout-modal{transform:translateY(0) scale(1);}
+        .checkout-modal h3{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin:0 0 6px;}
+        .checkout-modal p{font-size:14px;color:#888;margin:0 0 20px;line-height:1.6;}
+        body:not(.dark-mode) .checkout-modal p{color:#888;}
+        .checkout-modal-items{border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px;margin:0 0 16px;background:rgba(255,255,255,0.03);}
+        body:not(.dark-mode) .checkout-modal-items{border-color:rgba(0,0,0,0.06);background:rgba(0,0,0,0.02);}
+        .checkout-modal-item{display:flex;justify-content:space-between;gap:12px;padding:10px 4px;border-bottom:1px solid rgba(255,255,255,0.04);font-size:14px;}
+        body:not(.dark-mode) .checkout-modal-item{border-color:rgba(0,0,0,0.04);}
+        .checkout-modal-item:last-child{border-bottom:none;}
+        .checkout-modal-item .nm{font-weight:700;}
+        .checkout-modal-item .mt{display:block;font-size:12px;color:#888;margin-top:3px;}
+        .checkout-modal-item .pr{font-weight:700;white-space:nowrap;}
+        .checkout-modal-total{display:flex;justify-content:space-between;font-size:20px;font-weight:800;padding:12px 4px 0;border-top:1px solid rgba(255,255,255,0.06);margin-top:4px;}
+        body:not(.dark-mode) .checkout-modal-total{border-color:rgba(0,0,0,0.06);}
+        .checkout-modal-note{font-size:13px;line-height:1.7;color:#888;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);padding:16px 18px;border-radius:14px;margin:20px 0;}
+        body:not(.dark-mode) .checkout-modal-note{color:#666;background:rgba(0,0,0,0.02);border-color:rgba(0,0,0,0.04);}
+        .checkout-modal-actions{display:flex;flex-direction:column;gap:12px;}
+        .checkout-modal-next,.checkout-modal-done{display:block;width:100%;padding:18px;background:#fff;color:#111;border:none;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.3s ease;font-family:inherit;}
+        body:not(.dark-mode) .checkout-modal-next,body:not(.dark-mode) .checkout-modal-done{background:#1a1a1a;color:#fff;}
+        .checkout-modal-next:hover,.checkout-modal-done:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15);}
+        .checkout-modal-discord{display:block;width:100%;padding:18px;background:#5865f2;color:#fff;border:none;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;text-align:center;transition:all 0.3s ease;}
+        .checkout-modal-discord:hover{background:#4a56e0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(88,101,242,0.3);}
+        .checkout-modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.06);border:none;color:#888;width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:15px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+        body:not(.dark-mode) .checkout-modal-close{background:rgba(0,0,0,0.04);color:#999;}
+        .checkout-modal-close:hover{background:rgba(255,255,255,0.1);color:#fff;transform:rotate(90deg);}
+        body:not(.dark-mode) .checkout-modal-close:hover{background:rgba(0,0,0,0.08);color:#1a1a1a;}
+        .checkout-modal-step{display:none;}
+        .checkout-modal-step.active{display:block;animation:stepIn 0.35s ease;}
+        @keyframes stepIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+    </style>
+</head>
+
+<body class="page-basket">
+
+<nav>
+    <a href="index.html" class="logo"><img src="aerialarc.png" alt="AERIALARC" class="logo-img"></a>
+    <div style="display:flex;gap:8px;align-items:center;">
+        <div class="currency-select">
+            <button id="currencyToggle" class="currency-toggle"><img src="usa.webp" class="flag" alt="US"> USD</button>
+            <div id="currencyDropdown" class="currency-dropdown" aria-hidden="true">
+                <button class="currency-option" data-currency="USD"><img src="usa.webp" class="flag" alt="US"> United States Dollar (USD)</button>
+                <button class="currency-option" data-currency="BHD"><img src="bh.svg" class="flag" alt="BHD"> Bahraini Dinar (BHD)</button>
+                <button class="currency-option" data-currency="SAR"><img src="sa.png" class="flag" alt="SAR"> Saudi Riyal (SAR)</button>
+            </div>
+        </div>
+        <button id="lightModeBtn" class="mode-btn">Light</button>
+        <button id="darkModeBtn" class="mode-btn">Dark</button>
+    </div>
+</nav>
+
+<div class="basket-wrap">
+    <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep">&rsaquo;</span>
+        <span class="current">Shopping Cart</span>
+    </div>
+
+    <div id="basketContent"></div>
+</div>
+
+<div class="checkout-modal-overlay" id="checkoutOverlay">
+    <div class="checkout-modal">
+        <button class="checkout-modal-close" id="modalClose">&#10005;</button>
+        <div class="checkout-modal-step active" data-step="review">
+            <h3>Order Summary</h3>
+            <p>Review your selections before proceeding.</p>
+            <div class="checkout-modal-items" id="modalItems"></div>
+            <div class="checkout-modal-total"><span>Total</span><span id="modalTotal"></span></div>
+            <div class="checkout-modal-note">Please take a screenshot of your order summary. You will need it to confirm your order on Discord.</div>
+            <div class="checkout-modal-actions">
+                <button class="checkout-modal-next" id="modalNext">Continue</button>
+            </div>
+        </div>
+        <div class="checkout-modal-step" data-step="ticket">
+            <h3>Final Step</h3>
+            <p>Complete your order on Discord.</p>
+            <div class="checkout-modal-note">Join AERIALARC's Discord server and open a ticket. Send your order screenshot so we can confirm and begin your boost.</div>
+            <div class="checkout-modal-actions">
+                <a href="https://discord.gg/qEcN67Us" target="_blank" rel="noopener noreferrer" class="checkout-modal-discord">Open Discord Server</a>
+                <button class="checkout-modal-done" id="modalDone">Done</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+(function(){
+    var KEY="aerialarc_basket";
+    function load(){try{var r=localStorage.getItem(KEY);return r?JSON.parse(r):[]}catch(e){return[]}}
+    function save(items){try{localStorage.setItem(KEY,JSON.stringify(items))}catch(e){}}
+    function fmt(p){return p==null?"Price on request":"$"+Number(p).toFixed(2)}
+
+    function render(){
+        var items=load();
+        var el=document.getElementById("basketContent");
+        if(!items.length){
+            el.innerHTML='<div class="empty-basket"><h2>Your cart is empty</h2><p>Add services to get started.</p><a href="index.html">Browse Services</a></div>';
+            return;
+        }
+        var html='<div class="basket-grid"><div class="basket-items">';
+        items.forEach(function(it,i){
+            html+='<div class="basket-card" style="animation-delay:'+(i*0.06)+'s">';
+            html+='<img class="basket-card-img" src="ar1.png" alt="">';
+            html+='<div class="basket-card-info">';
+            html+='<div class="basket-card-title"></div>';
+            html+='<div class="basket-card-meta"></div>';
+            html+='</div>';
+            html+='<div class="basket-card-right">';
+            html+='<button class="basket-card-remove" data-i="'+i+'">&#10005;</button>';
+            html+='<div class="basket-card-prices"><span class="basket-card-price"></span></div>';
+            html+='</div>';
+            html+='</div>';
+        });
+        html+='</div>';
+        var total=items.reduce(function(s,it){return s+(Number(it.price)||0)},0);
+        html+='<div class="basket-summary">';
+        html+='<div class="summary-card">';
+        html+='<div class="summary-title">Order Summary</div>';
+        html+='<div class="discount-row"><input class="discount-input" placeholder="Enter discount code"><button class="discount-btn">Apply</button></div>';
+        html+='<div class="summary-rows">';
+        html+='<div class="summary-row"><span class="label">Subtotal ('+items.length+' item'+(items.length>1?'s':'')+')</span><span class="value" id="subTotal"></span></div>';
+        html+='</div>';
+        html+='<div class="summary-total"><span class="label">Total</span><span class="value" id="sumTotal"></span></div>';
+        html+='<button class="checkout-btn" id="checkoutBtn">Complete Order</button>';
+        html+='</div></div>';
+        el.innerHTML=html;
+
+        var cards=el.querySelectorAll(".basket-card");
+        cards.forEach(function(card,i){
+            card.querySelector(".basket-card-title").textContent=items[i].name;
+            card.querySelector(".basket-card-meta").textContent=items[i].meta||"";
+            card.querySelector(".basket-card-price").textContent=fmt(items[i].price);
+        });
+        document.getElementById("subTotal").textContent=fmt(total);
+        document.getElementById("sumTotal").textContent=fmt(total);
+
+        el.querySelectorAll(".basket-card-remove").forEach(function(btn){
+            btn.addEventListener("click",function(){
+                var idx=parseInt(btn.getAttribute("data-i"));
+                var arr=load();arr.splice(idx,1);save(arr);render();
+            });
+        });
+
+        document.getElementById("checkoutBtn").addEventListener("click",function(){
+            if(!items.length)return;
+            var mItems=document.getElementById("modalItems");
+            mItems.innerHTML="";
+            items.forEach(function(it){
+                var row=document.createElement("div");row.className="checkout-modal-item";
+                row.innerHTML='<div><span class="nm"></span><span class="mt"></span></div><span class="pr"></span>';
+                row.querySelector(".nm").textContent=it.name;
+                row.querySelector(".mt").textContent=it.meta||"";
+                row.querySelector(".pr").textContent=fmt(it.price);
+                mItems.appendChild(row);
+            });
+            document.getElementById("modalTotal").textContent=fmt(total);
+            document.getElementById("checkoutOverlay").classList.add("open");
+        });
+    }
+
+    document.getElementById("modalClose").addEventListener("click",function(){document.getElementById("checkoutOverlay").classList.remove("open")});
+    document.getElementById("checkoutOverlay").addEventListener("click",function(e){if(e.target===this)this.classList.remove("open")});
+    document.getElementById("modalNext").addEventListener("click",function(){
+        document.querySelector('[data-step="review"]').classList.remove("active");
+        document.querySelector('[data-step="ticket"]').classList.add("active");
+    });
+    document.getElementById("modalDone").addEventListener("click",function(){document.getElementById("checkoutOverlay").classList.remove("open")});
+
+    render();
+})();
+</script>
+<script src="scripts.js"></script>
+</body>
+</html>
