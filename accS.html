@@ -31,8 +31,8 @@
     <div class="badge">Rocket League Accounts</div>
     <h1>Smurf <span>Accounts.</span></h1>
     <p>
-        Browse ready-to-play Rocket League accounts from Bronze through high-MMR SSL tiers.
-        Select your target MMR and platform to see the estimated account price instantly.
+        Browse ready-to-play Rocket League accounts from Bronze through SSL.
+        Select your current rank and desired rank to see the estimated account price instantly.
     </p>
 </section>
 
@@ -41,50 +41,32 @@
         <div class="selector-title">Configure your account</div>
 
         <div class="modes">
-            <div class="mode active" data-filter="all">All MMR<small>Browse all tiers</small></div>
-            <div class="mode" data-filter="low">Bronze – Gold<small>600–900 MMR</small></div>
-            <div class="mode" data-filter="mid">Plat – Champ<small>1000–1200 MMR</small></div>
-            <div class="mode" data-filter="high">GC – SSL<small>1400–1875 MMR</small></div>
+            <div class="mode active" data-filter="all">All Ranks<small>Browse all tiers</small></div>
+            <div class="mode" data-filter="low">Bronze – Silver<small>Ranks 1–24</small></div>
+            <div class="mode" data-filter="mid">Gold – Platinum<small>Ranks 25–48</small></div>
+            <div class="mode" data-filter="high">Diamond – SSL<small>Ranks 49–85</small></div>
         </div>
 
         <div class="rank-selection">
             <div class="rank-box">
-                <label>Target MMR</label>
-                <select id="mmrSelect">
-                    <option value="600">Bronze — 600 MMR</option>
-                    <option value="800">Silver — 800 MMR</option>
-                    <option value="900">Gold — 900 MMR</option>
-                    <option value="1000">Platinum — 1000 MMR</option>
-                    <option value="1100">Diamond — 1100 MMR</option>
-                    <option value="1200">Champion — 1200 MMR</option>
-                    <option value="1448">Grand Champion I — 1448 MMR</option>
-                    <option value="1550">Grand Champion II — 1550 MMR</option>
-                    <option value="1700">Grand Champion III — 1700 MMR</option>
-                    <option value="1800">SSL — 1800 MMR</option>
-                    <option value="1875">SSL — 1875 MMR</option>
-                </select>
+                <label>Current Rank</label>
+                <select id="currentRankSelect"></select>
             </div>
 
             <div class="arrow">→</div>
 
             <div class="rank-box">
-                <label>Platform</label>
-                <select id="platformSelect">
-                    <option value="PC">PC / Epic Games</option>
-                    <option value="Steam">Steam</option>
-                    <option value="PlayStation">PlayStation</option>
-                    <option value="Xbox">Xbox</option>
-                    <option value="Switch">Nintendo Switch</option>
-                </select>
+                <label>Desired Rank</label>
+                <select id="desiredRankSelect"></select>
             </div>
         </div>
 
         <div class="price-card">
             <div class="price-info">
                 <small>Estimated Account Price</small>
-                <strong id="route">Bronze • 600 MMR • PC / Epic Games</strong>
+                <strong id="route">Unranked → Unranked</strong>
             </div>
-            <div class="price" id="price" data-usd="4.99"><span class="price-amount">$4.99</span></div>
+            <div class="price" id="price" data-usd="0"><span class="price-amount">$0.00</span></div>
             <button class="order-btn" onclick="orderAccount()">Request Account</button>
         </div>
     </div>
@@ -92,12 +74,12 @@
     <section class="pricing-section">
         <div class="section-heading">
             <h2>Account pricing</h2>
-            <p>Example market-aligned tiers for ranked-ready accounts; final pricing can vary by platform, inventory and account history.</p>
+            <p>Example market-aligned tiers for ranked-ready accounts; final pricing can vary by inventory and account history.</p>
         </div>
         <div class="table-wrap">
             <table>
                 <thead>
-                    <tr><th>Tier</th><th>MMR</th><th>Suggested Price</th><th>Availability</th></tr>
+                    <tr><th>Tier</th><th>Rank</th><th>Suggested Price</th><th>Availability</th></tr>
                 </thead>
                 <tbody id="pricingRows"></tbody>
             </table>
@@ -108,17 +90,17 @@
         <div class="feature">
             <div class="feature-icon">⚡</div>
             <h3>Fast Delivery</h3>
-            <p>Keep your catalog ready for quick order handling with a simple account-tier selector and clear pricing.</p>
+            <p>Keep your catalog ready for quick order handling with a simple rank selector and clear pricing.</p>
         </div>
         <div class="feature">
             <div class="feature-icon">🛡</div>
             <h3>Clear Listings</h3>
-            <p>Show MMR, platform and price together so customers know exactly what tier they are selecting.</p>
+            <p>Show current rank, desired rank and price together so customers know exactly what they are selecting.</p>
         </div>
         <div class="feature">
             <div class="feature-icon">🏆</div>
-            <h3>Bronze → 1875 MMR</h3>
-            <p>Offer a full range of example tiers from Bronze through high-MMR SSL listings in one catalog.</p>
+            <h3>Unranked → SSL</h3>
+            <p>Offer a full range of account tiers from Unranked through Supersonic Legend in one catalog.</p>
         </div>
     </section>
 </div>
@@ -131,66 +113,72 @@
 
 <script>
 
+const RANKS=["Unranked","Bronze I \u00b7 Div I","Bronze I \u00b7 Div II","Bronze I \u00b7 Div III","Bronze I \u00b7 Div IV","Bronze II \u00b7 Div I","Bronze II \u00b7 Div II","Bronze II \u00b7 Div III","Bronze II \u00b7 Div IV","Bronze III \u00b7 Div I","Bronze III \u00b7 Div II","Bronze III \u00b7 Div III","Bronze III \u00b7 Div IV","Silver I \u00b7 Div I","Silver I \u00b7 Div II","Silver I \u00b7 Div III","Silver I \u00b7 Div IV","Silver II \u00b7 Div I","Silver II \u00b7 Div II","Silver II \u00b7 Div III","Silver II \u00b7 Div IV","Silver III \u00b7 Div I","Silver III \u00b7 Div II","Silver III \u00b7 Div III","Silver III \u00b7 Div IV","Gold I \u00b7 Div I","Gold I \u00b7 Div II","Gold I \u00b7 Div III","Gold I \u00b7 Div IV","Gold II \u00b7 Div I","Gold II \u00b7 Div II","Gold II \u00b7 Div III","Gold II \u00b7 Div IV","Gold III \u00b7 Div I","Gold III \u00b7 Div II","Gold III \u00b7 Div III","Gold III \u00b7 Div IV","Platinum I \u00b7 Div I","Platinum I \u00b7 Div II","Platinum I \u00b7 Div III","Platinum I \u00b7 Div IV","Platinum II \u00b7 Div I","Platinum II \u00b7 Div II","Platinum II \u00b7 Div III","Platinum II \u00b7 Div IV","Platinum III \u00b7 Div I","Platinum III \u00b7 Div II","Platinum III \u00b7 Div III","Platinum III \u00b7 Div IV","Diamond I \u00b7 Div I","Diamond I \u00b7 Div II","Diamond I \u00b7 Div III","Diamond I \u00b7 Div IV","Diamond II \u00b7 Div I","Diamond II \u00b7 Div II","Diamond II \u00b7 Div III","Diamond II \u00b7 Div IV","Diamond III \u00b7 Div I","Diamond III \u00b7 Div II","Diamond III \u00b7 Div III","Diamond III \u00b7 Div IV","Champion I \u00b7 Div I","Champion I \u00b7 Div II","Champion I \u00b7 Div III","Champion I \u00b7 Div IV","Champion II \u00b7 Div I","Champion II \u00b7 Div II","Champion II \u00b7 Div III","Champion II \u00b7 Div IV","Champion III \u00b7 Div I","Champion III \u00b7 Div II","Champion III \u00b7 Div III","Champion III \u00b7 Div IV","Grand Champion I \u00b7 Div I","Grand Champion I \u00b7 Div II","Grand Champion I \u00b7 Div III","Grand Champion I \u00b7 Div IV","Grand Champion II \u00b7 Div I","Grand Champion II \u00b7 Div II","Grand Champion II \u00b7 Div III","Grand Champion II \u00b7 Div IV","Grand Champion III \u00b7 Div I","Grand Champion III \u00b7 Div II","Grand Champion III \u00b7 Div III","Grand Champion III \u00b7 Div IV","Supersonic Legend"];
 
-const accounts = [
-    { tier:'Bronze', mmr:600, price:4.99, band:'low' },
-    { tier:'Silver', mmr:800, price:5.99, band:'low' },
-    { tier:'Gold', mmr:900, price:7.99, band:'low' },
-    { tier:'Platinum', mmr:1000, price:9.99, band:'mid' },
-    { tier:'Diamond', mmr:1100, price:12.99, band:'mid' },
-    { tier:'Champion', mmr:1200, price:17.99, band:'mid' },
-    { tier:'Grand Champion I', mmr:1448, price:24.99, band:'high' },
-    { tier:'Grand Champion II', mmr:1550, price:28.99, band:'high' },
-    { tier:'Grand Champion III', mmr:1700, price:32.99, band:'high' },
-    { tier:'Supersonic Legend', mmr:1800, price:36.99, band:'high' },
-    { tier:'Supersonic Legend', mmr:1875, price:44.99, band:'high' }
-];
+const PRICES=[0,4.99,5.49,5.99,6.49,6.99,7.49,7.99,8.49,8.99,9.49,9.99,10.49,10.99,11.49,11.99,12.49,12.99,13.49,13.99,14.49,14.99,15.49,15.99,16.49,16.99,17.49,17.99,18.49,18.99,19.49,19.99,20.49,20.99,21.49,21.99,22.49,22.99,23.49,23.99,24.49,24.99,25.49,25.99,26.49,26.99,27.49,27.99,28.49,28.99,29.49,29.99,30.49,30.99,31.49,31.99,32.49,32.99,33.49,33.99,34.49,34.99,35.49,35.99,36.49,36.99,37.49,37.99,38.49,38.99,39.49,39.99,40.49,40.99,41.49,41.99,42.49,42.99,43.49,43.99,44.49,44.99,45.49,45.99,46.49];
 
-let selectedBand='all';
-const mmrSelect=document.getElementById('mmrSelect');
-const platformSelect=document.getElementById('platformSelect');
+const currentRankSelect=document.getElementById('currentRankSelect');
+const desiredRankSelect=document.getElementById('desiredRankSelect');
 const priceEl=document.getElementById('price');
 const routeEl=document.getElementById('route');
 const rowsEl=document.getElementById('pricingRows');
 
-function selectedAccount(){
-    return accounts.find(a=>a.mmr===Number(mmrSelect.value)) || accounts[0];
+RANKS.forEach(function(r,i){
+    var o1=document.createElement('option');o1.value=i;o1.textContent=r;currentRankSelect.appendChild(o1);
+    var o2=document.createElement('option');o2.value=i;o2.textContent=r;desiredRankSelect.appendChild(o2);
+});
+currentRankSelect.value=0;
+desiredRankSelect.value=13;
+
+function computeTotal(ci,ti){
+    if(ti<=ci)return 0;
+    var total=0;
+    for(var i=ci;i<ti;i++){total+=PRICES[i]||0;}
+    return total;
 }
 
 function updatePrice(){
-    const a=selectedAccount();
-    const platform=platformSelect.value;
-    routeEl.textContent=`${a.tier} • ${a.mmr} MMR • ${platform}`;
-    window.aaUpdatePrice(priceEl,a.price);
+    var ci=Number(currentRankSelect.value);
+    var ti=Number(desiredRankSelect.value);
+    var total=computeTotal(ci,ti);
+    routeEl.textContent=RANKS[ci]+' \u2192 '+RANKS[ti];
+    window.aaUpdatePrice(priceEl,total||null);
 }
 
 function renderTable(){
     rowsEl.innerHTML='';
-    accounts.filter(a=>selectedBand==='all' || a.band===selectedBand).forEach(a=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML=`<td>${a.tier}</td><td>${a.mmr} MMR</td><td>$${a.price.toFixed(2)}</td><td><span class="ssl">Available</span></td>`;
+    var bands={all:function(){return true;},low:function(i){return i>=1&&i<=24;},mid:function(i){return i>=25&&i<=48;},high:function(i){return i>=49&&i<=85;}};
+    RANKS.forEach(function(r,i){
+        if(i===0)return;
+        if(!bands[selectedBand](i))return;
+        var tr=document.createElement('tr');
+        var price=PRICES[i]||0;
+        tr.innerHTML='<td>'+r.split(' \u00b7 ')[0]+'</td><td>'+r+'</td><td>$'+price.toFixed(2)+'</td><td><span class="ssl">Available</span></td>';
         rowsEl.appendChild(tr);
     });
 }
 
-document.querySelectorAll('.mode').forEach(mode=>{
-    mode.addEventListener('click',()=>{
-        document.querySelectorAll('.mode').forEach(m=>m.classList.remove('active'));
+document.querySelectorAll('.mode').forEach(function(mode){
+    mode.addEventListener('click',function(){
+        document.querySelectorAll('.mode').forEach(function(m){m.classList.remove('active');});
         mode.classList.add('active');
         selectedBand=mode.dataset.filter;
         renderTable();
     });
 });
-mmrSelect.addEventListener('change',updatePrice);
-platformSelect.addEventListener('change',updatePrice);
+var selectedBand='all';
+currentRankSelect.addEventListener('change',updatePrice);
+desiredRankSelect.addEventListener('change',updatePrice);
 
 function orderAccount(){
-    const a=selectedAccount();
-    const platform=platformSelect.value;
+    var ci=Number(currentRankSelect.value);
+    var ti=Number(desiredRankSelect.value);
+    var total=computeTotal(ci,ti);
+    if(total<=0)return;
     window.Basket.add(
         'Rocket League Smurf Account',
-        a.price,
-        `${a.tier} • ${a.mmr} MMR • ${platform}`
+        total,
+        RANKS[ci]+' \u2192 '+RANKS[ti]
     );
 }
 
