@@ -31,8 +31,8 @@
       .aab-drawer{position:fixed;top:0;right:0;height:100vh;width:min(420px,92vw);background:#ffffff;color:#1a1a1a;transform:translateX(100%);transition:transform 0.5s cubic-bezier(.25,.8,.25,1);z-index:9999;display:flex;flex-direction:column;box-shadow:-8px 0 40px rgba(0,0,0,0.08);}
       .dark-mode .aab-drawer{background:#0f0f0f;color:#e8e8e8;box-shadow:-8px 0 40px rgba(0,0,0,0.4);}
       .aab-drawer.open{transform:translateX(0);}
-      .aab-head{display:flex;align-items:center;justify-content:space-between;padding:32px 32px 28px;}
-      .aab-head h3{margin:0;font-size:26px;font-weight:800;letter-spacing:-0.5px;}
+      .aab-head{display:flex;align-items:center;justify-content:space-between;padding:36px 32px 32px;}
+      .aab-head h3{margin:0;font-size:28px;font-weight:800;letter-spacing:-0.5px;}
       .aab-close{background:rgba(0,0,0,0.04);border:none;color:#999;width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:16px;line-height:1;transition:all 0.3s cubic-bezier(.25,.8,.25,1);display:flex;align-items:center;justify-content:center;}
       .dark-mode .aab-close{background:rgba(255,255,255,0.06);color:#666;}
       .aab-close:hover{background:rgba(0,0,0,0.08);color:#1a1a1a;transform:rotate(90deg) scale(1.1);}
@@ -47,32 +47,32 @@
       .aab-empty-icon{width:72px;height:72px;margin:0 auto 24px;border:2px solid rgba(0,0,0,0.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#ccc;transition:all 0.5s cubic-bezier(.25,.8,.25,1);}
       .dark-mode .aab-empty-icon{border-color:rgba(255,255,255,0.08);color:#444;}
       .aab-empty-icon svg{width:30px;height:30px;}
-      .aab-item{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:24px;margin:10px 0;background:rgba(0,0,0,0.02);border-radius:16px;transition:all 0.4s cubic-bezier(.25,.8,.25,1);animation:aab-item-in 0.4s cubic-bezier(.25,.8,.25,1) backwards;}
+      .aab-item{position:relative;display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:28px;margin:12px 0;background:rgba(0,0,0,0.02);border-radius:16px;transition:all 0.4s cubic-bezier(.25,.8,.25,1);animation:aab-item-in 0.4s cubic-bezier(.25,.8,.25,1) backwards;}
       .dark-mode .aab-item{background:rgba(255,255,255,0.03);}
       .aab-item:hover{background:rgba(0,0,0,0.04);transform:translateX(-4px);}
       .dark-mode .aab-item:hover{background:rgba(255,255,255,0.05);}
       @keyframes aab-item-in{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
       .aab-item-info{flex:1;min-width:0;}
-      .aab-item-name{font-size:15px;font-weight:700;letter-spacing:-0.2px;line-height:1.3;}
-      .aab-item-meta{display:block;font-size:13px;color:#888;margin-top:6px;line-height:1.5;}
+      .aab-item-name{font-size:17px;font-weight:700;letter-spacing:-0.2px;line-height:1.3;}
+      .aab-item-meta{display:block;font-size:14px;color:#888;margin-top:6px;line-height:1.5;}
       .dark-mode .aab-item-meta{color:#666;}
       .aab-item-right{display:flex;flex-direction:column;align-items:flex-end;gap:12px;flex-shrink:0;}
-      .aab-item-price{font-size:16px;font-weight:700;letter-spacing:-0.3px;}
+      .aab-item-price{font-size:18px;font-weight:700;letter-spacing:-0.3px;}
       .aab-remove{background:transparent;border:none;color:#bbb;cursor:pointer;font-size:12px;padding:6px 12px;font-family:inherit;border-radius:8px;transition:all 0.3s ease;letter-spacing:0.2px;font-weight:500;}
       .dark-mode .aab-remove{color:#555;}
       .aab-remove:hover{color:#e74c3c;background:rgba(231,76,60,0.06);}
-      .aab-foot{padding:24px 32px 36px;border-top:1px solid rgba(0,0,0,0.06);}
+      .aab-foot{padding:28px 32px 40px;border-top:1px solid rgba(0,0,0,0.06);}
       .dark-mode .aab-foot{border-color:rgba(255,255,255,0.06);}
       .aab-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding:0;}
       .aab-total span:first-child{color:#999;font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;}
       .dark-mode .aab-total span:first-child{color:#666;}
-      .aab-total-value{font-size:22px;font-weight:800;letter-spacing:-0.5px;}
-      .aab-checkout{display:block;width:100%;text-align:center;background:#1a1a1a;color:#ffffff;border:none;padding:18px;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.4s cubic-bezier(.25,.8,.25,1);font-family:inherit;letter-spacing:0.3px;box-shadow:0 4px 16px rgba(0,0,0,0.12);}
+      .aab-total-value{font-size:26px;font-weight:800;letter-spacing:-0.5px;}
+      .aab-checkout{display:block;width:100%;text-align:center;background:#1a1a1a;color:#ffffff;border:none;padding:22px;border-radius:16px;font-weight:700;font-size:17px;cursor:pointer;transition:all 0.4s cubic-bezier(.25,.8,.25,1);font-family:inherit;letter-spacing:0.3px;box-shadow:0 4px 16px rgba(0,0,0,0.12);}
       .dark-mode .aab-checkout{background:#fff;color:#111;box-shadow:0 4px 16px rgba(255,255,255,0.08);}
       .aab-checkout:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(0,0,0,0.18);}
       .dark-mode .aab-checkout:hover{box-shadow:0 8px 28px rgba(255,255,255,0.12);}
       .aab-checkout:active{transform:translateY(-1px) scale(0.98);}
-      .aab-clear{display:block;width:100%;text-align:center;background:transparent;color:#bbb;border:1px solid rgba(0,0,0,0.08);padding:14px;border-radius:14px;font-weight:600;font-size:13px;cursor:pointer;margin-top:12px;transition:all 0.3s ease;font-family:inherit;letter-spacing:0.2px;}
+      .aab-clear{display:block;width:100%;text-align:center;background:transparent;color:#bbb;border:1px solid rgba(0,0,0,0.08);padding:16px;border-radius:14px;font-weight:600;font-size:14px;cursor:pointer;margin-top:14px;transition:all 0.3s ease;font-family:inherit;letter-spacing:0.2px;}
       .dark-mode .aab-clear{color:#555;border-color:rgba(255,255,255,0.08);}
       .aab-clear:hover{color:#1a1a1a;border-color:rgba(0,0,0,0.15);background:rgba(0,0,0,0.02);}
       .dark-mode .aab-clear:hover{color:#fff;border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.03);}
