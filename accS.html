@@ -40,13 +40,6 @@
     <div class="selector">
         <div class="selector-title">Configure your account</div>
 
-        <div class="modes">
-            <div class="mode active" data-filter="all">All Ranks<small>Browse all tiers</small></div>
-            <div class="mode" data-filter="low">Bronze – Silver<small>Ranks 1–24</small></div>
-            <div class="mode" data-filter="mid">Gold – Platinum<small>Ranks 25–48</small></div>
-            <div class="mode" data-filter="high">Diamond – SSL<small>Ranks 49–85</small></div>
-        </div>
-
         <div class="rank-selection">
             <div class="rank-box">
                 <label>Current Rank</label>
@@ -147,10 +140,8 @@ function updatePrice(){
 
 function renderTable(){
     rowsEl.innerHTML='';
-    var bands={all:function(){return true;},low:function(i){return i>=1&&i<=24;},mid:function(i){return i>=25&&i<=48;},high:function(i){return i>=49&&i<=85;}};
     RANKS.forEach(function(r,i){
         if(i===0)return;
-        if(!bands[selectedBand](i))return;
         var tr=document.createElement('tr');
         var price=PRICES[i]||0;
         tr.innerHTML='<td>'+r.split(' \u00b7 ')[0]+'</td><td>'+r+'</td><td>$'+price.toFixed(2)+'</td><td><span class="ssl">Available</span></td>';
@@ -158,15 +149,6 @@ function renderTable(){
     });
 }
 
-document.querySelectorAll('.mode').forEach(function(mode){
-    mode.addEventListener('click',function(){
-        document.querySelectorAll('.mode').forEach(function(m){m.classList.remove('active');});
-        mode.classList.add('active');
-        selectedBand=mode.dataset.filter;
-        renderTable();
-    });
-});
-var selectedBand='all';
 currentRankSelect.addEventListener('change',updatePrice);
 desiredRankSelect.addEventListener('change',updatePrice);
 
