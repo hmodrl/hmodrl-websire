@@ -42,22 +42,37 @@
 
         <div class="rank-selection">
             <div class="rank-box">
-                <label>Current Rank</label>
-                <select id="currentRankSelect"></select>
+                <label>Account Rank</label>
+                <select id="rankSelect">
+                    <option value="0">Bronze</option>
+                    <option value="1">Silver</option>
+                    <option value="2">Gold</option>
+                    <option value="3">Platinum</option>
+                    <option value="4">Diamond</option>
+                    <option value="5">Champion</option>
+                    <option value="6">Grand Champion</option>
+                    <option value="7">Supersonic Legend</option>
+                </select>
             </div>
 
             <div class="arrow">→</div>
 
             <div class="rank-box">
-                <label>Desired Rank</label>
-                <select id="desiredRankSelect"></select>
+                <label>Platform</label>
+                <select id="platformSelect">
+                    <option value="epic">Epic Games</option>
+                    <option value="steam">Steam (+$100)</option>
+                    <option value="playstation">PlayStation</option>
+                    <option value="xbox">Xbox</option>
+                    <option value="switch">Nintendo Switch</option>
+                </select>
             </div>
         </div>
 
         <div class="price-card">
             <div class="price-info">
                 <small>Estimated Account Price</small>
-                <strong id="route">Unranked → Unranked</strong>
+                <strong id="route">Bronze • Epic Games</strong>
             </div>
             <div class="price" id="price" data-usd="0"><span class="price-amount">$0.00</span></div>
             <button class="order-btn" onclick="orderAccount()">Request Account</button>
@@ -72,7 +87,7 @@
         <div class="table-wrap">
             <table>
                 <thead>
-                    <tr><th>Tier</th><th>Rank</th><th>Suggested Price</th><th>Availability</th></tr>
+                    <tr><th>Tier</th><th>Suggested Price</th><th>Availability</th></tr>
                 </thead>
                 <tbody id="pricingRows"></tbody>
             </table>
@@ -106,61 +121,55 @@
 
 <script>
 
-const RANKS=["Unranked","Bronze I \u00b7 Div I","Bronze I \u00b7 Div II","Bronze I \u00b7 Div III","Bronze I \u00b7 Div IV","Bronze II \u00b7 Div I","Bronze II \u00b7 Div II","Bronze II \u00b7 Div III","Bronze II \u00b7 Div IV","Bronze III \u00b7 Div I","Bronze III \u00b7 Div II","Bronze III \u00b7 Div III","Bronze III \u00b7 Div IV","Silver I \u00b7 Div I","Silver I \u00b7 Div II","Silver I \u00b7 Div III","Silver I \u00b7 Div IV","Silver II \u00b7 Div I","Silver II \u00b7 Div II","Silver II \u00b7 Div III","Silver II \u00b7 Div IV","Silver III \u00b7 Div I","Silver III \u00b7 Div II","Silver III \u00b7 Div III","Silver III \u00b7 Div IV","Gold I \u00b7 Div I","Gold I \u00b7 Div II","Gold I \u00b7 Div III","Gold I \u00b7 Div IV","Gold II \u00b7 Div I","Gold II \u00b7 Div II","Gold II \u00b7 Div III","Gold II \u00b7 Div IV","Gold III \u00b7 Div I","Gold III \u00b7 Div II","Gold III \u00b7 Div III","Gold III \u00b7 Div IV","Platinum I \u00b7 Div I","Platinum I \u00b7 Div II","Platinum I \u00b7 Div III","Platinum I \u00b7 Div IV","Platinum II \u00b7 Div I","Platinum II \u00b7 Div II","Platinum II \u00b7 Div III","Platinum II \u00b7 Div IV","Platinum III \u00b7 Div I","Platinum III \u00b7 Div II","Platinum III \u00b7 Div III","Platinum III \u00b7 Div IV","Diamond I \u00b7 Div I","Diamond I \u00b7 Div II","Diamond I \u00b7 Div III","Diamond I \u00b7 Div IV","Diamond II \u00b7 Div I","Diamond II \u00b7 Div II","Diamond II \u00b7 Div III","Diamond II \u00b7 Div IV","Diamond III \u00b7 Div I","Diamond III \u00b7 Div II","Diamond III \u00b7 Div III","Diamond III \u00b7 Div IV","Champion I \u00b7 Div I","Champion I \u00b7 Div II","Champion I \u00b7 Div III","Champion I \u00b7 Div IV","Champion II \u00b7 Div I","Champion II \u00b7 Div II","Champion II \u00b7 Div III","Champion II \u00b7 Div IV","Champion III \u00b7 Div I","Champion III \u00b7 Div II","Champion III \u00b7 Div III","Champion III \u00b7 Div IV","Grand Champion I \u00b7 Div I","Grand Champion I \u00b7 Div II","Grand Champion I \u00b7 Div III","Grand Champion I \u00b7 Div IV","Grand Champion II \u00b7 Div I","Grand Champion II \u00b7 Div II","Grand Champion II \u00b7 Div III","Grand Champion II \u00b7 Div IV","Grand Champion III \u00b7 Div I","Grand Champion III \u00b7 Div II","Grand Champion III \u00b7 Div III","Grand Champion III \u00b7 Div IV","Supersonic Legend"];
+var RANKS=[
+    {name:'Bronze',price:4.99},
+    {name:'Silver',price:5.99},
+    {name:'Gold',price:6.99},
+    {name:'Platinum',price:8.99},
+    {name:'Diamond',price:11.99},
+    {name:'Champion',price:17.99},
+    {name:'Grand Champion',price:29.99},
+    {name:'Supersonic Legend',price:49.99}
+];
 
-const PRICES=[0,4.99,5.49,5.99,6.49,6.99,7.49,7.99,8.49,8.99,9.49,9.99,10.49,10.99,11.49,11.99,12.49,12.99,13.49,13.99,14.49,14.99,15.49,15.99,16.49,16.99,17.49,17.99,18.49,18.99,19.49,19.99,20.49,20.99,21.49,21.99,22.49,22.99,23.49,23.99,24.49,24.99,25.49,25.99,26.49,26.99,27.49,27.99,28.49,28.99,29.49,29.99,30.49,30.99,31.49,31.99,32.49,32.99,33.49,33.99,34.49,34.99,35.49,35.99,36.49,36.99,37.49,37.99,38.49,38.99,39.49,39.99,40.49,40.99,41.49,41.99,42.49,42.99,43.49,43.99,44.49,44.99,45.49,45.99,46.49];
+var STEAM_EXTRA=100;
 
-const currentRankSelect=document.getElementById('currentRankSelect');
-const desiredRankSelect=document.getElementById('desiredRankSelect');
-const priceEl=document.getElementById('price');
-const routeEl=document.getElementById('route');
-const rowsEl=document.getElementById('pricingRows');
-
-RANKS.forEach(function(r,i){
-    var o1=document.createElement('option');o1.value=i;o1.textContent=r;currentRankSelect.appendChild(o1);
-    var o2=document.createElement('option');o2.value=i;o2.textContent=r;desiredRankSelect.appendChild(o2);
-});
-currentRankSelect.value=0;
-desiredRankSelect.value=13;
-
-function computeTotal(ci,ti){
-    if(ti<=ci)return 0;
-    var total=0;
-    for(var i=ci;i<ti;i++){total+=PRICES[i]||0;}
-    return total;
-}
+var rankSelect=document.getElementById('rankSelect');
+var platformSelect=document.getElementById('platformSelect');
+var priceEl=document.getElementById('price');
+var routeEl=document.getElementById('route');
+var rowsEl=document.getElementById('pricingRows');
 
 function updatePrice(){
-    var ci=Number(currentRankSelect.value);
-    var ti=Number(desiredRankSelect.value);
-    var total=computeTotal(ci,ti);
-    routeEl.textContent=RANKS[ci]+' \u2192 '+RANKS[ti];
-    window.aaUpdatePrice(priceEl,total||null);
+    var ri=Number(rankSelect.value);
+    var platform=platformSelect.value;
+    var base=RANKS[ri].price;
+    var total=base+(platform==='steam'?STEAM_EXTRA:0);
+    routeEl.textContent=RANKS[ri].name+' \u2022 '+platformSelect.options[platformSelect.selectedIndex].text.replace(' (+$100)','');
+    window.aaUpdatePrice(priceEl,total);
 }
 
 function renderTable(){
     rowsEl.innerHTML='';
-    RANKS.forEach(function(r,i){
-        if(i===0)return;
+    RANKS.forEach(function(r){
         var tr=document.createElement('tr');
-        var price=PRICES[i]||0;
-        tr.innerHTML='<td>'+r.split(' \u00b7 ')[0]+'</td><td>'+r+'</td><td>$'+price.toFixed(2)+'</td><td><span class="ssl">Available</span></td>';
+        tr.innerHTML='<td>'+r.name+'</td><td>$'+r.price.toFixed(2)+'</td><td><span class="ssl">Available</span></td>';
         rowsEl.appendChild(tr);
     });
 }
 
-currentRankSelect.addEventListener('change',updatePrice);
-desiredRankSelect.addEventListener('change',updatePrice);
+rankSelect.addEventListener('change',updatePrice);
+platformSelect.addEventListener('change',updatePrice);
 
 function orderAccount(){
-    var ci=Number(currentRankSelect.value);
-    var ti=Number(desiredRankSelect.value);
-    var total=computeTotal(ci,ti);
-    if(total<=0)return;
+    var ri=Number(rankSelect.value);
+    var platform=platformSelect.value;
+    var base=RANKS[ri].price;
+    var total=base+(platform==='steam'?STEAM_EXTRA:0);
     window.Basket.add(
         'Rocket League Smurf Account',
         total,
-        RANKS[ci]+' \u2192 '+RANKS[ti]
+        RANKS[ri].name+' \u2022 '+platformSelect.options[platformSelect.selectedIndex].text.replace(' (+$100)','')
     );
 }
 
