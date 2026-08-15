@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AERIALARC — Rocket League Rank Boosting</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #fffaf0 0%, #000000 100%);
+            color: #111111;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+            top: -200px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+            bottom: -200px;
+            right: -150px;
+            z-index: -1;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            width: 100%;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,250,240,0.78);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #111111;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            display: block;
+            cursor: pointer;
+            transition: opacity 280ms ease, transform 280ms ease;
+        }
+
+        .logo span {
+            opacity: 0.6;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #111111;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .back:hover {
+            color: #444444;
+        }
+
+        .mode-btn {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: transparent;
+            cursor: pointer;
+            font-weight: 700;
+            color: #111111;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .mode-btn.active {
+            background: #111111;
+            color: #ffffff;
+        }
+
+        /* Dark mode styles */
+        .dark-mode { background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        .dark-mode nav { background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .dark-mode .logo { color: #f5f5f5; }
+        .dark-mode .back { color: #d1d1d1; }
+        .dark-mode .back:hover { color: #ffffff; }
+        .dark-mode .mode-btn { color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        .dark-mode .mode-btn.active { background: #f5f5f5; color: #000000; }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+            padding: 120px 20px 60px;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 50px;
+            color: #777777;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: #111111;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #888888;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #6b6b6b;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .dark-mode .badge { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        .dark-mode .hero h1 { color: #ffffff; }
+        .dark-mode .hero h1 span { color: #b0b0b0; }
+        .dark-mode .hero p { color: #d0d0d0; }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding-bottom: 80px;
+            padding-top: 40px;
+        }
+
+        /* SELECTOR */
+
+        .selector {
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            backdrop-filter: blur(8px);
+        }
+
+        .selector-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #111111;
+        }
+
+        .modes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .mode {
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            color: #666666;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .mode small {
+            display: block;
+            font-size: 11px;
+            color: #999999;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        .mode:hover {
+            border-color: #111111;
+            color: #111111;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .mode.active {
+            background: #111111;
+            color: #ffffff;
+            border-color: #111111;
+        }
+
+        .mode.active small {
+            color: #cccccc;
+        }
+
+        .dark-mode .selector { background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        .dark-mode .selector-title { color: #ffffff; }
+        .dark-mode .mode { background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        .dark-mode .mode small { color: #909090; }
+        .dark-mode .mode:hover { border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .dark-mode .mode.active { background: #ffffff; color: #000000; border-color: #ffffff; }
+        .dark-mode .mode.active small { color: #444444; }
+
+        /* RANK SELECTORS */
+
+        .rank-selection {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 15px;
+            align-items: center;
+            margin-top: 30px;
+            margin-bottom: 25px;
+        }
+
+        .rank-box {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .rank-box label {
+            display: block;
+            color: #999999;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        select {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.06);
+            color: #111111;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .arrow {
+            text-align: center;
+            color: #999999;
+            font-size: 24px;
+        }
+
+        .dark-mode .rank-box { background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
+        .dark-mode .rank-box label { color: #909090; }
+        .dark-mode select { background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
+        .dark-mode .arrow { color: #707070; }
+
+        /* PRICE */
+
+        .price-card {
+            margin-top: 25px;
+            border-radius: 18px;
+            padding: 30px;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .price-info small {
+            color: #999999;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .price-info strong {
+            font-size: 20px;
+            color: #111111;
+            font-weight: 700;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            color: #111111;
+        }
+
+        .order-btn {
+            border: none;
+            background: #111111;
+            color: #ffffff;
+            padding: 16px 34px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+        }
+
+        .dark-mode .price-card { background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        .dark-mode .price-info small { color: #909090; }
+        .dark-mode .price-info strong { color: #ffffff; }
+        .dark-mode .price { color: #ffffff; }
+        .dark-mode .order-btn { background: #ffffff; color: #000000; }
+        .dark-mode .order-btn:hover { box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+
+        /* PRICING TABLE */
+
+        .pricing-section {
+            margin-top: 60px;
+        }
+
+        .section-heading {
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+        }
+
+        .section-heading p {
+            color: #777;
+            margin-top: 8px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 18px;
+            border: 1px solid #222;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+            background: #090909;
+        }
+
+        th {
+            background: #111;
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 18px;
+            text-align: left;
+        }
+
+        td {
+            padding: 19px 18px;
+            border-top: 1px solid #1c1c1c;
+            color: #ddd;
+        }
+
+        td:not(:first-child) {
+            font-weight: 800;
+        }
+
+        tr:hover td {
+            background: #0e0e0e;
+        }
+
+        .ssl {
+            color: #fff;
+        }
+
+        /* FEATURES */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .feature {
+            padding: 30px;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #111111;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .feature p {
+            color: #6b6b6b;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .dark-mode .feature { background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        .dark-mode .feature:hover { box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        .dark-mode .feature h3 { color: #ffffff; }
+        .dark-mode .feature p { color: #d0d0d0; }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            color: #999999;
+            background: rgba(255,250,240,0.4);
+            font-size: 13px;
+        }
+
+        .dark-mode footer { background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 768px) {
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .modes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .rank-selection {
+                grid-template-columns: 1fr;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .price-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .price {
+                font-size: 32px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 20px 5%;
+            }
+
+            .selector {
+                padding: 25px;
+            }
+        }
+            /* Currency select styles */
+            .currency-select{ position:relative; display:inline-block; }
+            .currency-toggle{
+                background:rgba(0,0,0,0.04); color:#111111;
+                border:1px solid rgba(0,0,0,0.1); padding:8px 12px;
+                border-radius:10px; cursor:pointer; font-weight:700;
+                display:inline-flex; align-items:center; gap:6px;
+            }
+            .currency-dropdown{
+                position:absolute; top:calc(100% + 10px); left:0;
+                background:rgba(0,0,0,0.9); border:1px solid rgba(255,255,255,0.06);
+                padding:8px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.5);
+                display:none; min-width:220px; z-index:40;
+            }
+            .currency-dropdown.open{ display:block; }
+            .currency-option{
+                display:block; background:transparent; color:#f5f5f5;
+                border:none; text-align:left; padding:8px 10px; width:100%;
+                cursor:pointer; border-radius:8px;
+            }
+            .currency-option:hover{ background:rgba(255,255,255,0.03); }
+            .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
+            .dark-mode .currency-toggle{
+                background:rgba(255,255,255,0.06); color:#f5f5f5;
+                border:1px solid rgba(255,255,255,0.08);
+            }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html" class="logo"><img src="aerialarc.png" alt="AERIALARC" class="logo-img"></a>
+
+    <div style="display: flex; gap: 8px; align-items: center;">
+        <div class="currency-select">
+            <button id="currencyToggle" class="currency-toggle"><img src="usa.webp" class="flag" alt="US"> USD</button>
+            <div id="currencyDropdown" class="currency-dropdown" aria-hidden="true">
+                <button class="currency-option" data-currency="USD"><img src="usa.webp" class="flag" alt="US"> United States Dollar (USD)</button>
+                <button class="currency-option" data-currency="BHD"><img src="bh.svg" class="flag" alt="BHD"> Bahraini Dinar (BHD)</button>
+                <button class="currency-option" data-currency="SAR"><img src="sa.png" class="flag" alt="SAR"> Saudi Riyal (SAR)</button>
+            </div>
+        </div>
+        <button id="lightModeBtn" class="mode-btn">Light</button>
+        <button id="darkModeBtn" class="mode-btn">Dark</button>
+    </div>
+</nav>
+
+<section class="hero">
+
+    <div class="badge">
+        Rocket League Boosting
+    </div>
+
+    <h1>
+        Rank <span>Boosting.</span>
+    </h1>
+
+    <p>
+        Climb the Rocket League competitive ladder with experienced boosters.
+        Choose your playlist, current rank, and target rank to instantly see
+        your AERIALARC price.
+    </p>
+
+</section>
+
+
+<div class="container">
+
+    <div class="selector">
+
+        <div class="selector-title">
+            Configure your boost
+        </div>
+
+        <div class="modes">
+
+            <div class="mode active" data-mode="1v1">
+                1v1
+                <small>Solo Duel</small>
+            </div>
+
+            <div class="mode" data-mode="2v2">
+                2v2
+                <small>Doubles</small>
+            </div>
+
+            <div class="mode" data-mode="3v3">
+                3v3
+                <small>Standard</small>
+            </div>
+
+            <div class="mode" data-mode="4v4">
+                4v4
+                <small>Chaos</small>
+            </div>
+
+        </div>
+
+
+        <div class="rank-selection">
+
+            <div class="rank-box">
+
+                <label>Current Rank</label>
+
+                <select id="currentRank">
+                    <option value="0">Unranked</option>
+                    <option value="1">Bronze I · Div I</option>
+                    <option value="2">Bronze I · Div II</option>
+                    <option value="3">Bronze I · Div III</option>
+                    <option value="4">Bronze I · Div IV</option>
+                    <option value="5">Bronze II · Div I</option>
+                    <option value="6">Bronze II · Div II</option>
+                    <option value="7">Bronze II · Div III</option>
+                    <option value="8">Bronze II · Div IV</option>
+                    <option value="9">Bronze III · Div I</option>
+                    <option value="10">Bronze III · Div II</option>
+                    <option value="11">Bronze III · Div III</option>
+                    <option value="12">Bronze III · Div IV</option>
+                    <option value="13">Silver I · Div I</option>
+                    <option value="14">Silver I · Div II</option>
+                    <option value="15">Silver I · Div III</option>
+                    <option value="16">Silver I · Div IV</option>
+                    <option value="17">Silver II · Div I</option>
+                    <option value="18">Silver II · Div II</option>
+                    <option value="19">Silver II · Div III</option>
+                    <option value="20">Silver II · Div IV</option>
+                    <option value="21">Silver III · Div I</option>
+                    <option value="22">Silver III · Div II</option>
+                    <option value="23">Silver III · Div III</option>
+                    <option value="24">Silver III · Div IV</option>
+                    <option value="25">Gold I · Div I</option>
+                    <option value="26">Gold I · Div II</option>
+                    <option value="27">Gold I · Div III</option>
+                    <option value="28">Gold I · Div IV</option>
+                    <option value="29">Gold II · Div I</option>
+                    <option value="30">Gold II · Div II</option>
+                    <option value="31">Gold II · Div III</option>
+                    <option value="32">Gold II · Div IV</option>
+                    <option value="33">Gold III · Div I</option>
+                    <option value="34">Gold III · Div II</option>
+                    <option value="35">Gold III · Div III</option>
+                    <option value="36">Gold III · Div IV</option>
+                    <option value="37">Platinum I · Div I</option>
+                    <option value="38">Platinum I · Div II</option>
+                    <option value="39">Platinum I · Div III</option>
+                    <option value="40">Platinum I · Div IV</option>
+                    <option value="41">Platinum II · Div I</option>
+                    <option value="42">Platinum II · Div II</option>
+                    <option value="43">Platinum II · Div III</option>
+                    <option value="44">Platinum II · Div IV</option>
+                    <option value="45">Platinum III · Div I</option>
+                    <option value="46">Platinum III · Div II</option>
+                    <option value="47">Platinum III · Div III</option>
+                    <option value="48">Platinum III · Div IV</option>
+                    <option value="49">Diamond I · Div I</option>
+                    <option value="50">Diamond I · Div II</option>
+                    <option value="51">Diamond I · Div III</option>
+                    <option value="52">Diamond I · Div IV</option>
+                    <option value="53">Diamond II · Div I</option>
+                    <option value="54">Diamond II · Div II</option>
+                    <option value="55">Diamond II · Div III</option>
+                    <option value="56">Diamond II · Div IV</option>
+                    <option value="57">Diamond III · Div I</option>
+                    <option value="58">Diamond III · Div II</option>
+                    <option value="59">Diamond III · Div III</option>
+                    <option value="60">Diamond III · Div IV</option>
+                    <option value="61">Champion I · Div I</option>
+                    <option value="62">Champion I · Div II</option>
+                    <option value="63">Champion I · Div III</option>
+                    <option value="64">Champion I · Div IV</option>
+                    <option value="65">Champion II · Div I</option>
+                    <option value="66">Champion II · Div II</option>
+                    <option value="67">Champion II · Div III</option>
+                    <option value="68">Champion II · Div IV</option>
+                    <option value="69">Champion III · Div I</option>
+                    <option value="70">Champion III · Div II</option>
+                    <option value="71">Champion III · Div III</option>
+                    <option value="72">Champion III · Div IV</option>
+                    <option value="73">Grand Champion I · Div I</option>
+                    <option value="74">Grand Champion I · Div II</option>
+                    <option value="75">Grand Champion I · Div III</option>
+                    <option value="76">Grand Champion I · Div IV</option>
+                    <option value="77">Grand Champion II · Div I</option>
+                    <option value="78">Grand Champion II · Div II</option>
+                    <option value="79">Grand Champion II · Div III</option>
+                    <option value="80">Grand Champion II · Div IV</option>
+                    <option value="81">Grand Champion III · Div I</option>
+                    <option value="82">Grand Champion III · Div II</option>
+                    <option value="83">Grand Champion III · Div III</option>
+                    <option value="84">Grand Champion III · Div IV</option>
+                    <option value="85">Supersonic Legend</option>
+                </select>
+
+
+            </div>
+
+
+            <div class="arrow">
+                →
+            </div>
+
+
+            <div class="rank-box">
+
+                <label>Target Rank</label>
+
+                <select id="targetRank">
+                    <option value="0">Unranked</option>
+                    <option value="1">Bronze I · Div I</option>
+                    <option value="2">Bronze I · Div II</option>
+                    <option value="3">Bronze I · Div III</option>
+                    <option value="4">Bronze I · Div IV</option>
+                    <option value="5">Bronze II · Div I</option>
+                    <option value="6">Bronze II · Div II</option>
+                    <option value="7">Bronze II · Div III</option>
+                    <option value="8">Bronze II · Div IV</option>
+                    <option value="9">Bronze III · Div I</option>
+                    <option value="10">Bronze III · Div II</option>
+                    <option value="11">Bronze III · Div III</option>
+                    <option value="12">Bronze III · Div IV</option>
+                    <option value="13" selected>Silver I · Div I</option>
+                    <option value="14">Silver I · Div II</option>
+                    <option value="15">Silver I · Div III</option>
+                    <option value="16">Silver I · Div IV</option>
+                    <option value="17">Silver II · Div I</option>
+                    <option value="18">Silver II · Div II</option>
+                    <option value="19">Silver II · Div III</option>
+                    <option value="20">Silver II · Div IV</option>
+                    <option value="21">Silver III · Div I</option>
+                    <option value="22">Silver III · Div II</option>
+                    <option value="23">Silver III · Div III</option>
+                    <option value="24">Silver III · Div IV</option>
+                    <option value="25">Gold I · Div I</option>
+                    <option value="26">Gold I · Div II</option>
+                    <option value="27">Gold I · Div III</option>
+                    <option value="28">Gold I · Div IV</option>
+                    <option value="29">Gold II · Div I</option>
+                    <option value="30">Gold II · Div II</option>
+                    <option value="31">Gold II · Div III</option>
+                    <option value="32">Gold II · Div IV</option>
+                    <option value="33">Gold III · Div I</option>
+                    <option value="34">Gold III · Div II</option>
+                    <option value="35">Gold III · Div III</option>
+                    <option value="36">Gold III · Div IV</option>
+                    <option value="37">Platinum I · Div I</option>
+                    <option value="38">Platinum I · Div II</option>
+                    <option value="39">Platinum I · Div III</option>
+                    <option value="40">Platinum I · Div IV</option>
+                    <option value="41">Platinum II · Div I</option>
+                    <option value="42">Platinum II · Div II</option>
+                    <option value="43">Platinum II · Div III</option>
+                    <option value="44">Platinum II · Div IV</option>
+                    <option value="45">Platinum III · Div I</option>
+                    <option value="46">Platinum III · Div II</option>
+                    <option value="47">Platinum III · Div III</option>
+                    <option value="48">Platinum III · Div IV</option>
+                    <option value="49">Diamond I · Div I</option>
+                    <option value="50">Diamond I · Div II</option>
+                    <option value="51">Diamond I · Div III</option>
+                    <option value="52">Diamond I · Div IV</option>
+                    <option value="53">Diamond II · Div I</option>
+                    <option value="54">Diamond II · Div II</option>
+                    <option value="55">Diamond II · Div III</option>
+                    <option value="56">Diamond II · Div IV</option>
+                    <option value="57">Diamond III · Div I</option>
+                    <option value="58">Diamond III · Div II</option>
+                    <option value="59">Diamond III · Div III</option>
+                    <option value="60">Diamond III · Div IV</option>
+                    <option value="61">Champion I · Div I</option>
+                    <option value="62">Champion I · Div II</option>
+                    <option value="63">Champion I · Div III</option>
+                    <option value="64">Champion I · Div IV</option>
+                    <option value="65">Champion II · Div I</option>
+                    <option value="66">Champion II · Div II</option>
+                    <option value="67">Champion II · Div III</option>
+                    <option value="68">Champion II · Div IV</option>
+                    <option value="69">Champion III · Div I</option>
+                    <option value="70">Champion III · Div II</option>
+                    <option value="71">Champion III · Div III</option>
+                    <option value="72">Champion III · Div IV</option>
+                    <option value="73">Grand Champion I · Div I</option>
+                    <option value="74">Grand Champion I · Div II</option>
+                    <option value="75">Grand Champion I · Div III</option>
+                    <option value="76">Grand Champion I · Div IV</option>
+                    <option value="77">Grand Champion II · Div I</option>
+                    <option value="78">Grand Champion II · Div II</option>
+                    <option value="79">Grand Champion II · Div III</option>
+                    <option value="80">Grand Champion II · Div IV</option>
+                    <option value="81">Grand Champion III · Div I</option>
+                    <option value="82">Grand Champion III · Div II</option>
+                    <option value="83">Grand Champion III · Div III</option>
+                    <option value="84">Grand Champion III · Div IV</option>
+                    <option value="85">Supersonic Legend</option>
+                </select>
+
+
+            </div>
+
+        </div>
+
+
+        <div class="price-card">
+
+            <div class="price-info">
+
+                <small>Estimated Boost Price</small>
+
+                <strong id="route">
+                    Bronze I → Silver I
+                </strong>
+
+            </div>
+
+            <div class="price" id="price" data-usd="8">
+                <span class="price-amount">$8.00</span>
+            </div>
+
+            <button class="order-btn" onclick="orderBoost()">
+                Order Boost
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <section class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">⚡</div>
+
+            <h3>Fast Delivery</h3>
+
+            <p>
+                Get your requested rank completed efficiently by experienced
+                Rocket League boosters.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🛡</div>
+
+            <h3>Secure Service</h3>
+
+            <p>
+                Your account information is handled privately and only used
+                for completing the requested service.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🏆</div>
+
+            <h3>Bronze → SSL</h3>
+
+            <p>
+                Full competitive rank progression available across 1v1, 2v2,
+                3v3 and 4v4.
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<footer>
+    © 2026 AERIALARC. All rights reserved.
+</footer>
+
+
+<script>
+(() => {
+    const RATES = { USD: 1, BHD: 0.37625, SAR: 3.7625 };
+    let current = 'USD';
+
+    const toggle = document.getElementById('currencyToggle');
+    const dropdown = document.getElementById('currencyDropdown');
+    const options = document.querySelectorAll('.currency-option');
+    if(!toggle || !dropdown) return;
+
+    function formatPrice(usdValue, currency){
+        const val = (usdValue * (RATES[currency] || 1));
+        if(currency === 'USD') return `$${val.toFixed(2)}`;
+        if(currency === 'BHD') return `${val.toFixed(2)} BHD`;
+        if(currency === 'SAR') return `${val.toFixed(2)} SAR`;
+        return `${val.toFixed(2)}`;
+    }
+
+    window.aaFormatPrice = function(usd){ return formatPrice(usd, current); };
+
+    window.aaUpdatePrice = function(el, usd, naText){
+        if(usd == null){
+            el.dataset.usd = '';
+            const s = el.querySelector('.price-amount');
+            const t = naText || '—';
+            if(s){ s.textContent = t; } else { el.textContent = t; }
+            return;
+        }
+        el.dataset.usd = usd;
+        const s = el.querySelector('.price-amount');
+        if(s){ s.textContent = formatPrice(usd, current); } else { el.textContent = formatPrice(usd, current); }
+    };
+
+    function updatePrices(){
+        document.querySelectorAll('[data-usd]').forEach(el => {
+            const usd = parseFloat(el.getAttribute('data-usd'));
+            if(isNaN(usd)) return;
+            const span = el.querySelector('.price-amount');
+            if(span){ span.textContent = formatPrice(usd, current); } else { el.textContent = formatPrice(usd, current); }
+        });
+        if(toggle){
+            const label = (c) => {
+                if(c === 'USD') return `<img src="usa.webp" class="flag" alt="US"> USD`;
+                if(c === 'BHD') return `<img src="bh.svg" class="flag" alt="BHD"> BHD`;
+                return `<img src="sa.png" class="flag" alt="SAR"> SAR`;
+            };
+            toggle.innerHTML = label(current);
+        }
+    }
+
+    updatePrices();
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+    });
+
+    options.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const c = btn.getAttribute('data-currency');
+            if(c){ current = c; }
+            dropdown.classList.remove('open');
+            updatePrices();
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if(!dropdown.contains(e.target) && e.target !== toggle){
+            dropdown.classList.remove('open');
+        }
+    });
+})();
+</script>
+
+<script>
+    // Dark mode theme toggle
+    (function(){
+        const lightBtn = document.getElementById('lightModeBtn');
+        const darkBtn = document.getElementById('darkModeBtn');
+        if(!lightBtn || !darkBtn) return;
+        const logoImg = document.querySelector('.logo img');
+        function applyTheme(theme){
+            if(theme==='dark'){
+                document.body.classList.add('dark-mode');
+                darkBtn.classList.add('active'); lightBtn.classList.remove('active');
+                if(logoImg){ logoImg.style.opacity=0; setTimeout(()=>{ logoImg.src='aerialarc2.png'; logoImg.style.opacity=1; },180); }
+            } else {
+                document.body.classList.remove('dark-mode');
+                lightBtn.classList.add('active'); darkBtn.classList.remove('active');
+                if(logoImg){ logoImg.style.opacity=0; setTimeout(()=>{ logoImg.src='aerialarc.png'; logoImg.style.opacity=1; },180); }
+            }
+            try{ localStorage.setItem('theme', theme); }catch(e){}
+        }
+        lightBtn.addEventListener('click', ()=>applyTheme('light'));
+        darkBtn.addEventListener('click', ()=>applyTheme('dark'));
+        const saved = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(saved);
+    })();
+
+    let selectedMode = "1v1";
+
+    const prices = {
+
+        "1v1": [
+            8,
+            10,
+            14,
+            20,
+            30,
+            55,
+            85
+        ],
+
+        "2v2": [
+            7,
+            9,
+            13,
+            18,
+            27,
+            50,
+            77
+        ],
+
+        "3v3": [
+            10,
+            12,
+            17,
+            24,
+            36,
+            66,
+            102
+        ],
+
+        "4v4": [
+            10,
+            13,
+            18,
+            26,
+            39,
+            72,
+            111
+        ]
+
+    };
+
+
+    const ranks = [
+        "Bronze",
+        "Silver",
+        "Gold",
+        "Platinum",
+        "Diamond",
+        "Champion",
+        "Grand Champion",
+        "Supersonic Legend"
+    ];
+
+
+    const modes = document.querySelectorAll(".mode");
+
+    modes.forEach(mode => {
+
+        mode.addEventListener("click", () => {
+
+            modes.forEach(m => m.classList.remove("active"));
+
+            mode.classList.add("active");
+
+            selectedMode = mode.dataset.mode;
+
+            updatePrice();
+
+        });
+
+    });
+
+
+    document
+        .getElementById("currentRank")
+        .addEventListener("change", updatePrice);
+
+
+    document
+        .getElementById("targetRank")
+        .addEventListener("change", updatePrice);
+
+
+    const TIERS = ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Champion", "Grand Champion"];
+
+    const DIVS = ["I", "II", "III", "IV"];
+
+
+    function rankLabel(i) {
+
+        if (i === 0) return "Unranked";
+
+        if (i >= 85) return "Supersonic Legend";
+
+        const off = i - 1;
+
+        const tier = Math.floor(off / 12);
+
+        const sub = Math.floor((off % 12) / 4);
+
+        const div = (off % 12) % 4;
+
+        return TIERS[tier] + " " + DIVS[sub] + " · Div " + DIVS[div];
+
+    }
+
+
+    function pos(i) {
+
+        if (i === 0 || i === 1) return 0;
+
+        if (i >= 85) return 84;
+
+        const off = i - 1;
+
+        return Math.floor(off / 12) * 12 + (off % 12);
+
+    }
+
+
+    function segPrice(t) {
+
+        const arr = prices[selectedMode];
+
+        return arr[Math.min(Math.max(t, 0), arr.length - 1)];
+
+    }
+
+
+    function computeTotal(ci, ti) {
+
+        const a = pos(ci);
+
+        const b = pos(ti);
+
+        const ta = Math.floor(a / 12);
+
+        const tb = Math.floor(b / 12);
+
+        const sa = a % 12;
+
+        const sb = b % 12;
+
+        let total = 0;
+
+        for (let t = ta; t < tb; t++) {
+
+            total += segPrice(t);
+
+        }
+
+        total -= sa * segPrice(ta) / 12;
+
+        total += sb * segPrice(tb) / 12;
+
+        return total;
+
+    }
+
+
+    function updatePrice() {
+
+        const current =
+            parseInt(document.getElementById("currentRank").value);
+
+        const target =
+            parseInt(document.getElementById("targetRank").value);
+
+
+        const priceElement =
+            document.getElementById("price");
+
+        const routeElement =
+            document.getElementById("route");
+
+
+        if (target <= current) {
+
+            window.aaUpdatePrice(priceElement, null);
+
+            routeElement.textContent =
+                "Choose a higher target rank";
+
+            return;
+
+        }
+
+
+        const total = computeTotal(current, target);
+
+        routeElement.textContent =
+            `${rankLabel(current)} → ${rankLabel(target)}`;
+
+        window.aaUpdatePrice(priceElement, total);
+
+    }
+
+
+    function orderBoost() {
+
+        const current =
+            parseInt(document.getElementById("currentRank").value);
+
+        const target =
+            parseInt(document.getElementById("targetRank").value);
+
+
+        if (target <= current) {
+
+            alert("Please select a higher target rank.");
+
+            return;
+
+        }
+
+
+        const total = computeTotal(current, target);
+
+        const route =
+            `${rankLabel(current)} → ${rankLabel(target)}`;
+
+
+        window.Basket.add(
+            `Rank Boosting (${selectedMode})`,
+            total,
+            route
+        );
+
+    }
+
+
+    updatePrice();
+
+</script>
+
+<script src="basket.js"></script>
+
+</body>
+</html>

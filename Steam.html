@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AERIALARC — Rocket League Steam Accounts</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(180deg, #fffaf0 0%, #000000 100%);
+            color: #111111;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+            top: -200px;
+            left: -150px;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+            bottom: -200px;
+            right: -150px;
+            z-index: -1;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            width: 100%;
+            padding: 25px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            background: rgba(255,250,240,0.78);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #111111;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 36px;
+            width: auto;
+            display: block;
+            cursor: pointer;
+            transition: opacity 280ms ease, transform 280ms ease;
+        }
+
+        .logo span {
+            opacity: 0.6;
+        }
+
+        .back {
+            text-decoration: none;
+            color: #111111;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .back:hover {
+            color: #444444;
+        }
+
+        .mode-btn {
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.06);
+            background: transparent;
+            cursor: pointer;
+            font-weight: 700;
+            color: #111111;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .mode-btn.active {
+            background: #111111;
+            color: #ffffff;
+        }
+
+        /* Dark mode styles */
+        .dark-mode { background: linear-gradient(180deg, #000000 0%, #000000 100%); color: #f5f5f5; }
+        .dark-mode nav { background: rgba(0,0,0,0.88); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .dark-mode .logo { color: #f5f5f5; }
+        .dark-mode .back { color: #d1d1d1; }
+        .dark-mode .back:hover { color: #ffffff; }
+        .dark-mode .mode-btn { color: #f5f5f5; border: 1px solid rgba(255,255,255,0.12); }
+        .dark-mode .mode-btn.active { background: #f5f5f5; color: #000000; }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+            padding: 120px 20px 60px;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 50px;
+            color: #777777;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 22px;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 72px);
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: #111111;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #888888;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 20px auto 0;
+            color: #6b6b6b;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .dark-mode .badge { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.12); color: #9a9a9a; }
+        .dark-mode .hero h1 { color: #ffffff; }
+        .dark-mode .hero h1 span { color: #b0b0b0; }
+        .dark-mode .hero p { color: #d0d0d0; }
+
+        /* MAIN */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding-bottom: 80px;
+            padding-top: 40px;
+        }
+
+        /* SELECTOR */
+
+        .selector {
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            backdrop-filter: blur(8px);
+        }
+
+        .selector-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            color: #111111;
+        }
+
+        .modes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .mode {
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.08);
+            border-radius: 12px;
+            color: #666666;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .mode small {
+            display: block;
+            font-size: 11px;
+            color: #999999;
+            margin-top: 5px;
+            font-weight: normal;
+        }
+
+        .mode:hover {
+            border-color: #111111;
+            color: #111111;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .mode.active {
+            background: #111111;
+            color: #ffffff;
+            border-color: #111111;
+        }
+
+        .mode.active small {
+            color: #cccccc;
+        }
+
+        .dark-mode .selector { background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        .dark-mode .selector-title { color: #ffffff; }
+        .dark-mode .mode { background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #d0d0d0; }
+        .dark-mode .mode small { color: #909090; }
+        .dark-mode .mode:hover { border-color: #ffffff; color: #ffffff; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .dark-mode .mode.active { background: #ffffff; color: #000000; border-color: #ffffff; }
+        .dark-mode .mode.active small { color: #444444; }
+
+        /* RANK SELECTORS */
+
+        .rank-selection {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 15px;
+            align-items: center;
+            margin-top: 30px;
+            margin-bottom: 25px;
+        }
+
+        .rank-box {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .rank-box label {
+            display: block;
+            color: #999999;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        select {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.06);
+            color: #111111;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            outline: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .arrow {
+            text-align: center;
+            color: #999999;
+            font-size: 24px;
+        }
+
+        .dark-mode .rank-box { background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); }
+        .dark-mode .rank-box label { color: #909090; }
+        .dark-mode select { background: #1a1a24; border: 1px solid rgba(255,255,255,0.1); color: #ffffff; }
+        .dark-mode .arrow { color: #707070; }
+
+        /* PRICE */
+
+        .price-card {
+            margin-top: 25px;
+            border-radius: 18px;
+            padding: 30px;
+            background: rgba(255,255,255,0.8);
+            border: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+        }
+
+        .price-info small {
+            color: #999999;
+            display: block;
+            margin-bottom: 8px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .price-info strong {
+            font-size: 20px;
+            color: #111111;
+            font-weight: 700;
+        }
+
+        .price {
+            font-size: 42px;
+            font-weight: 800;
+            color: #111111;
+        }
+
+        .order-btn {
+            border: none;
+            background: #111111;
+            color: #ffffff;
+            padding: 16px 34px;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+        }
+
+        .dark-mode .price-card { background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        .dark-mode .price-info small { color: #909090; }
+        .dark-mode .price-info strong { color: #ffffff; }
+        .dark-mode .price { color: #ffffff; }
+        .dark-mode .order-btn { background: #ffffff; color: #000000; }
+        .dark-mode .order-btn:hover { box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+
+        /* PRICING TABLE */
+
+        .pricing-section {
+            margin-top: 60px;
+        }
+
+        .section-heading {
+            margin-bottom: 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+        }
+
+        .section-heading p {
+            color: #777;
+            margin-top: 8px;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 18px;
+            border: 1px solid #222;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 700px;
+            background: #090909;
+        }
+
+        th {
+            background: #111;
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 18px;
+            text-align: left;
+        }
+
+        td {
+            padding: 19px 18px;
+            border-top: 1px solid #1c1c1c;
+            color: #ddd;
+        }
+
+        td:not(:first-child) {
+            font-weight: 800;
+        }
+
+        tr:hover td {
+            background: #0e0e0e;
+        }
+
+        .ssl {
+            color: #fff;
+        }
+
+        /* FEATURES */
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 60px;
+        }
+
+        .feature {
+            padding: 30px;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.06);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.08);
+        }
+
+        .feature-icon {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #111111;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .feature p {
+            color: #6b6b6b;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        .dark-mode .feature { background: rgba(40,40,50,0.8); border: 1px solid rgba(255,255,255,0.15); }
+        .dark-mode .feature:hover { box-shadow: 0 14px 40px rgba(0,0,0,0.3); }
+        .dark-mode .feature h3 { color: #ffffff; }
+        .dark-mode .feature p { color: #d0d0d0; }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            color: #999999;
+            background: rgba(255,250,240,0.4);
+            font-size: 13px;
+        }
+
+        .dark-mode footer { background: rgba(0,0,0,0.4); border-top: 1px solid rgba(255,255,255,0.08); color: #707070; }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 768px) {
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .modes {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .rank-selection {
+                grid-template-columns: 1fr;
+            }
+
+            .arrow {
+                transform: rotate(90deg);
+            }
+
+            .price-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .price {
+                font-size: 32px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 20px 5%;
+            }
+
+            .selector {
+                padding: 25px;
+            }
+        }
+
+/* STEAM ACCOUNT STORE */
+.market-section {
+    margin-top: 60px;
+}
+
+.config-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 20px;
+}
+
+.option-card {
+    appearance: none;
+    border: 1px solid rgba(0,0,0,0.08);
+    background: #ffffff;
+    color: #666666;
+    border-radius: 14px;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.25s;
+    width: 100%;
+}
+
+.option-card:hover {
+    transform: translateY(-2px);
+    border-color: #111;
+    box-shadow: 0 10px 22px rgba(0,0,0,0.07);
+}
+
+.option-card.active {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.option-card strong {
+    display: block;
+    color: inherit;
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+
+.option-card span {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.option-card.active span {
+    color: #cfcfcf;
+}
+
+.market-summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+    margin-top: 25px;
+    padding: 30px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.8);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.summary-small {
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.summary-title {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.summary-price {
+    font-size: 42px;
+    font-weight: 800;
+    color: #111;
+    white-space: nowrap;
+}
+
+.check-btn {
+    margin-top: 15px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    text-decoration: none;
+    background: #111;
+    color: #fff;
+    padding: 14px 22px;
+    border-radius: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.check-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+.market-note {
+    margin-top: 12px;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.sell-section {
+    margin-top: 60px;
+}
+
+.sell-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 38px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.62);
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+    backdrop-filter: blur(8px);
+}
+
+.sell-card h2 {
+    margin-top: 12px;
+    font-size: 30px;
+}
+
+.sell-card p {
+    max-width: 700px;
+    color: #6b6b6b;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.sell-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background: #111;
+    color: #fff;
+    padding: 16px 28px;
+    border-radius: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.sell-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.12);
+}
+
+.dark-mode .option-card {
+    background: #1a1a24;
+    border-color: rgba(255,255,255,0.1);
+    color: #d0d0d0;
+}
+
+.dark-mode .option-card:hover {
+    border-color: #fff;
+}
+
+.dark-mode .option-card.active {
+    background: #fff;
+    color: #000;
+    border-color: #fff;
+}
+
+.dark-mode .option-card.active span {
+    color: #444;
+}
+
+.dark-mode .market-summary,
+.dark-mode .sell-card {
+    background: rgba(40,40,50,0.8);
+    border-color: rgba(255,255,255,0.15);
+}
+
+.dark-mode .summary-price {
+    color: #fff;
+}
+
+.dark-mode .market-note,
+.dark-mode .sell-card p {
+    color: #d0d0d0;
+}
+
+.dark-mode .check-btn,
+.dark-mode .sell-btn {
+    background: #fff;
+    color: #000;
+}
+
+@media(max-width: 768px) {
+    .config-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .market-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-price {
+        font-size: 34px;
+    }
+
+    .sell-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 28px;
+    }
+
+    .sell-btn {
+        width: 100%;
+    }
+}
+            /* Currency select styles */
+            .currency-select{ position:relative; display:inline-block; }
+            .currency-toggle{
+                background:rgba(0,0,0,0.04); color:#111111;
+                border:1px solid rgba(0,0,0,0.1); padding:8px 12px;
+                border-radius:10px; cursor:pointer; font-weight:700;
+                display:inline-flex; align-items:center; gap:6px;
+            }
+            .currency-dropdown{
+                position:absolute; top:calc(100% + 10px); left:0;
+                background:rgba(0,0,0,0.9); border:1px solid rgba(255,255,255,0.06);
+                padding:8px; border-radius:10px; box-shadow:0 10px 30px rgba(0,0,0,0.5);
+                display:none; min-width:220px; z-index:40;
+            }
+            .currency-dropdown.open{ display:block; }
+            .currency-option{
+                display:block; background:transparent; color:#f5f5f5;
+                border:none; text-align:left; padding:8px 10px; width:100%;
+                cursor:pointer; border-radius:8px;
+            }
+            .currency-option:hover{ background:rgba(255,255,255,0.03); }
+            .flag{ width:20px; height:14px; object-fit:cover; margin-right:8px; vertical-align:middle; }
+            .dark-mode .currency-toggle{
+                background:rgba(255,255,255,0.06); color:#f5f5f5;
+                border:1px solid rgba(255,255,255,0.08);
+            }
+    </style>
+</head>
+
+<body>
+
+<nav>
+    <a href="index.html" class="logo">
+        <img src="aerialarc.png" alt="AERIALARC" class="logo-img">
+    </a>
+
+    <div style="display:flex; gap:8px; align-items:center;">
+        <div class="currency-select">
+            <button id="currencyToggle" class="currency-toggle"><img src="usa.webp" class="flag" alt="US"> USD</button>
+            <div id="currencyDropdown" class="currency-dropdown" aria-hidden="true">
+                <button class="currency-option" data-currency="USD"><img src="usa.webp" class="flag" alt="US"> United States Dollar (USD)</button>
+                <button class="currency-option" data-currency="BHD"><img src="bh.svg" class="flag" alt="BHD"> Bahraini Dinar (BHD)</button>
+                <button class="currency-option" data-currency="SAR"><img src="sa.png" class="flag" alt="SAR"> Saudi Riyal (SAR)</button>
+            </div>
+        </div>
+        <button id="lightModeBtn" class="mode-btn">Light</button>
+        <button id="darkModeBtn" class="mode-btn">Dark</button>
+    </div>
+</nav>
+
+<section class="hero">
+    <div>
+        <div class="badge">Steam Accounts</div>
+        <h1>Steam <span>Accounts.</span></h1>
+        <p>
+            Choose the Rocket League Steam account setup you want. Select Family Sharing,
+            Epic linking, and Legacy items to see an estimated AERIALARC price.
+        </p>
+    </div>
+</section>
+
+<div class="container">
+
+    <div class="selector">
+        <div class="selector-title">Configure your Steam account</div>
+
+        <div class="section-heading">
+            <p>Family Share</p>
+        </div>
+
+        <div class="config-grid" data-group="family">
+            <button class="option-card active" data-group="family" data-value="no">
+                <strong>No Family Share</strong>
+                <span>Steam account is intended to be used directly.</span>
+            </button>
+
+            <button class="option-card" data-group="family" data-value="yes">
+                <strong>Family Share</strong>
+                <span>Account is offered with a Family Sharing setup where applicable.</span>
+            </button>
+        </div>
+
+        <div class="section-heading" style="margin-top:28px;">
+            <p>Epic Games Link</p>
+        </div>
+
+        <div class="config-grid" data-group="epic">
+            <button class="option-card active" data-group="epic" data-value="no">
+                <strong>Not Linked</strong>
+                <span>Steam account is offered without an Epic Games link.</span>
+            </button>
+
+            <button class="option-card" data-group="epic" data-value="yes">
+                <strong>Epic Linked</strong>
+                <span>Steam account is offered with an existing Epic Games connection.</span>
+            </button>
+        </div>
+
+        <div class="section-heading" style="margin-top:28px;">
+            <p>Legacy Items</p>
+        </div>
+
+        <div class="config-grid" data-group="legacy">
+            <button class="option-card active" data-group="legacy" data-value="no">
+                <strong>Standard Inventory</strong>
+                <span>No specific Legacy inventory requirement.</span>
+            </button>
+
+            <button class="option-card" data-group="legacy" data-value="yes">
+                <strong>Legacy Items</strong>
+                <span>Includes Legacy-status Rocket League items where listed.</span>
+            </button>
+        </div>
+
+        <div class="market-summary">
+            <div>
+                <div class="summary-small">Estimated account price</div>
+                <div class="summary-title" id="selectionTitle">No Family Share · Not Linked · Standard Inventory</div>
+                <div class="market-note" id="selectionNote">
+                    Indicative marketplace pricing. Actual value depends on inventory quality,
+                    account history and exact contents.
+                </div>
+                <a class="check-btn" href="#" onclick="buySteamAccount(); return false;">
+                    Buy Now
+                </a>
+            </div>
+
+            <div class="summary-price" id="price" data-usd="133"><span class="price-amount">$133.00</span></div>
+        </div>
+
+    </div>
+
+    <section class="features">
+        <div class="feature">
+            <div class="feature-icon">🖥</div>
+            <h3>Steam Focused</h3>
+            <p>
+                Built specifically around Steam Rocket League accounts, with options
+                for different account setups.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">🔗</div>
+            <h3>Epic Linking</h3>
+            <p>
+                Choose whether your listing should be offered with an Epic Games
+                connection or without one.
+            </p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">✨</div>
+            <h3>Legacy Inventory</h3>
+            <p>
+                Legacy-status accounts can command a premium depending on the
+                exact inventory and account history.
+            </p>
+        </div>
+    </section>
+
+    <section class="sell-section">
+        <div class="sell-card">
+            <div>
+                <div class="badge">Steam Marketplace</div>
+                <h2>Want to list a Steam account?</h2>
+                <p>
+                    Submit an account for review with its Legacy status, inventory,
+                    Epic-link status and Family Sharing setup.
+                </p>
+            </div>
+
+            <a
+                class="sell-btn"
+                href="https://discord.gg/qEcN67Us"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Sell Account
+            </a>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    © 2026 AERIALARC. All rights reserved.
+</footer>
+
+<script>
+(() => {
+    const RATES = { USD: 1, BHD: 0.37625, SAR: 3.7625 };
+    let current = 'USD';
+
+    const toggle = document.getElementById('currencyToggle');
+    const dropdown = document.getElementById('currencyDropdown');
+    const options = document.querySelectorAll('.currency-option');
+    if(!toggle || !dropdown) return;
+
+    function formatPrice(usdValue, currency){
+        const val = (usdValue * (RATES[currency] || 1));
+        if(currency === 'USD') return `$${val.toFixed(2)}`;
+        if(currency === 'BHD') return `${val.toFixed(2)} BHD`;
+        if(currency === 'SAR') return `${val.toFixed(2)} SAR`;
+        return `${val.toFixed(2)}`;
+    }
+
+    window.aaFormatPrice = function(usd){ return formatPrice(usd, current); };
+
+    window.aaUpdatePrice = function(el, usd, naText){
+        if(usd == null){
+            el.dataset.usd = '';
+            const s = el.querySelector('.price-amount');
+            const t = naText || '—';
+            if(s){ s.textContent = t; } else { el.textContent = t; }
+            return;
+        }
+        el.dataset.usd = usd;
+        const s = el.querySelector('.price-amount');
+        if(s){ s.textContent = formatPrice(usd, current); } else { el.textContent = formatPrice(usd, current); }
+    };
+
+    function updatePrices(){
+        document.querySelectorAll('[data-usd]').forEach(el => {
+            const usd = parseFloat(el.getAttribute('data-usd'));
+            if(isNaN(usd)) return;
+            const span = el.querySelector('.price-amount');
+            if(span){ span.textContent = formatPrice(usd, current); } else { el.textContent = formatPrice(usd, current); }
+        });
+        if(toggle){
+            const label = (c) => {
+                if(c === 'USD') return `<img src="usa.webp" class="flag" alt="US"> USD`;
+                if(c === 'BHD') return `<img src="bh.svg" class="flag" alt="BHD"> BHD`;
+                return `<img src="sa.png" class="flag" alt="SAR"> SAR`;
+            };
+            toggle.innerHTML = label(current);
+        }
+    }
+
+    updatePrices();
+
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+    });
+
+    options.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const c = btn.getAttribute('data-currency');
+            if(c){ current = c; }
+            dropdown.classList.remove('open');
+            updatePrices();
+        });
+    });
+
+    document.addEventListener('click', (e) => {
+        if(!dropdown.contains(e.target) && e.target !== toggle){
+            dropdown.classList.remove('open');
+        }
+    });
+})();
+</script>
+
+<script>
+(function () {
+    const lightBtn = document.getElementById("lightModeBtn");
+    const darkBtn = document.getElementById("darkModeBtn");
+    const logoImg = document.querySelector(".logo img");
+
+    function applyTheme(theme) {
+        const dark = theme === "dark";
+        document.body.classList.toggle("dark-mode", dark);
+        lightBtn.classList.toggle("active", !dark);
+        darkBtn.classList.toggle("active", dark);
+
+        if (logoImg) {
+            logoImg.style.opacity = "0";
+            setTimeout(() => {
+                logoImg.src = dark ? "aerialarc2.png" : "aerialarc.png";
+                logoImg.style.opacity = "1";
+            }, 180);
+        }
+
+        try { localStorage.setItem("theme", theme); } catch (e) {}
+    }
+
+    lightBtn.addEventListener("click", () => applyTheme("light"));
+    darkBtn.addEventListener("click", () => applyTheme("dark"));
+
+    let savedTheme = "light";
+    try {
+        savedTheme = localStorage.getItem("theme") || "light";
+    } catch (e) {}
+    applyTheme(savedTheme);
+
+    const state = {
+        family: "no",
+        epic: "no",
+        legacy: "no"
+    };
+
+    const optionButtons = document.querySelectorAll(".option-card");
+    const priceEl = document.getElementById("price");
+    const titleEl = document.getElementById("selectionTitle");
+    const noteEl = document.getElementById("selectionNote");
+
+    const priceMatrix = {
+        "yes:no:yes": 35,
+        "no:no:yes": 150,
+        "yes:yes:yes": 27,
+        "no:yes:yes": null,
+        "yes:no:no": null,
+        "no:no:no": 133,
+        "no:yes:no": 105,
+        "yes:yes:no": null
+    };
+
+    function update() {
+        const family = state.family === "yes";
+        const epic = state.epic === "yes";
+        const legacy = state.legacy === "yes";
+
+        const price = priceMatrix[`${state.family}:${state.epic}:${state.legacy}`];
+
+        const familyLabel = family ? "Family Share" : "No Family Share";
+        const epicLabel = epic ? "Epic Linked" : "Not Linked";
+        const legacyLabel = legacy ? "Legacy Items" : "Standard Inventory";
+
+        titleEl.textContent = `${familyLabel} · ${epicLabel} · ${legacyLabel}`;
+        if (price === null) { window.aaUpdatePrice(priceEl, null, "N/A"); }
+        else { window.aaUpdatePrice(priceEl, price); }
+
+        noteEl.textContent =
+            "Indicative marketplace pricing. Actual value depends on inventory quality, account history and exact contents.";
+    }
+
+    function buySteamAccount() {
+        const family = state.family === "yes";
+        const epic = state.epic === "yes";
+        const legacy = state.legacy === "yes";
+        const price = priceMatrix[`${state.family}:${state.epic}:${state.legacy}`];
+
+        window.Basket.add(
+            "Steam Rocket League Account",
+            price,
+            `${family ? "Family Share" : "No Family Share"} · ${epic ? "Epic Linked" : "Not Linked"} · ${legacy ? "Legacy Items" : "Standard Inventory"}`
+        );
+    }
+
+    window.buySteamAccount = buySteamAccount;
+
+    optionButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const group = button.dataset.group;
+            const value = button.dataset.value;
+
+            document
+                .querySelectorAll(`.option-card[data-group="${group}"]`)
+                .forEach((item) => item.classList.remove("active"));
+
+            button.classList.add("active");
+            state[group] = value;
+            update();
+        });
+    });
+
+    update();
+})();
+</script>
+
+<script src="basket.js"></script>
+
+</body>
+
+</html>

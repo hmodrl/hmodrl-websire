@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>AERIALARC - Discord Services</title>
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+        <style>
+            *{
+                margin:0;
+                padding:0;
+                box-sizing:border-box;
+                scroll-behavior:smooth;
+            }
+
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                background: linear-gradient(180deg, #fffaf0 0%, #000000 100%);
+                color:#111111;
+                overflow-x:hidden;
+            }
+
+            body::before{
+                content:"";
+                position:fixed;
+                width:600px;
+                height:600px;
+                background:radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+                top:-200px;
+                left:-150px;
+                z-index:-1;
+            }
+
+            body::after{
+                content:"";
+                position:fixed;
+                width:500px;
+                height:500px;
+                background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+                bottom:-200px;
+                right:-150px;
+                z-index:-1;
+            }
+
+            header{
+                width:100%;
+                padding:25px 8%;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                position:fixed;
+                top:0;
+                z-index:1000;
+                background: rgba(255,250,240,0.78);
+                backdrop-filter: blur(8px);
+                border-bottom:1px solid rgba(0,0,0,0.06);
+            }
+
+            .logo{
+                font-size:28px;
+                font-weight:bold;
+                letter-spacing:2px;
+                color:#111111;
+            }
+
+            .logo img{ height:36px; width:auto; display:block; cursor:pointer; }
+
+            .header-actions{ display:flex; gap:8px; align-items:center; }
+            .mode-btn{ padding:6px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06); background:transparent; cursor:pointer; font-weight:700; color:#111111; }
+            .mode-btn.active{ background:#111111; color:#ffffff; }
+            .logo img{ transition:opacity 280ms ease, transform 280ms ease; }
+            .dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
+            .dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
+            .dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
+            .dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
+
+            nav a{
+                text-decoration:none;
+                color:#111111;
+                margin-left:30px;
+                transition:0.3s;
+                font-size:15px;
+            }
+
+            nav a:hover{
+                color:#444444;
+            }
+
+            .container{
+                width:90%;
+                max-width:1200px;
+                margin:120px auto 40px; /* account for fixed header */
+                padding:50px 0;
+            }
+
+            .section-title{
+                font-size:32px;
+                margin-bottom:18px;
+            }
+
+            .card{
+                background:rgba(255,255,255,0.04);
+                border:1px solid rgba(255,255,255,0.08);
+                border-radius:16px;
+                padding:20px;
+                transition:transform 0.35s cubic-bezier(.25,.8,.25,1), box-shadow 0.35s cubic-bezier(.25,.8,.25,1), opacity 0.35s ease;
+                transform:translateY(0);
+                will-change:transform, opacity;
+                opacity:0; /* start hidden for reveal */
+            }
+
+            .card:hover{
+                transform:translateY(-10px) scale(1.01);
+                box-shadow:0 30px 60px rgba(0,0,0,0.45);
+            }
+
+            .card .icon{
+                width:72px;
+                height:72px;
+                margin:0 auto 16px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                border-radius:50%;
+                background:rgba(255,255,255,0.05);
+            }
+
+            .card .icon i,
+            .card .icon img{
+                font-size:28px;
+                width:36px;
+                height:36px;
+                color:#fff;
+            }
+
+            .card h3{
+                margin-bottom:14px;
+                text-align:center;
+            }
+
+            .products{
+                display:grid;
+                grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+                gap:20px;
+            }
+
+            /* Currency select styles */
+            .currency-select{
+                position:relative;
+                display:inline-block;
+            }
+
+            .currency-toggle{
+                background:rgba(255,255,255,0.06);
+                color:#f5f5f5;
+                border:1px solid rgba(255,255,255,0.08);
+                padding:10px 14px;
+                border-radius:10px;
+                cursor:pointer;
+                font-weight:700;
+            }
+
+            .currency-dropdown{
+                position:absolute;
+                top:calc(100% + 10px);
+                left:0;
+                background:rgba(0,0,0,0.9);
+                border:1px solid rgba(255,255,255,0.06);
+                padding:8px;
+                border-radius:10px;
+                box-shadow:0 10px 30px rgba(0,0,0,0.5);
+                display:none;
+                min-width:220px;
+                z-index:40;
+            }
+
+            .currency-dropdown.open{ display:block; }
+
+            .currency-option{
+                display:block;
+                background:transparent;
+                color:#f5f5f5;
+                border:none;
+                text-align:left;
+                padding:8px 10px;
+                width:100%;
+                cursor:pointer;
+                border-radius:8px;
+            }
+
+            .currency-option:hover{ background:rgba(255,255,255,0.03); }
+            .flag{
+                width:20px;
+                height:14px;
+                object-fit:cover;
+                margin-right:8px;
+                vertical-align:middle;
+            }
+
+            .price{ color:#d8d8d8; margin:12px 0 }
+
+            .btn{ background:#ffffff; color:#000; padding:10px 14px; border-radius:10px; border:none; cursor:pointer; font-weight:bold; transition:transform 0.22s ease, box-shadow 0.22s ease; }
+
+            .btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(0,0,0,0.2); }
+
+            /* Reveal utility for smooth scroll animations */
+            .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.6s cubic-bezier(.2,.8,.2,1), transform 0.6s cubic-bezier(.2,.8,.2,1); }
+            .reveal.active{ opacity:1; transform:translateY(0); }
+
+            /* small controls */
+            .currency-btn, .boost-tab{ transition:background 0.25s ease, transform 0.18s ease; }
+            .currency-btn:hover, .boost-tab:hover{ transform:translateY(-3px); }
+
+            footer{
+                text-align:center;
+                padding:35px;
+                border-top:1px solid rgba(255,255,255,0.08);
+                color:#7e8ba3;
+                background:#040611;
+                margin-top:40px;
+            }
+            /* Boost cards layout */
+            .boost-buttons{ display:flex; gap:12px; justify-content:center; margin-bottom:28px; }
+
+            .boost-tab{
+                padding:10px 24px;
+                border-radius:16px;
+                background:#09090f;
+                border:1px solid rgba(255,255,255,0.08);
+                color:#d5d6e0;
+                cursor:pointer;
+                font-weight:700;
+                letter-spacing:0.01em;
+                transition:background 0.3s cubic-bezier(.25,.8,.25,1), border-color 0.3s cubic-bezier(.25,.8,.25,1), color 0.3s cubic-bezier(.25,.8,.25,1), text-shadow 0.3s cubic-bezier(.25,.8,.25,1);
+            }
+
+            .boost-tab.active{
+                background:rgba(44, 9, 75, 0.7);
+                border-color:#8b5cf6;
+                color:#ffffff;
+                text-shadow:0 0 18px rgba(227, 129, 255, 0.7);
+            }
+
+            .boost-grid{
+                display:grid;
+                grid-template-columns:repeat(4,1fr);
+                gap:24px;
+                align-items:start;
+            }
+
+            .boost-card{
+                background:rgba(7,7,15,0.96);
+                border:1px solid rgba(255,255,255,0.06);
+                border-radius:24px;
+                padding:32px 24px;
+                position:relative;
+                overflow:hidden;
+                transition:transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+                min-height:420px;
+            }
+
+            .boost-card:hover{ transform:translateY(-8px); box-shadow:0 30px 50px rgba(0,0,0,0.4); }
+
+            .boost-card h3{ font-size:22px; margin-bottom:12px; letter-spacing:-0.03em; }
+
+            .boost-badge{
+                position:absolute;
+                top:-10px;
+                left:50%;
+                transform:translateX(-50%);
+                background:#ff75d8;
+                color:#fff;
+                padding:9px 24px;
+                border-radius:999px;
+                font-size:11px;
+                font-weight:800;
++                letter-spacing:0.08em;
+                text-transform:uppercase;
+            }
+
+            .boost-price{ font-size:40px; font-weight:900; color:#e397ff; margin:16px 0 20px; letter-spacing:-0.02em; }
+
+            .boost-features{ list-style:none; padding:0; margin:0 0 28px; color:#c0c3d5; line-height:2.1 }
+
+            .boost-features li{ position:relative; padding-left:34px; margin-bottom:12px; }
+            .boost-features li::before{ content:'\2713'; position:absolute; left:0; top:2px; color:#de90ff; background:rgba(20, 16, 50, 0.85); width:22px; height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:11px; border:1px solid rgba(255,255,255,0.08); }
+
+            .purchase{ display:inline-block; width:100%; text-align:center; padding:16px 18px; border-radius:16px; background:rgba(255,255,255,0.04); border:1px solid rgba(112, 65, 255, 0.25); color:#fff; cursor:pointer; font-weight:800; letter-spacing:0.02em; transition:background 0.3s cubic-bezier(.25,.8,.25,1), transform 0.3s cubic-bezier(.25,.8,.25,1);
+            }
+
+            .purchase:hover{ transform:translateY(-2px); background:rgba(255,255,255,0.08); }
+
+            .purchase.primary{ background:linear-gradient(90deg,#7d47ff,#a53cff); border:none; box-shadow:0 14px 40px rgba(125,60,255,0.24); }
+
+            .boost-card.popular{ background:linear-gradient(180deg, rgba(81, 19, 134, 0.95), rgba(32, 6, 60, 0.98)); border:1px solid rgba(255,255,255,0.18); }
+
+            @media(max-width:960px){ .boost-grid{ grid-template-columns:repeat(2,1fr); } }
+            @media(max-width:560px){ .boost-grid{ grid-template-columns:1fr; } .boost-tab{ padding:10px 16px; } }
+        </style>
+</head>
+<body>
+
+<header>
+    <a href="index.html" class="logo"><img src="aerialarc.png" alt="AERIALARC" class="logo-img"></a>
+
+    <div style="display:flex; align-items:center; gap:20px;">
+        <nav>
+            <a href="index.html#features">Why Choose Us</a>
+            <a href="index.html#products">Products</a>
+            <a href="index.html#about">About</a>
+        </nav>
+
+        <div class="currency-select" style="margin-left:8px;">
+            <button id="currencyToggle" class="currency-toggle"><img src="usa.webp" class="flag" alt="US"> USD</button>
+            <div id="currencyDropdown" class="currency-dropdown" aria-hidden="true">
+                <button class="currency-option" data-currency="USD"><img src="usa.webp" class="flag" alt="US"> United States Dollar (USD)</button>
+                <button class="currency-option" data-currency="BHD"><img src="bh.svg" class="flag" alt="BHD"> Bahraini Dinar (BHD)</button>
+                <button class="currency-option" data-currency="SAR"><img src="sa.png" class="flag" alt="SAR"> Saudi Riyal (SAR)</button>
+            </div>
+        </div>
+
+        <div class="header-actions" style="margin-left:8px;">
+            <button id="lightModeBtn" class="mode-btn">Light</button>
+            <button id="darkModeBtn" class="mode-btn">Dark</button>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- Currency selector moved to header -->
+
+    <h2 class="section-title">Nitro Gaming</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <div class="icon">
+                <i class="fa-brands fa-discord"></i>
+            </div>
+            <h3>1 Month Nitro</h3>
+            <div class="price">Price: N/A</div>
+            <button class="btn" onclick="Basket.add('Discord Nitro — 1 Month', null, 'Nitro subscription')">Buy</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">
+                <i class="fa-brands fa-discord"></i>
+            </div>
+            <h3>1 Year Nitro</h3>
+            <div class="price">Price: N/A</div>
+            <button class="btn" onclick="Basket.add('Discord Nitro — 1 Year', null, 'Nitro subscription')">Buy</button>
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <h2 class="section-title">Discord Server Members</h2>
+
+    <div class="products">
+
+        <div class="card">
+            <div class="icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <h3>500 Discord Members Offline</h3>
+            <div class="price" data-usd="8"><span class="price-amount"></span></div>
+            <button class="btn" onclick="Basket.add('500 Discord Members Offline', 8, 'Members package')">Buy</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <h3>500 Discord Members Online</h3>
+            <div class="price" data-usd="16"><span class="price-amount"></span></div>
+            <button class="btn" onclick="Basket.add('500 Discord Members Online', 16, 'Members package')">Buy</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <h3>250 Online + 1000 Offline</h3>
+            <div class="price" data-usd="21.25"><span class="price-amount"></span></div>
+            <button class="btn" onclick="Basket.add('250 Online + 1000 Offline', 21.25, 'Members package')">Buy</button>
+        </div>
+
+        <div class="card">
+            <div class="icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <h3>800 Online + 2000 Offline</h3>
+            <div class="price" data-usd="39.84"><span class="price-amount"></span></div>
+            <button class="btn" onclick="Basket.add('800 Online + 2000 Offline', 39.84, 'Members package')">Buy</button>
+        </div>
+
+    </div>
+
+    <br><br>
+
+    <h2 class="section-title">Discord Accounts</h2>
+
+    <div class="accounts-box">
+        No Discord accounts available at the moment.
+    </div>
+
+    <br><br>
+
+    <h2 class="section-title">Discord Boosts</h2>
+
+    <div class="boost-buttons">
+        <button class="boost-tab active" onclick="showBoosts('month1', this)">1Month</button>
+        <button class="boost-tab" onclick="showBoosts('month3', this)">3Months</button>
+    </div>
+
+    <div id="month1" class="boost-grid">
+
+        <div class="boost-card">
+            <h3>4 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="1"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Instant Delivery</li>
+                <li>24/7 Support</li>
+            </ul>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 4 Boosts', 1, '30 days warranty')">PurchaseNow</button>
+        </div>
+
+        <div class="boost-card">
+            <h3>8 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="2"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Instant Delivery</li>
+                <li>24/7 Support</li>
+            </ul>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 8 Boosts', 2, '30 days warranty')">PurchaseNow</button>
+        </div>
+
+        <div class="boost-card popular">
+            <h3>14 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="3.5"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Instant Delivery</li>
+                <li>24/7 Support</li>
+                <li>Priority Support</li>
+            </ul>
+            <button class="purchase primary" onclick="Basket.add('Discord Boosts (1 Month) — 14 Boosts', 3.5, 'Priority support')">PurchaseNow</button>
+        </div>
+
+        <div class="boost-card">
+            <h3>30 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="6.99"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Instant Delivery</li>
+                <li>Priority Support</li>
+            </ul>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 30 Boosts', 6.99, 'Priority support')">PurchaseNow</button>
+        </div>
+
+    </div>
+
+    <div id="month3" class="boost-grid" style="display:none;">
+
+        <div class="boost-card">
+            <h3>4 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="2.2"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Instant Delivery</li>
+            </ul>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 4 Boosts', 2.2, '30 days warranty')">PurchaseNow</button>
+        </div>
+
+        <div class="boost-card">
+            <h3>8 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="4.4"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Instant Delivery</li>
+            </ul>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 8 Boosts', 4.4, '30 days warranty')">PurchaseNow</button>
+        </div>
+
+        <div class="boost-card popular">
+            <h3>14 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="7"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Instant Delivery</li>
+                <li>Priority Support</li>
+            </ul>
+            <button class="purchase primary" onclick="Basket.add('Discord Boosts (3 Months) — 14 Boosts', 7, 'Priority support')">PurchaseNow</button>
+        </div>
+
+        <div class="boost-card">
+            <h3>30 Boosts</h3>
+            <div class="boost-price"><div class="price" data-usd="13.98"><span class="price-amount"></span></div></div>
+            <ul class="boost-features">
+                <li>30 Days Warranty</li>
+                <li>Priority Support</li>
+            </ul>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 30 Boosts', 13.98, 'Priority support')">PurchaseNow</button>
+        </div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2025 AERIALARC. All rights reserved.
+</footer>
+
+<script>
+function showBoosts(type, btnElem){
+
+    document.getElementById("month1").style.display = "none";
+    document.getElementById("month3").style.display = "none";
+
+    document.getElementById(type).style.display = "grid";
+
+    document.querySelectorAll(".boost-tab").forEach(btn=>{
+        btn.classList.remove("active");
+    });
+
+    if(btnElem) btnElem.classList.add("active");
+}
+</script>
+
+<script>
+    (function(){
+        const lightBtn = document.getElementById('lightModeBtn');
+        const darkBtn = document.getElementById('darkModeBtn');
+        if(!lightBtn || !darkBtn) return;
+        const logoImg = document.querySelector('.logo img');
+        function applyTheme(theme){
+            if(theme==='dark'){
+                document.body.classList.add('dark-mode');
+                darkBtn.classList.add('active'); lightBtn.classList.remove('active');
+                if(logoImg){ logoImg.style.opacity=0; setTimeout(()=>{ logoImg.src='aerialarc2.png'; logoImg.style.opacity=1; },180); }
+            } else {
+                document.body.classList.remove('dark-mode');
+                lightBtn.classList.add('active'); darkBtn.classList.remove('active');
+                if(logoImg){ logoImg.style.opacity=0; setTimeout(()=>{ logoImg.src='aerialarc.png'; logoImg.style.opacity=1; },180); }
+            }
+            try{ localStorage.setItem('theme', theme); }catch(e){}
+        }
+        lightBtn.addEventListener('click', ()=>applyTheme('light'));
+        darkBtn.addEventListener('click', ()=>applyTheme('dark'));
+        const saved = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        applyTheme(saved);
+    })();
+</script>
+
+<script>
+// Smooth reveal on scroll for .card and other sections
+document.addEventListener('DOMContentLoaded', function(){
+    const revealEls = document.querySelectorAll('.card, .section-title, .products, .container > h2');
+    revealEls.forEach(el => el.classList.add('reveal'));
+
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add('active');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, {threshold: 0.12});
+
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+});
+</script>
+
+<script>
+// Currency selector + price updater
+(() => {
+    const RATES = { USD: 1, BHD: 0.37625, SAR: 3.7625 };
+    let current = 'USD';
+
+    const toggle = document.getElementById('currencyToggle');
+    const dropdown = document.getElementById('currencyDropdown');
+    const options = document.querySelectorAll('.currency-option');
+
+    function formatPrice(usdValue, currency){
+        const val = (usdValue * (RATES[currency] || 1));
+        if(currency === 'USD') return `$${val.toFixed(2)}`;
+        if(currency === 'BHD') return `${val.toFixed(2)} BHD`;
+        if(currency === 'SAR') return `${val.toFixed(2)} SAR`;
+        return `${val.toFixed(2)}`;
+    }
+
+    function updatePrices(){
+        document.querySelectorAll('.price').forEach(el => {
+            const usd = parseFloat(el.getAttribute('data-usd')) || 0;
+            const span = el.querySelector('.price-amount');
+            if(span) span.textContent = formatPrice(usd, current);
+        });
+        // update toggle label with flag images
+        if(toggle){
+            const label = (c) => {
+                if(c === 'USD') return `<img src="usa.webp" class="flag" alt="US"> USD`;
+                if(c === 'BHD') return `<img src="bh.svg" class="flag" alt="BHD"> BHD`;
+                return `<img src="sa.png" class="flag" alt="SAR"> SAR`;
+            };
+            toggle.innerHTML = label(current);
+        }
+    }
+
+    // init
+    updatePrices();
+
+    // toggle dropdown
+    toggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.classList.toggle('open');
+    });
+
+    options.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const c = btn.getAttribute('data-currency');
+            if(c){ current = c; }
+            dropdown.classList.remove('open');
+            updatePrices();
+        });
+    });
+
+    // close when clicking outside
+    document.addEventListener('click', (e) => {
+        if(!dropdown.contains(e.target) && e.target !== toggle){
+            dropdown.classList.remove('open');
+        }
+    });
+})();
+</script>
+
+<script src="basket.js"></script>
+
+</body>
+</html>

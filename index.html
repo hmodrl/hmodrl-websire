@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AERIALARC STORE</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #fffaf0 0%, #000000 100%);
+      color:#111111;
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      width:600px;
+      height:600px;
+      background:radial-gradient(circle, rgba(255,255,255,0.12), transparent 70%);
+      top:-200px;
+      left:-150px;
+      z-index:-1;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      width:500px;
+      height:500px;
+      background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+      bottom:-200px;
+      right:-150px;
+      z-index:-1;
+    }
+
+    header{
+      width:100%;
+      padding:25px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      z-index:1000;
+      background: rgba(255,250,240,0.78);
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid rgba(0,0,0,0.06);
+    }
+
+    .logo{
+      font-size:28px;
+      font-weight:bold;
+      letter-spacing:2px;
+      color:#f5f5f5;
+    }
+
+    .logo img{
+      height:36px;
+      width:auto;
+      display:block;
+      cursor:pointer;
+      transition:opacity 280ms ease, transform 280ms ease;
+    }
+
+    .header-actions{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .mode-btn{
+      padding:6px 10px;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.06);
+      background:transparent;
+      cursor:pointer;
+      font-weight:700;
+      color:#111111;
+    }
+
+    .mode-btn.active{
+      background:#111111;
+      color:#ffffff;
+    }
+
+    /* Smooth transitions for theme change */
+    body, header, nav a, .hero h1, .hero p, .card, .card h3, .card p, .section-title, .section-subtitle, footer, .product-btn, .btn {
+      transition: background 400ms ease, color 400ms ease, border-color 400ms ease, box-shadow 400ms ease;
+    }
+
+    .dark-mode{ background: linear-gradient(180deg,#000000 0%, #000000 100%); color:#f5f5f5; }
+    .dark-mode header{ background: rgba(0,0,0,0.88); border-bottom:1px solid rgba(255,255,255,0.08); }
+    .dark-mode .mode-btn{ color:#f5f5f5; border:1px solid rgba(255,255,255,0.12); }
+    .dark-mode .mode-btn.active{ background:#f5f5f5; color:#000000; }
+
+    /* Invert text and important elements for dark mode */
+    .dark-mode nav a{ color:#f5f5f5; }
+    .dark-mode .hero h1{ color:#ffffff; }
+    .dark-mode .hero p{ color:#d0d0d0; }
+    .dark-mode .card h3, .dark-mode .card p, .dark-mode .section-title, .dark-mode .section-subtitle, .dark-mode footer, .dark-mode .product-btn, .dark-mode .btn{ color:#e6e6e6; }
+    .dark-mode .product-btn{ background:#111111; color:#ffffff; border-color: rgba(255,255,255,0.12); box-shadow:0 10px 30px rgba(0,0,0,0.4); }
+
+    /* Ensure hero buttons have black text in both themes and readable backgrounds */
+    #exploreBtn, #contactBtn { color:#111111 !important; }
+    /* In dark mode keep text black but make the button backgrounds light so text is readable */
+    .dark-mode #exploreBtn { color:#111111 !important; background: rgba(255,255,255,0.9) !important; border-color: rgba(0,0,0,0.06) !important; }
+    .dark-mode #contactBtn { color:#111111 !important; background: rgba(255,255,255,0.85) !important; border-color: rgba(0,0,0,0.06) !important; }
+
+    nav a{
+      text-decoration:none;
+      color:#111111;
+      margin-left:30px;
+      transition:0.3s;
+      font-size:15px;
+    }
+
+    nav a:hover{
+      color:#444444;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:120px 10%;
+    }
+
+    .hero-content{
+      max-width:900px;
+    }
+
+    .hero h1{
+      font-size:72px;
+      margin-bottom:20px;
+      color:#111111;
+      letter-spacing:2px;
+      line-height:1.05;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+
+    .hero p{
+      font-size:20px;
+      line-height:1.9;
+      color:#6b6b6b;
+      margin-bottom:40px;
+      max-width:760px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .buttons{
+      display:inline-flex;
+      justify-content:center;
+      gap:20px;
+      flex-wrap:wrap;
+      background: rgba(255,255,255,0.6);
+      padding:12px 18px;
+      border-radius:14px;
+      backdrop-filter: blur(8px);
+      border:1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      align-items:center;
+    }
+
+    .btn{
+      padding:16px 34px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:16px;
+      font-weight:bold;
+      transition:0.3s;
+      text-decoration:none;
+    }
+
+    .primary{
+      background:#ffffff;
+      color:#000000;
+      box-shadow:0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .primary:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 40px rgba(0,0,0,0.12);
+    }
+
+    .secondary{
+      background:transparent;
+      border:2px solid rgba(0,0,0,0.08);
+      color:#111111;
+    }
+
+    .secondary:hover{
+      background: rgba(255,255,255,0.9);
+      color:#000000;
+    }
+
+    /* Luxurious proximity animation styles */
+    .btn{
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.8), rgba(255,255,255,0.2), transparent);
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      transition: width 0.4s ease-out, height 0.4s ease-out;
+      opacity: 0;
+    }
+
+    .btn.proximity-active::before {
+      opacity: 1;
+      width: 200px;
+      height: 200px;
+    }
+
+    .btn.proximity-active {
+      transform: scale(1.08);
+      box-shadow: 0 20px 50px rgba(255,200,100,0.35), 0 0 40px rgba(255,215,0,0.25) !important;
+    }
+
+    #exploreBtn.proximity-active {
+      background: linear-gradient(135deg, #ffffff 0%, #fffacd 100%) !important;
+      box-shadow: 0 20px 50px rgba(255,200,100,0.4), 0 0 60px rgba(255,215,0,0.3) !important;
+    }
+
+    #contactBtn.proximity-active {
+      background: rgba(255,255,255,0.95) !important;
+      border-color: rgba(255,215,0,0.5) !important;
+      box-shadow: 0 20px 50px rgba(255,200,100,0.35), 0 0 40px rgba(255,215,0,0.2) !important;
+    }
+
+    /* Dark mode proximity animation styles */
+    .dark-mode .btn.proximity-active {
+      transform: scale(1.08);
+      box-shadow: 0 20px 50px rgba(255,200,100,0.35), 0 0 40px rgba(255,215,0,0.25) !important;
+    }
+
+    .dark-mode #exploreBtn.proximity-active {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, #fffacd 100%) !important;
+      box-shadow: 0 20px 50px rgba(255,200,100,0.4), 0 0 60px rgba(255,215,0,0.3) !important;
+    }
+
+    .dark-mode #contactBtn.proximity-active {
+      background: rgba(255,255,255,0.95) !important;
+      border-color: rgba(255,215,0,0.6) !important;
+      box-shadow: 0 20px 50px rgba(255,200,100,0.35), 0 0 40px rgba(255,215,0,0.2) !important;
+    }
+
+    section{
+      padding:100px 10%;
+    }
+
+    .section-title{
+      text-align:center;
+      font-size:42px;
+      margin-bottom:15px;
+    }
+
+    .section-subtitle{
+      text-align:center;
+      color:#d1d1d1;
+      margin-bottom:60px;
+      font-size:18px;
+    }
+
+    .features{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:360px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:20px;
+      padding:35px;
+      transition:0.3s;
+      backdrop-filter:blur(10px);
+    }
+
+    .card{
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      min-height:360px;
+      background:rgba(255,255,255,0.06);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:20px;
+      padding:35px;
+      transition:transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+      backdrop-filter:blur(10px);
+    }
+
+    .card:hover{
+      transform:translateY(-8px);
+      border-color:rgba(255,255,255,0.3);
+      box-shadow:0 30px 60px rgba(0,0,0,0.25);
+      background:rgba(255,255,255,0.08);
+    }
+
+    .card-icon{
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      background:rgba(255,255,255,0.18);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin-bottom:20px;
+      font-size:26px;
+      color:#ffffff;
+      box-shadow:0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .card h3{
+      font-size:24px;
+      margin-bottom:18px;
+      color:#ffffff;
+    }
+
+    .card p{
+      color:#d8d8d8;
+      line-height:1.8;
+      margin-bottom:25px;
+    }
+
+    .product-btn{
+      display:inline-block;
+      padding:12px 24px;
+      background:#ffffff;
+      border:1px solid rgba(255,255,255,0.18);
+      border-radius:12px;
+      color:#000000;
+      text-decoration:none;
+      transition:transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease, color 0.35s ease;
+      font-weight:bold;
+      box-shadow:0 10px 30px rgba(255,255,255,0.08);
+    }
+
+    .product-btn:hover{
+      transform:translateY(-4px) scale(1.02);
+      box-shadow:0 18px 40px rgba(255,255,255,0.14);
+      background:#f5f5f5;
+    }
+
+    .about{
+      text-align:center;
+      max-width:1000px;
+      margin:auto;
+    }
+
+    .about p{
+      color:#d8d8d8;
+      line-height:2;
+      margin-bottom:25px;
+      font-size:18px;
+    }
+
+    .contact-list{
+      list-style:none;
+      padding:0;
+      margin:30px auto 0;
+      max-width:520px;
+      display:grid;
+      gap:16px;
+    }
+
+    .contact-item{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+      background:rgba(255,255,255,0.04);
+      border:1px solid rgba(255,255,255,0.12);
+      border-radius:16px;
+      padding:18px 22px;
+    }
+
+    .contact-icon{
+      width:34px;
+      height:34px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      flex-shrink:0;
+      background:rgba(255,255,255,0.1);
+      border-radius:50%;
+    }
+
+    .contact-link{
+      color:#f5f5f5;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .contact-note{
+      color:#ff6b6b;
+      margin-top:16px;
+      max-width:560px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    footer{
+      text-align:center;
+      padding:35px;
+      border-top:1px solid rgba(255,255,255,0.08);
+      color:#7e8ba3;
+      background:#040611;
+    }
+
+    @media(max-width:768px){
+
+      .hero h1{
+        font-size:48px;
+      }
+
+      nav{
+        display:none;
+      }
+
+      .hero p{
+        font-size:17px;
+      }
+
+      .section-title{
+        font-size:34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <a href="index.html" class="logo"><img src="aerialarc.png" alt="AERIALARC" class="logo-img"></a>
+
+    <nav>
+      <a href="#features">Why Choose Us</a>
+      <a href="#products">Products</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="header-actions">
+      <button id="lightModeBtn" class="mode-btn">Light</button>
+      <button id="darkModeBtn" class="mode-btn">Dark</button>
+    </div>
+  </header>
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>AERIALARC STORE</h1>
+
+      <p>
+        AERIALARC pioneers the future of technology with cutting-edge solutions
+        that blend performance, security, and elegant design.
+        We're transforming ideas into reality for a smarter digital world.
+      </p>
+
+      <div class="buttons">
+
+        <a id="exploreBtn" href="#products" class="btn primary">
+          Explore Products
+        </a>
+
+        <a id="contactBtn" href="mailto:aerialarc.supp@gmail.com" class="btn secondary">
+          Contact Us
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="features">
+
+    <h2 class="section-title">Why Choose AERIALARC</h2>
+
+    <p class="section-subtitle">
+      Discover what sets us apart in the digital landscape
+    </p>
+
+    <div class="features">
+
+      <div class="card">
+        <div class="card-icon">⚡</div>
+        <h3>Lightning Fast</h3>
+
+        <p>
+          Our solutions are optimized for maximum speed and performance,
+          ensuring seamless user experiences even under heavy loads.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🛡️</div>
+        <h3>Secure & Reliable</h3>
+
+        <p>
+          Security is our top priority. We implement enterprise-grade
+          protection to keep your data safe and operations running smoothly.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <h3>Modern Design</h3>
+
+        <p>
+          We combine aesthetics with functionality to create visually stunning
+          interfaces that are intuitive and enjoyable to use.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="products">
+
+    <h2 class="section-title">Our Products</h2>
+
+    <p class="section-subtitle">
+      Explore our suite of innovative digital solutions
+    </p>
+
+    <div class="features">
+
+      <div class="card">
+
+        <h3>Rocket League Boosting and Accounts</h3>
+
+        <p>
+          Professional Rocket League boosting services to help you reach your
+          desired rank. Fast, secure, and guaranteed results with experienced
+          players.
+          <br><br>
+          Premium Rocket League accounts with exclusive items, high ranks,
+          and special cosmetics. Ready to play with instant delivery.
+        </p>
+
+        <a href="rank.html" class="product-btn">
+          View More
+        </a>
+
+      </div>
+
+      <!-- NitroMOD product removed -->
+
+      <div class="card">
+
+        <h3>Discord</h3>
+
+        <p>
+          Premium Discord solutions including server setup,
+          custom branding, moderation systems, automation tools,
+          and community enhancement services.
+        </p>
+
+        <a href="discord.html" class="product-btn">
+          View More
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section id="about">
+
+    <div class="about">
+
+      <h2 class="section-title">About AERIALARC</h2>
+
+      <p class="section-subtitle">
+        Our journey and vision for the future
+      </p>
+
+      <p>
+        Founded in 2025, AERIALARC emerged with a mission to revolutionize
+        the digital landscape through innovative solutions that empower users
+        and businesses alike.
+      </p>
+
+      <p>
+        We believe technology should be accessible, powerful, and beautiful.
+        That's why every product we develop is designed with the user at the
+        center, ensuring intuitive experiences and tangible value.
+      </p>
+
+      <p>
+        From gaming enhancements to productivity tools, we're committed to
+        delivering excellence in every aspect of our work.
+      </p>
+
+    </div>
+
+  </section>
+
+  <section id="contact">
+
+    <div class="about">
+
+      <h2 class="section-title">Contact Us</h2>
+
+      <p class="section-subtitle">
+        Reach out through your preferred channel
+      </p>
+
+      <ul class="contact-list">
+        <li class="contact-item">
+          <span class="contact-icon">
+            <img src="whatsapp.png" alt="WhatsApp" style="width:20px; height:20px; object-fit:contain;">
+          </span>
+          <a class="contact-link" href="https://wa.me/97334203541">+973 3420 3541</a>
+        </li>
+        <li class="contact-item">
+          <span class="contact-icon">
+            <img src="insta.webp" alt="Instagram" style="width:20px; height:20px; object-fit:contain;">
+          </span>
+          <a class="contact-link" href="https://instagram.com/hmodrl">hmodrl</a>
+        </li>
+        <li class="contact-item">
+          <span class="contact-icon">
+            <img src="discord.png" alt="Discord" style="width:20px; height:20px; object-fit:contain;">
+          </span>
+          <a class="contact-link" href="https://discord.gg/rmzz">discord.gg/rmzz</a>
+        </li>
+      </ul>
+
+      <p class="contact-note">
+        If the Discord link doesn't work, contact this username instead: <strong>h1od</strong>
+      </p>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2025 AERIALARC. All rights reserved.
+  </footer>
+
+  <script>
+    (function(){
+      const lightBtn = document.getElementById('lightModeBtn');
+      const darkBtn = document.getElementById('darkModeBtn');
+      const logoImg = document.querySelector('.logo img');
+      function applyTheme(theme){
+        if(theme==='dark'){
+          document.body.classList.add('dark-mode');
+          darkBtn.classList.add('active'); lightBtn.classList.remove('active');
+          if(logoImg){ logoImg.style.opacity=0; setTimeout(()=>{ logoImg.src='aerialarc2.png'; logoImg.style.opacity=1; },180); }
+        } else {
+          document.body.classList.remove('dark-mode');
+          lightBtn.classList.add('active'); darkBtn.classList.remove('active');
+          if(logoImg){ logoImg.style.opacity=0; setTimeout(()=>{ logoImg.src='aerialarc.png'; logoImg.style.opacity=1; },180); }
+        }
+        try{ localStorage.setItem('theme', theme); }catch(e){}
+      }
+      lightBtn.addEventListener('click', ()=>applyTheme('light'));
+      darkBtn.addEventListener('click', ()=>applyTheme('dark'));
+      const saved = localStorage.getItem('theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      applyTheme(saved);
+    })();
+
+    // Luxurious proximity animation for buttons
+    (function(){
+      const buttons = document.querySelectorAll('#exploreBtn, #contactBtn');
+      const proximityDistance = 120;
+
+      document.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        buttons.forEach(button => {
+          const rect = button.getBoundingClientRect();
+          const buttonCenterX = rect.left + rect.width / 2;
+          const buttonCenterY = rect.top + rect.height / 2;
+
+          const distance = Math.sqrt(
+            Math.pow(mouseX - buttonCenterX, 2) + 
+            Math.pow(mouseY - buttonCenterY, 2)
+          );
+
+          if(distance < proximityDistance){
+            button.classList.add('proximity-active');
+            
+            // Update glow position based on mouse
+            const angle = Math.atan2(mouseY - buttonCenterY, mouseX - buttonCenterX);
+            const glowX = Math.cos(angle) * (proximityDistance - distance) * 0.8;
+            const glowY = Math.sin(angle) * (proximityDistance - distance) * 0.8;
+            
+            button.style.setProperty('--glow-x', glowX + 'px');
+            button.style.setProperty('--glow-y', glowY + 'px');
+          } else {
+            button.classList.remove('proximity-active');
+          }
+        });
+      });
+    })();
+  </script>
+
+  <script src="basket.js"></script>
+</body>
+</html>
