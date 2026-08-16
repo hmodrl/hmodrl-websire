@@ -8,6 +8,37 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
+        <style>
+            .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s cubic-bezier(.25,.8,.25,1),transform 0.6s cubic-bezier(.25,.8,.25,1);}
+            .reveal.active{opacity:1;transform:translateY(0);}
+            .card,.boost-card{opacity:0;transform:translateY(24px);transition:opacity 0.5s cubic-bezier(.25,.8,.25,1),transform 0.5s cubic-bezier(.25,.8,.25,1),box-shadow 0.3s ease,border-color 0.3s ease;}
+            .card.visible,.boost-card.visible{opacity:1;transform:translateY(0);}
+            .card:hover,.boost-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,0.12);}
+            .dark-mode .card:hover,.dark-mode .boost-card:hover{box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+            .card .btn,.card .purchase{transition:all 0.3s cubic-bezier(.25,.8,.25,1);}
+            .card .btn:hover,.card .purchase:hover{transform:translateY(-2px) scale(1.02);}
+            .card .btn:active,.card .purchase:active{transform:translateY(0) scale(0.98);}
+            .boost-tab{transition:all 0.3s cubic-bezier(.25,.8,.25,1);}
+            .boost-tab:hover{transform:translateY(-2px);}
+            .boost-tab.active{transform:scale(1.05);}
+            .section-title{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;}
+            .section-title.visible{opacity:1;transform:translateY(0);}
+            .icon{transition:transform 0.3s ease;}
+            .card:hover .icon{transform:scale(1.1) rotate(-3deg);}
+            .boost-features li{opacity:0;transform:translateX(-12px);transition:opacity 0.3s ease,transform 0.3s ease;}
+            .boost-card.visible .boost-features li{opacity:1;transform:translateX(0);}
+            .boost-card.visible .boost-features li:nth-child(1){transition-delay:0.1s;}
+            .boost-card.visible .boost-features li:nth-child(2){transition-delay:0.18s;}
+            .boost-card.visible .boost-features li:nth-child(3){transition-delay:0.26s;}
+            .boost-card.visible .boost-features li:nth-child(4){transition-delay:0.34s;}
+            .accounts-box{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
+            .accounts-box.visible{opacity:1;transform:translateY(0);}
+            .boost-grid{animation:none;}
+            .boost-buttons{opacity:0;transform:translateY(16px);transition:opacity 0.4s ease,transform 0.4s ease;}
+            .boost-buttons.visible{opacity:1;transform:translateY(0);}
+            footer{opacity:0;transition:opacity 0.5s ease;}
+            footer.visible{opacity:1;}
+        </style>
 </head>
 <body class="page-discord">
 
@@ -245,21 +276,49 @@ function showBoosts(type, btnElem){
 <script src="scripts.js"></script>
 
 <script>
-// Smooth reveal on scroll for .card and other sections
 document.addEventListener('DOMContentLoaded', function(){
-    const revealEls = document.querySelectorAll('.card, .section-title, .products, .container > h2');
-    revealEls.forEach(el => el.classList.add('reveal'));
+    var sections=document.querySelectorAll('.section-title');
+    var cards=document.querySelectorAll('.card');
+    var boostCards=document.querySelectorAll('.boost-card');
+    var boostBtns=document.querySelector('.boost-buttons');
+    var accountsBox=document.querySelector('.accounts-box');
+    var footer=document.querySelector('footer');
 
-    const io = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
+    function staggerReveal(els,delay){
+        els.forEach(function(el,i){
+            el.style.transitionDelay=(i*delay)+'s';
+            el.classList.add('reveal');
+        });
+    }
+
+    staggerReveal(sections,0);
+    staggerReveal(cards,0.08);
+    staggerReveal(boostCards,0.08);
+    if(boostBtns)boostBtns.classList.add('reveal');
+    if(accountsBox)accountsBox.classList.add('reveal');
+    if(footer)footer.classList.add('reveal');
+
+    var io=new IntersectionObserver(function(entries,obs){
+        entries.forEach(function(entry){
             if(entry.isIntersecting){
-                entry.target.classList.add('active');
+                entry.target.classList.add('active','visible');
                 obs.unobserve(entry.target);
             }
         });
-    }, {threshold: 0.12});
+    },{threshold:0.08});
 
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+
+    var boostObserver=new IntersectionObserver(function(entries,obs){
+        entries.forEach(function(entry){
+            if(entry.isIntersecting){
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    },{threshold:0.1});
+
+    boostCards.forEach(function(c){boostObserver.observe(c);});
 });
 </script>
 
