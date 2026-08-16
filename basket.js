@@ -26,6 +26,15 @@
       .aab-icon:hover svg{transform:scale(1.1);}
       .aab-badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;padding:0 5px;border-radius:999px;background:#1a1a1a;color:#fff;font-size:10px;font-weight:700;display:none;align-items:center;justify-content:center;line-height:1;transition:transform 0.3s cubic-bezier(.34,1.56,.64,1);pointer-events:none;}
       .dark-mode .aab-badge{background:#fff;color:#111;}
+      .aab-toast{position:fixed;top:24px;left:24px;z-index:99999;display:flex;align-items:center;gap:12px;padding:16px 24px;background:#1a1a1a;color:#fff;border-radius:14px;font-size:14px;font-weight:600;box-shadow:0 8px 32px rgba(0,0,0,0.18);transform:translateX(-120%);opacity:0;transition:all 0.4s cubic-bezier(.25,.8,.25,1);pointer-events:none;max-width:min(360px,85vw);}
+      .dark-mode .aab-toast{background:#fff;color:#111;box-shadow:0 8px 32px rgba(0,0,0,0.4);}
+      .aab-toast.show{transform:translateX(0);opacity:1;}
+      .aab-toast-icon{width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;}
+      .dark-mode .aab-toast-icon{background:rgba(0,0,0,0.06);}
+      .aab-toast-text{flex:1;min-width:0;}
+      .aab-toast-name{font-weight:700;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+      .aab-toast-sub{font-size:12px;color:#999;margin-top:2px;font-weight:400;}
+      .dark-mode .aab-toast-sub{color:#777;}
     `;
     document.head.appendChild(style);
 
@@ -50,6 +59,20 @@
 
     updateBadge();
 
+    var toastTimeout=null;
+    function showToast(name,price){
+        var existing=document.querySelector('.aab-toast');
+        if(existing)existing.remove();
+        clearTimeout(toastTimeout);
+        var t=document.createElement('div');
+        t.className='aab-toast';
+        var priceText=price!=null?'$'+Number(price).toFixed(2):'';
+        t.innerHTML='<div class="aab-toast-icon">&#10003;</div><div class="aab-toast-text"><div class="aab-toast-name">'+name+'</div><div class="aab-toast-sub">Added to cart'+(priceText?' \u2022 '+priceText:'')+'</div></div>';
+        document.body.appendChild(t);
+        requestAnimationFrame(function(){requestAnimationFrame(function(){t.classList.add('show');})});
+        toastTimeout=setTimeout(function(){t.classList.remove('show');setTimeout(function(){t.remove();},400);},2500);
+    }
+
     window.Basket = {
         add: function (name, price, meta) {
             var items = load();
@@ -61,6 +84,7 @@
             });
             save(items);
             updateBadge();
+            showToast(name,price);
         },
         count: function () {
             return load().length;
