@@ -116,10 +116,11 @@
         .checkout-modal-note{font-size:13px;line-height:1.7;color:#888;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);padding:16px 18px;border-radius:14px;margin:20px 0;}
         body:not(.dark-mode) .checkout-modal-note{color:#666;background:rgba(0,0,0,0.02);border-color:rgba(0,0,0,0.04);}
         .checkout-modal-actions{display:flex;flex-direction:column;gap:12px;}
-        .checkout-modal-next,.checkout-modal-done{display:block;width:100%;padding:18px;background:#fff;color:#111;border:none;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.3s ease;font-family:inherit;}
+        .checkout-modal-next,.checkout-modal-done,.checkout-modal-discord{display:block;width:100%;padding:18px;border:none;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer;transition:all 0.3s ease;font-family:inherit;box-sizing:border-box;}
+        .checkout-modal-next,.checkout-modal-done{background:#fff;color:#111;}
         body:not(.dark-mode) .checkout-modal-next,body:not(.dark-mode) .checkout-modal-done{background:#1a1a1a;color:#fff;}
         .checkout-modal-next:hover,.checkout-modal-done:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,0.15);}
-        .checkout-modal-discord{display:block;width:100%;padding:18px;background:#5865f2;color:#fff;border:none;border-radius:14px;font-weight:700;font-size:15px;cursor:pointer;text-decoration:none;text-align:center;transition:all 0.3s ease;}
+        .checkout-modal-discord{background:#5865f2;color:#fff;text-decoration:none;text-align:center;}
         .checkout-modal-discord:hover{background:#4a56e0;transform:translateY(-2px);box-shadow:0 8px 24px rgba(88,101,242,0.3);}
         .checkout-modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,0.06);border:none;color:#888;width:36px;height:36px;border-radius:10px;cursor:pointer;font-size:15px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
         body:not(.dark-mode) .checkout-modal-close{background:rgba(0,0,0,0.04);color:#999;}
