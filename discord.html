@@ -11,31 +11,49 @@
         <style>
             .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s cubic-bezier(.25,.8,.25,1),transform 0.6s cubic-bezier(.25,.8,.25,1);}
             .reveal.active{opacity:1;transform:translateY(0);}
-            .card,.boost-card{opacity:0;transform:translateY(24px);transition:opacity 0.5s cubic-bezier(.25,.8,.25,1),transform 0.5s cubic-bezier(.25,.8,.25,1),box-shadow 0.3s ease,border-color 0.3s ease;}
-            .card.visible,.boost-card.visible{opacity:1;transform:translateY(0);}
-            .card:hover,.boost-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,0.12);}
-            .dark-mode .card:hover,.dark-mode .boost-card:hover{box-shadow:0 12px 40px rgba(0,0,0,0.4);}
-            .card .btn,.card .purchase{transition:all 0.3s cubic-bezier(.25,.8,.25,1);}
-            .card .btn:hover,.card .purchase:hover{transform:translateY(-2px) scale(1.02);}
-            .card .btn:active,.card .purchase:active{transform:translateY(0) scale(0.98);}
-            .boost-tab{transition:all 0.3s cubic-bezier(.25,.8,.25,1);}
-            .boost-tab:hover{transform:translateY(-2px);}
-            .boost-tab.active{transform:scale(1.05);}
-            .section-title{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;}
-            .section-title.visible{opacity:1;transform:translateY(0);}
+            .card{opacity:0;transform:translateY(24px);transition:opacity 0.5s cubic-bezier(.25,.8,.25,1),transform 0.5s cubic-bezier(.25,.8,.25,1),box-shadow 0.3s ease,border-color 0.3s ease;}
+            .card.visible{opacity:1;transform:translateY(0);}
+            .card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,0.12);}
+            .dark-mode .card:hover{box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+            .card .btn{transition:all 0.3s cubic-bezier(.25,.8,.25,1);}
+            .card .btn:hover{transform:translateY(-2px) scale(1.02);}
+            .card .btn:active{transform:translateY(0) scale(0.98);}
             .icon{transition:transform 0.3s ease;}
             .card:hover .icon{transform:scale(1.1) rotate(-3deg);}
-            .boost-features li{opacity:0;transform:translateX(-12px);transition:opacity 0.3s ease,transform 0.3s ease;}
-            .boost-card.visible .boost-features li{opacity:1;transform:translateX(0);}
-            .boost-card.visible .boost-features li:nth-child(1){transition-delay:0.1s;}
-            .boost-card.visible .boost-features li:nth-child(2){transition-delay:0.18s;}
-            .boost-card.visible .boost-features li:nth-child(3){transition-delay:0.26s;}
-            .boost-card.visible .boost-features li:nth-child(4){transition-delay:0.34s;}
+            .section-title{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;}
+            .section-title.visible{opacity:1;transform:translateY(0);}
             .accounts-box{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
             .accounts-box.visible{opacity:1;transform:translateY(0);}
-            .boost-grid{animation:none;}
-            .boost-buttons{opacity:0;transform:translateY(16px);transition:opacity 0.4s ease,transform 0.4s ease;}
-            .boost-buttons.visible{opacity:1;transform:translateY(0);}
+            .boost-buttons{display:flex;justify-content:center;gap:0;margin-bottom:40px;background:rgba(255,255,255,0.04);border-radius:12px;padding:4px;width:fit-content;margin-left:auto;margin-right:auto;border:1px solid rgba(255,255,255,0.06);}
+            .dark-mode .boost-buttons{background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.06);}
+            .boost-tab{padding:12px 32px;border:none;background:transparent;color:#888;font-size:15px;font-weight:600;cursor:pointer;border-radius:10px;transition:all 0.35s cubic-bezier(.25,.8,.25,1);font-family:inherit;position:relative;}
+            .boost-tab:hover{color:#ccc;}
+            .boost-tab.active{background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;box-shadow:0 4px 16px rgba(168,85,247,0.3);}
+            .boost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-bottom:60px;}
+            @media(max-width:900px){.boost-grid{grid-template-columns:repeat(2,1fr);}}
+            @media(max-width:520px){.boost-grid{grid-template-columns:1fr;}}
+            .boost-card{position:relative;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;opacity:0;transform:translateY(24px);transition:all 0.5s cubic-bezier(.25,.8,.25,1);}
+            .dark-mode .boost-card{background:rgba(255,255,255,0.02);border-color:rgba(255,255,255,0.06);}
+            .boost-card.visible{opacity:1;transform:translateY(0);}
+            .boost-card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,0.15);border-color:rgba(255,255,255,0.1);}
+            .dark-mode .boost-card:hover{box-shadow:0 12px 40px rgba(0,0,0,0.5);border-color:rgba(255,255,255,0.12);}
+            .boost-card.popular{background:linear-gradient(160deg,rgba(168,85,247,0.12),rgba(124,58,237,0.06),rgba(255,255,255,0.02));border-color:rgba(168,85,247,0.25);box-shadow:0 8px 32px rgba(168,85,247,0.08);}
+            .boost-card.popular:hover{box-shadow:0 16px 48px rgba(168,85,247,0.15);border-color:rgba(168,85,247,0.35);}
+            .popular-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;font-size:10px;font-weight:800;padding:5px 14px;border-radius:999px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;box-shadow:0 4px 12px rgba(236,72,153,0.3);}
+            .boost-card h3{font-size:22px;font-weight:800;letter-spacing:-0.3px;margin:0 0 8px;}
+            .boost-price{font-size:32px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px;background:linear-gradient(135deg,#f472b6,#c084fc);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+            .boost-duration{font-size:13px;color:#888;margin-bottom:24px;}
+            .dark-mode .boost-duration{color:#666;}
+            .boost-features{list-style:none;padding:0;margin:0 0 28px;flex:1;display:flex;flex-direction:column;gap:14px;}
+            .boost-features li{display:flex;align-items:center;gap:12px;font-size:14px;color:#aaa;}
+            .dark-mode .boost-features li{color:#999;}
+            .boost-features li .bf-icon{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;background:rgba(168,85,247,0.1);color:#a855f7;}
+            .boost-features li:last-child .bf-icon{background:rgba(168,85,247,0.15);}
+            .purchase{display:block;width:100%;padding:16px;background:transparent;color:#fff;border:1.5px solid rgba(168,85,247,0.3);border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.35s cubic-bezier(.25,.8,.25,1);font-family:inherit;letter-spacing:0.2px;margin-top:auto;}
+            .purchase:hover{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.5);transform:translateY(-2px);box-shadow:0 8px 24px rgba(168,85,247,0.12);}
+            .purchase:active{transform:translateY(0) scale(0.98);}
+            .purchase.primary{background:linear-gradient(135deg,#a855f7,#7c3aed);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(168,85,247,0.25);}
+            .purchase.primary:hover{box-shadow:0 8px 28px rgba(168,85,247,0.35);transform:translateY(-2px);}
             footer{opacity:0;transition:opacity 0.5s ease;}
             footer.visible{opacity:1;}
         </style>
@@ -161,47 +179,57 @@
 
         <div class="boost-card">
             <h3>4 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="3"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$3.00</div>
+            <div class="boost-duration">1 Month</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Instant Delivery</li>
-                <li>24/7 Support</li>
+                <li><span class="bf-icon">&#10003;</span>30 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 0</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
             </ul>
-            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 4 Boosts', 3, '30 days warranty')">PurchaseNow</button>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 4 Boosts', 3, '30 days warranty')">Purchase Now</button>
         </div>
 
         <div class="boost-card">
             <h3>8 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="5"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$5.00</div>
+            <div class="boost-duration">1 Month</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Instant Delivery</li>
-                <li>24/7 Support</li>
+                <li><span class="bf-icon">&#10003;</span>30 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 1</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
             </ul>
-            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 8 Boosts', 5, '30 days warranty')">PurchaseNow</button>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 8 Boosts', 5, '30 days warranty')">Purchase Now</button>
         </div>
 
         <div class="boost-card popular">
+            <div class="popular-badge">Most Popular</div>
             <h3>14 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="8"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$8.00</div>
+            <div class="boost-duration">1 Month</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Instant Delivery</li>
-                <li>24/7 Support</li>
-                <li>Priority Support</li>
+                <li><span class="bf-icon">&#10003;</span>30 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 2</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
+                <li><span class="bf-icon">&#9742;</span>Priority Support</li>
             </ul>
-            <button class="purchase primary" onclick="Basket.add('Discord Boosts (1 Month) — 14 Boosts', 8, 'Priority support')">PurchaseNow</button>
+            <button class="purchase primary" onclick="Basket.add('Discord Boosts (1 Month) — 14 Boosts', 8, 'Priority support')">Purchase Now</button>
         </div>
 
         <div class="boost-card">
             <h3>30 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="15"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$15.00</div>
+            <div class="boost-duration">1 Month</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Instant Delivery</li>
-                <li>Priority Support</li>
+                <li><span class="bf-icon">&#10003;</span>30 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 3</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
+                <li><span class="bf-icon">&#9742;</span>Priority Support</li>
             </ul>
-            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 30 Boosts', 15, 'Priority support')">PurchaseNow</button>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (1 Month) — 30 Boosts', 15, 'Priority support')">Purchase Now</button>
         </div>
 
     </div>
@@ -210,43 +238,57 @@
 
         <div class="boost-card">
             <h3>4 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="6"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$6.00</div>
+            <div class="boost-duration">3 Months</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Instant Delivery</li>
+                <li><span class="bf-icon">&#10003;</span>90 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 0</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
             </ul>
-            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 4 Boosts', 6, '30 days warranty')">PurchaseNow</button>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 4 Boosts', 6, '90 days warranty')">Purchase Now</button>
         </div>
 
         <div class="boost-card">
             <h3>8 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="10"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$10.00</div>
+            <div class="boost-duration">3 Months</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Instant Delivery</li>
+                <li><span class="bf-icon">&#10003;</span>90 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 1</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
             </ul>
-            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 8 Boosts', 10, '30 days warranty')">PurchaseNow</button>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 8 Boosts', 10, '90 days warranty')">Purchase Now</button>
         </div>
 
         <div class="boost-card popular">
+            <div class="popular-badge">Most Popular</div>
             <h3>14 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="20"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$20.00</div>
+            <div class="boost-duration">3 Months</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Instant Delivery</li>
-                <li>Priority Support</li>
+                <li><span class="bf-icon">&#10003;</span>90 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 2</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
+                <li><span class="bf-icon">&#9742;</span>Priority Support</li>
             </ul>
-            <button class="purchase primary" onclick="Basket.add('Discord Boosts (3 Months) — 14 Boosts', 20, 'Priority support')">PurchaseNow</button>
+            <button class="purchase primary" onclick="Basket.add('Discord Boosts (3 Months) — 14 Boosts', 20, 'Priority support')">Purchase Now</button>
         </div>
 
         <div class="boost-card">
             <h3>30 Boosts</h3>
-            <div class="boost-price"><div class="price" data-usd="45"><span class="price-amount"></span></div></div>
+            <div class="boost-price">$45.00</div>
+            <div class="boost-duration">3 Months</div>
             <ul class="boost-features">
-                <li>30 Days Warranty</li>
-                <li>Priority Support</li>
+                <li><span class="bf-icon">&#10003;</span>90 Days Warranty</li>
+                <li><span class="bf-icon">&#9889;</span>Instant Delivery</li>
+                <li><span class="bf-icon">&#9733;</span>Server Level 3</li>
+                <li><span class="bf-icon">&#9742;</span>24/7 Support</li>
+                <li><span class="bf-icon">&#9742;</span>Priority Support</li>
             </ul>
-            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 30 Boosts', 45, 'Priority support')">PurchaseNow</button>
+            <button class="purchase" onclick="Basket.add('Discord Boosts (3 Months) — 30 Boosts', 45, 'Priority support')">Purchase Now</button>
         </div>
 
     </div>
