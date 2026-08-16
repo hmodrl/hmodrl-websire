@@ -31,12 +31,12 @@
             .boost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:60px;}
             @media(max-width:900px){.boost-grid{grid-template-columns:repeat(2,1fr);}}
             @media(max-width:520px){.boost-grid{grid-template-columns:1fr;}}
-            .boost-card{position:relative;background:#0d0d0d;border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:30px 24px 28px;display:flex;flex-direction:column;opacity:0;transform:translateY(24px);transition:all 0.5s cubic-bezier(.25,.8,.25,1);min-height:380px;}
+            .boost-card{position:relative;background:#0d0d0d;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 22px 24px;display:flex;flex-direction:column;opacity:0;transform:translateY(24px);transition:all 0.5s cubic-bezier(.25,.8,.25,1);}
             .boost-card.visible{opacity:1;transform:translateY(0);}
             .boost-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,0.3);}
-            .boost-card.popular{background:linear-gradient(170deg,rgba(168,85,247,0.15) 0%,rgba(124,58,237,0.05) 40%,#0d0d0d 100%);border:1px solid rgba(168,85,247,0.3);box-shadow:0 0 40px rgba(168,85,247,0.08);}
-            .boost-card.popular:hover{box-shadow:0 0 50px rgba(168,85,247,0.12);}
-            .popular-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;font-size:9px;font-weight:800;padding:5px 14px;border-radius:0 0 10px 10px;letter-spacing:1.2px;text-transform:uppercase;white-space:nowrap;}
+            .boost-card.popular{background:linear-gradient(170deg,rgba(168,85,247,0.18) 0%,rgba(124,58,237,0.06) 50%,#0d0d0d 100%);border:1px solid rgba(168,85,247,0.3);box-shadow:0 0 40px rgba(168,85,247,0.1);padding-top:40px;z-index:1;}
+            .boost-card.popular:hover{box-shadow:0 0 50px rgba(168,85,247,0.15);}
+            .popular-badge{position:absolute;top:12px;right:20px;background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;font-size:8px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;}
             .boost-card h3{font-size:20px;font-weight:800;font-style:italic;letter-spacing:-0.2px;margin:0 0 6px;color:#fff;}
             .boost-price{font-size:30px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px;background:linear-gradient(135deg,#f472b6,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
             .boost-duration{font-size:13px;color:#666;margin-bottom:28px;}
