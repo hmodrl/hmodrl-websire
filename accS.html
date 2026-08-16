@@ -79,21 +79,6 @@
         </div>
     </div>
 
-    <section class="pricing-section">
-        <div class="section-heading">
-            <h2>Account pricing</h2>
-            <p>Example market-aligned tiers for ranked-ready accounts; final pricing can vary by inventory and account history.</p>
-        </div>
-        <div class="table-wrap">
-            <table>
-                <thead>
-                    <tr><th>Tier</th><th>Suggested Price</th><th>Availability</th></tr>
-                </thead>
-                <tbody id="pricingRows"></tbody>
-            </table>
-        </div>
-    </section>
-
     <section class="features">
         <div class="feature">
             <div class="feature-icon">⚡</div>
@@ -138,7 +123,6 @@ var rankSelect=document.getElementById('rankSelect');
 var platformSelect=document.getElementById('platformSelect');
 var priceEl=document.getElementById('price');
 var routeEl=document.getElementById('route');
-var rowsEl=document.getElementById('pricingRows');
 
 function updatePrice(){
     var ri=Number(rankSelect.value);
@@ -147,15 +131,6 @@ function updatePrice(){
     var total=base+(platform==='steam'?STEAM_EXTRA:0);
     routeEl.textContent=RANKS[ri].name+' \u2022 '+platformSelect.options[platformSelect.selectedIndex].text.replace(' (+$100)','');
     window.aaUpdatePrice(priceEl,total);
-}
-
-function renderTable(){
-    rowsEl.innerHTML='';
-    RANKS.forEach(function(r){
-        var tr=document.createElement('tr');
-        tr.innerHTML='<td>'+r.name+'</td><td>$'+r.price.toFixed(2)+'</td><td><span class="ssl">Available</span></td>';
-        rowsEl.appendChild(tr);
-    });
 }
 
 rankSelect.addEventListener('change',updatePrice);
@@ -173,7 +148,6 @@ function orderAccount(){
     );
 }
 
-renderTable();
 updatePrice();
 </script>
 
