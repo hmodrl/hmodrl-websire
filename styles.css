@@ -705,6 +705,9 @@
       object-fit:cover;
       border-radius:14px;
     }
+    body.page-rank .card-image .light-img{display:none;}
+    body.page-rank.dark-mode .card-image .dark-img{display:none;}
+    body.page-rank.dark-mode .card-image .light-img{display:block;}
     body.page-rank.dark-mode .card-image{
       background:rgba(255,255,255,0.06);
     }
