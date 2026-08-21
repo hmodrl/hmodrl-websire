@@ -6,6 +6,7 @@
   <title>AERIALARC — Log In</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box;}
     body{
@@ -16,7 +17,6 @@
     }
     body:not(.dark-mode){background:#f5f5f5;color:#1a1a1a;}
 
-    /* ── nav ── */
     nav{
       display:flex;align-items:center;justify-content:space-between;
       padding:16px 40px;border-bottom:1px solid rgba(255,255,255,0.06);
@@ -40,7 +40,6 @@
     .mode-btn:hover{background:rgba(255,255,255,0.08);color:#fff;transform:translateY(-1px);}
     body:not(.dark-mode) .mode-btn:hover{background:rgba(0,0,0,0.06);color:#1a1a1a;}
 
-    /* ── background glow ── */
     .bg-glow{
       position:fixed;width:600px;height:600px;border-radius:50%;
       background:radial-gradient(circle,rgba(168,85,247,0.08) 0%,transparent 70%);
@@ -50,7 +49,6 @@
     body:not(.dark-mode) .bg-glow{background:radial-gradient(circle,rgba(168,85,247,0.05) 0%,transparent 70%);}
     @keyframes glowPulse{from{opacity:0.6;transform:translateX(-50%) scale(1);}to{opacity:1;transform:translateX(-50%) scale(1.1);}}
 
-    /* ── card ── */
     .login-wrap{
       flex:1;display:flex;align-items:center;justify-content:center;padding:40px 20px;
       position:relative;z-index:1;
@@ -65,10 +63,7 @@
     body:not(.dark-mode) .login-card{background:#fff;border-color:rgba(0,0,0,0.08);box-shadow:0 8px 40px rgba(0,0,0,0.08);}
     @keyframes cardIn{to{opacity:1;transform:translateY(0);}}
 
-    /* ── staggered children ── */
-    .login-card>*{
-      opacity:0;transform:translateY(16px);
-    }
+    .login-card>*{opacity:0;transform:translateY(16px);}
     .login-card>*:nth-child(1){animation:elIn 0.5s 0.35s cubic-bezier(.25,.8,.25,1) forwards;}
     .login-card>*:nth-child(2){animation:elIn 0.5s 0.42s cubic-bezier(.25,.8,.25,1) forwards;}
     .login-card>*:nth-child(3){animation:elIn 0.5s 0.49s cubic-bezier(.25,.8,.25,1) forwards;}
@@ -76,54 +71,31 @@
     .login-card>*:nth-child(5){animation:elIn 0.5s 0.63s cubic-bezier(.25,.8,.25,1) forwards;}
     .login-card>*:nth-child(6){animation:elIn 0.5s 0.70s cubic-bezier(.25,.8,.25,1) forwards;}
     .login-card>*:nth-child(7){animation:elIn 0.5s 0.77s cubic-bezier(.25,.8,.25,1) forwards;}
-    .login-card>*:nth-child(8){animation:elIn 0.5s 0.84s cubic-bezier(.25,.8,.25,1) forwards;}
     @keyframes elIn{to{opacity:1;transform:translateY(0);}}
 
-    .login-card h1{
-      font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;text-align:center;
-    }
-    .login-card .subtitle{
-      font-size:14px;color:#888;text-align:center;margin-bottom:32px;
-    }
+    .login-card h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;text-align:center;}
+    .login-card .subtitle{font-size:14px;color:#888;text-align:center;margin-bottom:32px;}
     body:not(.dark-mode) .login-card .subtitle{color:#888;}
 
-    /* ── form ── */
     .form-group{margin-bottom:18px;}
-    .form-group label{
-      display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:#ccc;
-      transition:color 0.3s;
-    }
+    .form-group label{display:block;font-size:13px;font-weight:600;margin-bottom:7px;color:#ccc;}
     body:not(.dark-mode) .form-group label{color:#444;}
     .form-group input{
       width:100%;padding:14px 16px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.1);
       background:rgba(255,255,255,0.04);color:#e8e8e8;font-size:14px;
       font-family:inherit;transition:all 0.35s cubic-bezier(.25,.8,.25,1);outline:none;
     }
-    body:not(.dark-mode) .form-group input{
-      border-color:rgba(0,0,0,0.12);background:rgba(0,0,0,0.02);color:#1a1a1a;
-    }
-    .form-group input:focus{
-      border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.15);
-      transform:translateY(-1px);
-    }
+    body:not(.dark-mode) .form-group input{border-color:rgba(0,0,0,0.12);background:rgba(0,0,0,0.02);color:#1a1a1a;}
+    .form-group input:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.15);transform:translateY(-1px);}
     .form-group input::placeholder{color:#555;}
 
-    .form-options{
-      display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;
-      font-size:13px;
-    }
+    .form-options{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;font-size:13px;}
     .form-options label{display:flex;align-items:center;gap:6px;color:#aaa;cursor:pointer;}
     body:not(.dark-mode) .form-options label{color:#666;}
-    .form-options input[type="checkbox"]{
-      width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(255,255,255,0.15);
-      background:rgba(255,255,255,0.04);cursor:pointer;accent-color:#a855f7;
-      transition:transform 0.2s;
-    }
-    .form-options input[type="checkbox"]:hover{transform:scale(1.15);}
-    .form-options a{color:#a855f7;text-decoration:none;font-weight:500;transition:color 0.3s;}
+    .form-options input[type="checkbox"]{width:16px;height:16px;border-radius:4px;border:1.5px solid rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);cursor:pointer;accent-color:#a855f7;}
+    .form-options a{color:#a855f7;text-decoration:none;font-weight:500;}
     .form-options a:hover{color:#c084fc;text-decoration:underline;}
 
-    /* ── buttons ── */
     .btn-login{
       width:100%;padding:15px;border:none;border-radius:12px;
       background:linear-gradient(135deg,#a855f7,#7c3aed);color:#fff;
@@ -131,27 +103,39 @@
       transition:all 0.35s cubic-bezier(.25,.8,.25,1);
       font-family:inherit;margin-bottom:14px;position:relative;overflow:hidden;
     }
-    .btn-login::after{
-      content:'';position:absolute;top:50%;left:50%;width:0;height:0;
-      background:rgba(255,255,255,0.15);border-radius:50%;
-      transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s;
-    }
+    .btn-login::after{content:'';position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,0.15);border-radius:50%;transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s;}
     .btn-login:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(168,85,247,0.35);}
     .btn-login:hover::after{width:300px;height:300px;}
     .btn-login:active{transform:translateY(0) scale(0.98);}
-
-    .btn-login .spinner{
-      display:none;width:20px;height:20px;border:2.5px solid rgba(255,255,255,0.3);
-      border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;
-      margin:0 auto;
-    }
+    .btn-login .spinner{display:none;width:20px;height:20px;border:2.5px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.7s linear infinite;margin:0 auto;}
     .btn-login.loading .btn-text{display:none;}
     .btn-login.loading .spinner{display:block;}
     @keyframes spin{to{transform:rotate(360deg);}}
 
-    .divider{
-      display:flex;align-items:center;gap:14px;margin:22px 0;color:#555;font-size:13px;
+    .btn-back{background:none;border:none;color:#a855f7;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;padding:0;margin-bottom:16px;}
+    .btn-back:hover{color:#c084fc;}
+
+    .code-label{font-size:13px;color:#aaa;text-align:center;margin-bottom:16px;}
+    body:not(.dark-mode) .code-label{color:#666;}
+
+    .code-inputs{display:flex;gap:10px;justify-content:center;margin-bottom:24px;}
+    .code-inputs input{
+      width:52px;height:58px;border-radius:12px;border:1.5px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.04);color:#e8e8e8;font-size:22px;font-weight:700;
+      text-align:center;font-family:inherit;outline:none;
+      transition:all 0.3s cubic-bezier(.25,.8,.25,1);caret-color:#a855f7;
     }
+    body:not(.dark-mode) .code-inputs input{border-color:rgba(0,0,0,0.12);background:rgba(0,0,0,0.02);color:#1a1a1a;}
+    .code-inputs input:focus{border-color:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,0.15);transform:translateY(-2px);}
+    .code-inputs input.filled{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.04);}
+
+    .resend-row{text-align:center;font-size:13px;color:#888;margin-bottom:24px;}
+    body:not(.dark-mode) .resend-row{color:#888;}
+    .resend-row button{background:none;border:none;color:#a855f7;font-weight:600;cursor:pointer;font-family:inherit;font-size:13px;padding:0;}
+    .resend-row button:hover{color:#c084fc;}
+    .resend-row button:disabled{color:#555;cursor:default;}
+
+    .divider{display:flex;align-items:center;gap:14px;margin:22px 0;color:#555;font-size:13px;}
     body:not(.dark-mode) .divider{color:#bbb;}
     .divider::before,.divider::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.08);}
     body:not(.dark-mode) .divider::before,body:not(.dark-mode) .divider::after{background:rgba(0,0,0,0.08);}
@@ -162,58 +146,41 @@
       color:#e8e8e8;font-size:14px;font-weight:600;cursor:pointer;
       transition:all 0.35s cubic-bezier(.25,.8,.25,1);font-family:inherit;
       display:flex;align-items:center;justify-content:center;gap:10px;
-      position:relative;overflow:hidden;
     }
     body:not(.dark-mode) .btn-google{border-color:rgba(0,0,0,0.12);background:#fff;color:#1a1a1a;}
-    .btn-google::after{
-      content:'';position:absolute;top:50%;left:50%;width:0;height:0;
-      background:rgba(168,85,247,0.08);border-radius:50%;
-      transform:translate(-50%,-50%);transition:width 0.6s,height 0.6s;
-    }
-    .btn-google:hover{background:rgba(255,255,255,0.08);border-color:rgba(168,85,247,0.3);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.15);}
+    .btn-google:hover{background:rgba(255,255,255,0.08);border-color:rgba(168,85,247,0.3);transform:translateY(-2px);}
     body:not(.dark-mode) .btn-google:hover{background:#f8f8f8;}
-    .btn-google:hover::after{width:300px;height:300px;}
-    .btn-google:active{transform:translateY(0) scale(0.98);}
-    .btn-google svg{width:20px;height:20px;position:relative;z-index:1;}
+    .btn-google svg{width:20px;height:20px;}
     .btn-google span{position:relative;z-index:1;}
 
-    .signup-link{
-      text-align:center;margin-top:24px;font-size:13px;color:#888;
-    }
-    .signup-link a{color:#a855f7;text-decoration:none;font-weight:600;transition:color 0.3s;}
+    .signup-link{text-align:center;margin-top:24px;font-size:13px;color:#888;}
+    .signup-link a{color:#a855f7;text-decoration:none;font-weight:600;}
     .signup-link a:hover{color:#c084fc;text-decoration:underline;}
 
-    /* ── messages ── */
     .error-msg{
       display:none;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);
-      color:#ef4444;font-size:13px;padding:10px 14px;border-radius:10px;
-      margin-bottom:16px;text-align:center;
+      color:#ef4444;font-size:13px;padding:10px 14px;border-radius:10px;margin-bottom:16px;text-align:center;
     }
     .error-msg.show{display:block;animation:msgIn 0.4s ease,shake 0.4s 0.4s ease;}
-    .success-msg{
-      display:none;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.2);
-      color:#22c55e;font-size:13px;padding:10px 14px;border-radius:10px;
-      margin-bottom:16px;text-align:center;
-    }
-    .success-msg.show{display:block;animation:msgIn 0.4s ease;}
     @keyframes msgIn{from{opacity:0;transform:translateY(-8px) scale(0.96);}to{opacity:1;transform:translateY(0) scale(1);}}
     @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-6px);}75%{transform:translateX(6px);}}
 
-    /* ── page exit ── */
+    .step{display:none;}
+    .step.active{display:block;animation:stepFade 0.4s cubic-bezier(.25,.8,.25,1);}
+    @keyframes stepFade{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+
     body.exiting{animation:pageOut 0.4s cubic-bezier(.25,.8,.25,1) forwards;}
     @keyframes pageOut{to{opacity:0;transform:translateY(-20px) scale(0.97);}}
 
     @media(max-width:520px){
       .login-card{padding:36px 24px;border-radius:20px;}
       nav{padding:14px 20px;}
+      .code-inputs input{width:44px;height:50px;font-size:18px;}
     }
   </style>
 </head>
-
 <body class="page-login dark-mode">
-
   <div class="bg-glow"></div>
-
   <nav>
     <a href="index.html" class="logo"><img src="aerialarc.png" alt="AERIALARC" class="logo-img"></a>
     <div class="nav-right">
@@ -224,42 +191,56 @@
 
   <div class="login-wrap">
     <div class="login-card">
-      <h1>Welcome Back</h1>
-      <p class="subtitle">Log in to your AERIALARC account</p>
-
+      <h1 id="cardTitle">Welcome Back</h1>
+      <p class="subtitle" id="cardSubtitle">Log in to your AERIALARC account</p>
       <div class="error-msg" id="errorMsg"></div>
 
-      <form id="loginForm" onsubmit="return false;">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" placeholder="you@example.com" required autocomplete="email">
-        </div>
+      <div class="step active" id="step1">
+        <form id="loginForm" onsubmit="return false;">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="you@example.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+          </div>
+          <div class="form-options">
+            <label><input type="checkbox" id="rememberMe"> Remember me</label>
+            <a href="#">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn-login" id="loginBtn">
+            <span class="btn-text">Continue</span>
+            <div class="spinner"></div>
+          </button>
+        </form>
+        <div class="divider">or</div>
+        <button class="btn-google" id="googleBtn">
+          <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+          <span>Sign in with Google</span>
+        </button>
+        <div class="signup-link">Don't have an account? <a href="#">Sign up</a></div>
+      </div>
 
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password">
+      <div class="step" id="step2">
+        <button class="btn-back" id="backBtn">&larr; Back to login</button>
+        <p class="code-label">We sent a 6-digit code to <strong id="codeEmailDisplay"></strong></p>
+        <div class="code-inputs" id="codeInputs">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" autofocus>
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]">
         </div>
-
-        <div class="form-options">
-          <label><input type="checkbox" id="rememberMe"> Remember me</label>
-          <a href="#">Forgot password?</a>
+        <div class="resend-row">
+          <span id="resendTimer"></span>
+          <button id="resendBtn" style="display:none;">Resend code</button>
         </div>
-
-        <button type="submit" class="btn-login" id="loginBtn">
-          <span class="btn-text">Log In</span>
+        <button class="btn-login" id="verifyBtn">
+          <span class="btn-text">Verify &amp; Log In</span>
           <div class="spinner"></div>
         </button>
-      </form>
-
-      <div class="divider">or</div>
-
-      <button class="btn-google" id="googleBtn">
-        <svg viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-        <span>Sign in with Google</span>
-      </button>
-
-      <div class="signup-link">
-        Don't have an account? <a href="#">Sign up</a>
       </div>
     </div>
   </div>
@@ -267,12 +248,13 @@
   <script>
     (function(){
       var body=document.body;
+      emailjs.init('TBMyuXqKYB7PQBpqM');
+      var EMAILJS_SERVICE='service_2g1qfsi';
+      var EMAILJS_TEMPLATE='template_9d4ncci';
 
-      // Theme toggle
       var lightBtn=document.getElementById('lightModeBtn');
       var darkBtn=document.getElementById('darkModeBtn');
       var logo=document.querySelector('.logo-img');
-
       function setTheme(dark){
         if(dark){body.classList.add('dark-mode');if(logo)logo.src='aerialarc.png';}
         else{body.classList.remove('dark-mode');if(logo)logo.src='aerialarc2.png';}
@@ -282,103 +264,187 @@
       var saved=localStorage.getItem('aerialarc_theme');
       setTheme(saved!=='light');
 
-      // ── Handle Google OAuth callback ──
       var params=new URLSearchParams(window.location.search);
       var authCode=params.get('code');
       if(authCode){
-        // Google redirected back with an auth code
-        // For a static site, we can't exchange the code server-side
-        // Store the code and redirect
         localStorage.setItem('aerialarc_google_code',authCode);
         localStorage.setItem('aerialarc_login_method','google');
         window.history.replaceState({},document.title,window.location.pathname);
-        showSuccessMsg('Signed in with Google! Redirecting...');
+        showMsg('Signed in with Google! Redirecting...',false);
         setTimeout(function(){body.classList.add('exiting');setTimeout(function(){window.location.href='index.html';},400);},1000);
       }
 
-      function showSuccessMsg(msg){
+      var pendingCode='';
+      var pendingEmail='';
+      var resendInterval;
+
+      function showMsg(msg,isError){
         var el=document.getElementById('errorMsg');
         el.textContent=msg;
-        el.style.background='rgba(34,197,94,0.1)';
-        el.style.borderColor='rgba(34,197,94,0.2)';
-        el.style.color='#22c55e';
+        el.style.background=isError?'rgba(239,68,68,0.1)':'rgba(34,197,94,0.1)';
+        el.style.borderColor=isError?'rgba(239,68,68,0.2)':'rgba(34,197,94,0.2)';
+        el.style.color=isError?'#ef4444':'#22c55e';
         el.classList.add('show');
       }
+      function clearMsg(){document.getElementById('errorMsg').classList.remove('show');}
 
-      // ── Login form ──
-      var form=document.getElementById('loginForm');
-      var errorMsg=document.getElementById('errorMsg');
-      var loginBtn=document.getElementById('loginBtn');
-
-      function showError(msg){
-        errorMsg.textContent=msg;
-        errorMsg.style.background='rgba(239,68,68,0.1)';
-        errorMsg.style.borderColor='rgba(239,68,68,0.2)';
-        errorMsg.style.color='#ef4444';
-        errorMsg.classList.add('show');
+      function goToStep(n){
+        document.querySelectorAll('.step').forEach(function(s){s.classList.remove('active');});
+        document.getElementById('step'+n).classList.add('active');
+        if(n===2){
+          document.getElementById('cardTitle').textContent='Verify Your Email';
+          document.getElementById('cardSubtitle').textContent='Enter the code we sent you';
+          setTimeout(function(){document.querySelector('#step2 .code-inputs input').focus();},100);
+        }else{
+          document.getElementById('cardTitle').textContent='Welcome Back';
+          document.getElementById('cardSubtitle').textContent='Log in to your AERIALARC account';
+        }
       }
-      function clearMsgs(){errorMsg.classList.remove('show');}
+
+      function generateCode(){
+        return String(Math.floor(100000+Math.random()*900000));
+      }
+
+      function sendCode(email,cb){
+        pendingCode=generateCode();
+        pendingEmail=email;
+        var params={to_email:email,code:pendingCode,from_name:'AERIALARC'};
+        emailjs.send(EMAILJS_SERVICE,EMAILJS_TEMPLATE,params).then(function(){
+          if(cb)cb();
+        },function(err){
+          showMsg('Failed to send code. Please try again.',true);
+        });
+      }
+
+      function startResendTimer(){
+        var btn=document.getElementById('resendBtn');
+        var timer=document.getElementById('resendTimer');
+        btn.style.display='none';
+        var sec=60;
+        timer.textContent='Resend in '+sec+'s';
+        clearInterval(resendInterval);
+        resendInterval=setInterval(function(){
+          sec--;
+          if(sec<=0){
+            clearInterval(resendInterval);
+            timer.textContent='';
+            btn.style.display='inline';
+          }else{
+            timer.textContent='Resend in '+sec+'s';
+          }
+        },1000);
+      }
+
+      var form=document.getElementById('loginForm');
+      var loginBtn=document.getElementById('loginBtn');
 
       form.addEventListener('submit',function(e){
         e.preventDefault();
-        clearMsgs();
+        clearMsg();
         var email=document.getElementById('email').value.trim();
         var pass=document.getElementById('password').value;
-
-        if(!email||!pass){showError('Please fill in all fields.');return;}
-        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showError('Please enter a valid email address.');return;}
-        if(pass.length<6){showError('Password must be at least 6 characters.');return;}
+        if(!email||!pass){showMsg('Please fill in all fields.',true);return;}
+        if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showMsg('Please enter a valid email address.',true);return;}
+        if(pass.length<6){showMsg('Password must be at least 6 characters.',true);return;}
 
         loginBtn.classList.add('loading');
         loginBtn.disabled=true;
 
-        setTimeout(function(){
-          var users=JSON.parse(localStorage.getItem('aerialarc_users')||'{}');
-          if(users[email]){
-            if(users[email]===pass){
-              localStorage.setItem('aerialarc_current_user',email);
-              loginBtn.classList.remove('loading');
-              loginBtn.disabled=false;
-              errorMsg.textContent='Login successful! Redirecting...';
-              errorMsg.style.background='rgba(34,197,94,0.1)';
-              errorMsg.style.borderColor='rgba(34,197,94,0.2)';
-              errorMsg.style.color='#22c55e';
-              errorMsg.classList.add('show');
-              setTimeout(function(){body.classList.add('exiting');setTimeout(function(){window.location.href='index.html';},400);},800);
-            }else{
-              loginBtn.classList.remove('loading');
-              loginBtn.disabled=false;
-              showError('Incorrect password. Please try again.');
-            }
-          }else{
-            users[email]=pass;
-            localStorage.setItem('aerialarc_users',JSON.stringify(users));
-            localStorage.setItem('aerialarc_current_user',email);
-            loginBtn.classList.remove('loading');
-            loginBtn.disabled=false;
-            errorMsg.textContent='Account created and logged in! Redirecting...';
-            errorMsg.style.background='rgba(34,197,94,0.1)';
-            errorMsg.style.borderColor='rgba(34,197,94,0.2)';
-            errorMsg.style.color='#22c55e';
-            errorMsg.classList.add('show');
-            setTimeout(function(){body.classList.add('exiting');setTimeout(function(){window.location.href='index.html';},400);},800);
-          }
-        },800);
+        sendCode(email,function(){
+          loginBtn.classList.remove('loading');
+          loginBtn.disabled=false;
+          document.getElementById('codeEmailDisplay').textContent=email;
+          goToStep(2);
+          startResendTimer();
+          clearMsg();
+        });
       });
 
-      // ── Google sign-in (real redirect) ──
-      var GOOGLE_CLIENT_ID='441965061955-tmnd4hhl0npdldf6l4g1vrfvrnik9hsp.apps.googleusercontent.com';
-      var REDIRECT_URI='https://aerialarc.net/login.html';
-      var GOOGLE_AUTH_URL='https://accounts.google.com/o/oauth2/v2/auth'
-        +'?client_id='+encodeURIComponent(GOOGLE_CLIENT_ID)
-        +'&redirect_uri='+encodeURIComponent(REDIRECT_URI)
-        +'&response_type=code'
-        +'&scope='+encodeURIComponent('openid email profile')
-        +'&access_type=offline'
-        +'&prompt=select_account';
+      document.getElementById('resendBtn').addEventListener('click',function(){
+        sendCode(pendingEmail,function(){
+          startResendTimer();
+          showMsg('Code resent!',false);
+          setTimeout(clearMsg,2000);
+        });
+      });
+
+      document.getElementById('backBtn').addEventListener('click',function(){
+        goToStep(1);
+        clearMsg();
+        clearInterval(resendInterval);
+      });
+
+      var codeInputs=document.querySelectorAll('#codeInputs input');
+      codeInputs.forEach(function(inp,idx){
+        inp.addEventListener('input',function(e){
+          var val=e.target.value.replace(/[^0-9]/g,'');
+          e.target.value=val;
+          if(val){
+            e.target.classList.add('filled');
+            if(idx<5)codeInputs[idx+1].focus();
+          }else{
+            e.target.classList.remove('filled');
+          }
+          checkCodeComplete();
+        });
+        inp.addEventListener('keydown',function(e){
+          if(e.key==='Backspace'&&!e.target.value&&idx>0){
+            codeInputs[idx-1].focus();
+            codeInputs[idx-1].value='';
+            codeInputs[idx-1].classList.remove('filled');
+          }
+        });
+        inp.addEventListener('paste',function(e){
+          e.preventDefault();
+          var paste=(e.clipboardData||window.clipboardData).getData('text').replace(/[^0-9]/g,'').substring(0,6);
+          for(var i=0;i<paste.length&&i<6;i++){
+            codeInputs[i].value=paste[i];
+            codeInputs[i].classList.add('filled');
+          }
+          if(paste.length>0)codeInputs[Math.min(paste.length,5)].focus();
+          checkCodeComplete();
+        });
+      });
+
+      function getCode(){
+        var c='';
+        codeInputs.forEach(function(inp){c+=inp.value;});
+        return c;
+      }
+
+      function checkCodeComplete(){
+        if(getCode().length===6){
+          document.getElementById('verifyBtn').click();
+        }
+      }
+
+      document.getElementById('verifyBtn').addEventListener('click',function(){
+        clearMsg();
+        var entered=getCode();
+        if(entered.length<6){showMsg('Please enter the full 6-digit code.',true);return;}
+        if(entered!==pendingCode){showMsg('Incorrect code. Please try again.',true);codeInputs.forEach(function(i){i.value='';i.classList.remove('filled');});codeInputs[0].focus();return;}
+
+        var email=pendingEmail;
+        var pass=document.getElementById('password').value;
+        var users=JSON.parse(localStorage.getItem('aerialarc_users')||'{}');
+        users[email]=pass;
+        localStorage.setItem('aerialarc_users',JSON.stringify(users));
+        localStorage.setItem('aerialarc_current_user',email);
+        localStorage.setItem('aerialarc_verified','true');
+        showMsg('Verified! Redirecting...',false);
+        setTimeout(function(){body.classList.add('exiting');setTimeout(function(){window.location.href='index.html';},400);},800);
+      });
 
       document.getElementById('googleBtn').addEventListener('click',function(){
-        window.location.href=GOOGLE_AUTH_URL;
+        var GOOGLE_CLIENT_ID='441965061955-tmnd4hhl0npdldf6l4g1vrfvrnik9hsp.apps.googleusercontent.com';
+        var REDIRECT_URI='https://aerialarc.net/login.html';
+        window.location.href='https://accounts.google.com/o/oauth2/v2/auth'
+          +'?client_id='+encodeURIComponent(GOOGLE_CLIENT_ID)
+          +'&redirect_uri='+encodeURIComponent(REDIRECT_URI)
+          +'&response_type=code'
+          +'&scope='+encodeURIComponent('openid email profile')
+          +'&access_type=offline'
+          +'&prompt=select_account';
       });
     })();
   </script>
