@@ -1,4 +1,11 @@
 
+    .login-link{
+      padding:7px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;
+      background:rgba(168,85,247,0.15);color:#a855f7;border:1px solid rgba(168,85,247,0.3);
+      transition:all 0.3s;
+    }
+    .login-link:hover{background:rgba(168,85,247,0.25);transform:translateY(-1px);}
+
     body.page-index *{
       margin:0;
       padding:0;
