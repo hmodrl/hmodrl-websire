@@ -68,6 +68,16 @@
                     <option value="switch">Nintendo Switch</option>
                 </select>
             </div>
+
+            <div class="arrow">→</div>
+
+            <div class="rank-box">
+                <label>Account Type</label>
+                <select id="typeSelect">
+                    <option value="notready">Not Rank Ready</option>
+                    <option value="ready">Rank Ready (+$5)</option>
+                </select>
+            </div>
         </div>
 
         <div class="price-card">
@@ -120,32 +130,40 @@ var RANKS=[
 
 var STEAM_EXTRA=100;
 
+var RANK_READY_EXTRA=5;
+
 var rankSelect=document.getElementById('rankSelect');
 var platformSelect=document.getElementById('platformSelect');
+var typeSelect=document.getElementById('typeSelect');
 var priceEl=document.getElementById('price');
 var routeEl=document.getElementById('route');
 
 function updatePrice(){
     var ri=Number(rankSelect.value);
     var platform=platformSelect.value;
+    var type=typeSelect.value;
     var base=RANKS[ri].price;
-    var total=base+(platform==='steam'?STEAM_EXTRA:0);
-    routeEl.textContent=RANKS[ri].name+' \u2022 '+platformSelect.options[platformSelect.selectedIndex].text.replace(' (+$100)','');
+    var total=base+(platform==='steam'?STEAM_EXTRA:0)+(type==='ready'?RANK_READY_EXTRA:0);
+    var typeLabel=type==='ready'?'Rank Ready':'Not Rank Ready';
+    routeEl.textContent=RANKS[ri].name+' \u2022 '+platformSelect.options[platformSelect.selectedIndex].text.replace(' (+$100)','')+' \u2022 '+typeLabel;
     window.aaUpdatePrice(priceEl,total);
 }
 
 rankSelect.addEventListener('change',updatePrice);
 platformSelect.addEventListener('change',updatePrice);
+typeSelect.addEventListener('change',updatePrice);
 
 function orderAccount(){
     var ri=Number(rankSelect.value);
     var platform=platformSelect.value;
+    var type=typeSelect.value;
     var base=RANKS[ri].price;
-    var total=base+(platform==='steam'?STEAM_EXTRA:0);
+    var total=base+(platform==='steam'?STEAM_EXTRA:0)+(type==='ready'?RANK_READY_EXTRA:0);
+    var typeLabel=type==='ready'?'Rank Ready':'Not Rank Ready';
     window.Basket.add(
         'Rocket League Smurf Account',
         total,
-        RANKS[ri].name+' \u2022 '+platformSelect.options[platformSelect.selectedIndex].text.replace(' (+$100)','')
+        RANKS[ri].name+' \u2022 '+platformSelect.options[platformSelect.selectedIndex].text.replace(' (+$100)','')+' \u2022 '+typeLabel
     );
 }
 
