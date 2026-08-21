@@ -63,14 +63,14 @@
     body:not(.dark-mode) .login-card{background:#fff;border-color:rgba(0,0,0,0.08);box-shadow:0 8px 40px rgba(0,0,0,0.08);}
     @keyframes cardIn{to{opacity:1;transform:translateY(0);}}
 
-    .login-card>*{opacity:0;transform:translateY(16px);}
-    .login-card>*:nth-child(1){animation:elIn 0.5s 0.35s cubic-bezier(.25,.8,.25,1) forwards;}
-    .login-card>*:nth-child(2){animation:elIn 0.5s 0.42s cubic-bezier(.25,.8,.25,1) forwards;}
-    .login-card>*:nth-child(3){animation:elIn 0.5s 0.49s cubic-bezier(.25,.8,.25,1) forwards;}
-    .login-card>*:nth-child(4){animation:elIn 0.5s 0.56s cubic-bezier(.25,.8,.25,1) forwards;}
-    .login-card>*:nth-child(5){animation:elIn 0.5s 0.63s cubic-bezier(.25,.8,.25,1) forwards;}
-    .login-card>*:nth-child(6){animation:elIn 0.5s 0.70s cubic-bezier(.25,.8,.25,1) forwards;}
-    .login-card>*:nth-child(7){animation:elIn 0.5s 0.77s cubic-bezier(.25,.8,.25,1) forwards;}
+    .login-card>*:not(.step){opacity:0;transform:translateY(16px);}
+    .login-card>*:not(.step):nth-child(1){animation:elIn 0.5s 0.35s cubic-bezier(.25,.8,.25,1) forwards;}
+    .login-card>*:not(.step):nth-child(2){animation:elIn 0.5s 0.42s cubic-bezier(.25,.8,.25,1) forwards;}
+    .login-card>*:not(.step):nth-child(3){animation:elIn 0.5s 0.49s cubic-bezier(.25,.8,.25,1) forwards;}
+    .login-card>*:not(.step):nth-child(4){animation:elIn 0.5s 0.56s cubic-bezier(.25,.8,.25,1) forwards;}
+    .login-card>*:not(.step):nth-child(5){animation:elIn 0.5s 0.63s cubic-bezier(.25,.8,.25,1) forwards;}
+    .login-card>*:not(.step):nth-child(6){animation:elIn 0.5s 0.70s cubic-bezier(.25,.8,.25,1) forwards;}
+    .login-card>*:not(.step):nth-child(7){animation:elIn 0.5s 0.77s cubic-bezier(.25,.8,.25,1) forwards;}
     @keyframes elIn{to{opacity:1;transform:translateY(0);}}
 
     .login-card h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;text-align:center;}
