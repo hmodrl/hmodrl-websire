@@ -367,7 +367,7 @@
       });
 
       // ── Google sign-in (real redirect) ──
-      var GOOGLE_CLIENT_ID='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+      var GOOGLE_CLIENT_ID='441965061955-tmnd4hhl0npdldf6l4g1vrfvrnik9hsp.apps.googleusercontent.com';
       var REDIRECT_URI='https://aerialarc.net/login.html';
       var GOOGLE_AUTH_URL='https://accounts.google.com/o/oauth2/v2/auth'
         +'?client_id='+encodeURIComponent(GOOGLE_CLIENT_ID)
@@ -378,10 +378,6 @@
         +'&prompt=select_account';
 
       document.getElementById('googleBtn').addEventListener('click',function(){
-        if(GOOGLE_CLIENT_ID==='YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com'){
-          showError('Google Sign-In is not configured yet. Please add your Google Client ID.');
-          return;
-        }
         window.location.href=GOOGLE_AUTH_URL;
       });
     })();
