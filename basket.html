@@ -129,7 +129,10 @@
         .checkout-modal-step{display:none;}
         .checkout-modal-step.active{display:block;animation:stepIn 0.35s ease;}
         @keyframes stepIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
-    </style>
+    
+.login-link:hover{background:rgba(168,85,247,0.25);border-color:rgba(168,85,247,0.5);transform:translateY(-1px);}
+.dark-mode .login-link:hover{background:rgba(168,85,247,0.25);}
+</style>
 </head>
 
 <body class="page-basket">
@@ -145,6 +148,7 @@
                 <button class="currency-option" data-currency="SAR"><img src="sa.png" class="flag" alt="SAR"> Saudi Riyal (SAR)</button>
             </div>
         </div>
+        <a href="login.html" class="login-link" style="padding:7px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;background:rgba(168,85,247,0.15);color:#a855f7;border:1px solid rgba(168,85,247,0.3);transition:all 0.3s;">Log In</a>
         <button id="lightModeBtn" class="mode-btn">Light</button>
         <button id="darkModeBtn" class="mode-btn">Dark</button>
     </div>
