@@ -1,10 +1,13 @@
 
     .login-link{
-      padding:6px 10px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;
-      background:transparent;color:#a855f7;border:1px solid rgba(168,85,247,0.3);
+      padding:6px 12px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:700;
+      background:transparent;color:#a855f7;border:1px solid rgba(0,0,0,0.06);
       transition:all 0.3s;font-family:inherit;display:inline-flex;align-items:center;
+      line-height:1.4;white-space:nowrap;
     }
-    .login-link:hover{background:rgba(168,85,247,0.15);transform:translateY(-1px);}
+    .login-link:hover{background:rgba(168,85,247,0.1);border-color:rgba(168,85,247,0.3);}
+    body.page-index.dark-mode .login-link{border-color:rgba(255,255,255,0.12);color:#c084fc;}
+    body.page-index.dark-mode .login-link:hover{background:rgba(168,85,247,0.15);}
 
     body.page-index *{
       margin:0;
