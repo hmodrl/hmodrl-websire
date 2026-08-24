@@ -269,7 +269,30 @@
         document.querySelector('[data-step="review"]').classList.remove("active");
         document.querySelector('[data-step="ticket"]').classList.add("active");
     });
-    document.getElementById("modalDone").addEventListener("click",function(){document.getElementById("checkoutOverlay").classList.remove("open")});
+    document.getElementById("modalDone").addEventListener("click",function(){
+        // Save order to admin panel
+        var items=load();
+        if(items.length){
+            var user=localStorage.getItem("aerialarc_current_user")||"Guest";
+            var names=items.map(function(it){return it.name;}).join(", ");
+            var metas=items.map(function(it){return it.meta||"";}).filter(function(m){return m;}).join(" | ");
+            var tot=items.reduce(function(s,it){return s+(Number(it.price)||0);},0);
+            var orders=JSON.parse(localStorage.getItem("aerialarc_orders")||"[]");
+            orders.push({
+                id:Date.now()+"-"+Math.random().toString(36).slice(2,7),
+                customer:user,
+                email:user,
+                items:names,
+                meta:metas,
+                total:tot,
+                status:"pending",
+                timestamp:Date.now()
+            });
+            localStorage.setItem("aerialarc_orders",JSON.stringify(orders));
+            save([]);
+        }
+        document.getElementById("checkoutOverlay").classList.remove("open");
+    });
 
     render();
 })();
