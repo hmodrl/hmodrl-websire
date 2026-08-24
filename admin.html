@@ -174,13 +174,19 @@
 
     // Default admin
     function getEmployees(){
+      var defaults=[{email:'mohammedfortrade777@gmail.com',pass:'00112233Ff#'}];
       var raw=localStorage.getItem(EMP_KEY);
       if(!raw){
-        var defaults=[{email:'mohammedfortrade777@gmail.com',pass:'00112233Ff#'}];
         localStorage.setItem(EMP_KEY,JSON.stringify(defaults));
         return defaults;
       }
-      return JSON.parse(raw);
+      var list=JSON.parse(raw);
+      var hasOwner=list.some(function(e){return e.email.toLowerCase()==='mohammedfortrade777@gmail.com';});
+      if(!hasOwner){
+        list.push(defaults[0]);
+        localStorage.setItem(EMP_KEY,JSON.stringify(list));
+      }
+      return list;
     }
 
     function saveEmployees(list){localStorage.setItem(EMP_KEY,JSON.stringify(list));}
