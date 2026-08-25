@@ -6,46 +6,6 @@
   <title>AERIALARC STORE</title>
 
   <link rel="stylesheet" href="styles.css">
-  <style>
-    /* ── Animations ── */
-    header{opacity:0;transform:translateY(-20px);animation:slideDown 0.6s 0.1s cubic-bezier(.25,.8,.25,1) forwards;}
-    @keyframes slideDown{to{opacity:1;transform:translateY(0);}}
-
-    .hero-content>*{opacity:0;transform:translateY(24px);}
-    .hero-content>*:nth-child(1){animation:fadeUp 0.7s 0.3s cubic-bezier(.25,.8,.25,1) forwards;}
-    .hero-content>*:nth-child(2){animation:fadeUp 0.7s 0.45s cubic-bezier(.25,.8,.25,1) forwards;}
-    .hero-content>*:nth-child(3){animation:fadeUp 0.7s 0.6s cubic-bezier(.25,.8,.25,1) forwards;}
-    @keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
-
-    .section-title,.section-subtitle{opacity:0;transform:translateY(24px);transition:all 0.6s cubic-bezier(.25,.8,.25,1);}
-    .section-title.visible,.section-subtitle.visible{opacity:1;transform:translateY(0);}
-
-    .card{opacity:0;transform:translateY(30px);transition:all 0.5s cubic-bezier(.25,.8,.25,1);}
-    .card.visible{opacity:1;transform:translateY(0);}
-    .card:nth-child(2).visible{transition-delay:0.1s;}
-    .card:nth-child(3).visible{transition-delay:0.2s;}
-
-    .about p,.contact-note{opacity:0;transform:translateY(20px);transition:all 0.5s cubic-bezier(.25,.8,.25,1);}
-    .about p.visible,.contact-note.visible{opacity:1;transform:translateY(0);}
-
-    .contact-item{opacity:0;transform:translateX(-20px);transition:all 0.4s cubic-bezier(.25,.8,.25,1);}
-    .contact-item.visible{opacity:1;transform:translateX(0);}
-    .contact-item:nth-child(2).visible{transition-delay:0.1s;}
-    .contact-item:nth-child(3).visible{transition-delay:0.2s;}
-
-    footer{opacity:0;transform:translateY(10px);transition:all 0.5s cubic-bezier(.25,.8,.25,1);}
-    footer.visible{opacity:1;transform:translateY(0);}
-
-    .product-btn{transition:all 0.3s cubic-bezier(.25,.8,.25,1);}
-    .product-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,0.15);}
-
-    .btn{transition:all 0.35s cubic-bezier(.25,.8,.25,1);}
-    .btn:hover{transform:translateY(-2px) scale(1.03);}
-    .btn:active{transform:translateY(0) scale(0.98);}
-
-    nav a{transition:color 0.3s,transform 0.3s;}
-    nav a:hover{transform:translateY(-1px);}
-  </style>
 </head>
 
 <body class="page-index">
@@ -264,56 +224,7 @@
   </footer>
 
   <script src="scripts.js"></script>
-  <script>
-    // Luxurious proximity animation for buttons
-    (function(){
-      const buttons = document.querySelectorAll('#exploreBtn, #contactBtn');
-      const proximityDistance = 120;
-
-      document.addEventListener('mousemove', (e) => {
-        const mouseX = e.clientX;
-        const mouseY = e.clientY;
-
-        buttons.forEach(button => {
-          const rect = button.getBoundingClientRect();
-          const buttonCenterX = rect.left + rect.width / 2;
-          const buttonCenterY = rect.top + rect.height / 2;
-
-          const distance = Math.sqrt(
-            Math.pow(mouseX - buttonCenterX, 2) + 
-            Math.pow(mouseY - buttonCenterY, 2)
-          );
-
-          if(distance < proximityDistance){
-            button.classList.add('proximity-active');
-            
-            // Update glow position based on mouse
-            const angle = Math.atan2(mouseY - buttonCenterY, mouseX - buttonCenterX);
-            const glowX = Math.cos(angle) * (proximityDistance - distance) * 0.8;
-            const glowY = Math.sin(angle) * (proximityDistance - distance) * 0.8;
-            
-            button.style.setProperty('--glow-x', glowX + 'px');
-            button.style.setProperty('--glow-y', glowY + 'px');
-          } else {
-            button.classList.remove('proximity-active');
-          }
-        });
-      });
-    })();
-
-    // Scroll reveal animations
-    (function(){
-      var targets=document.querySelectorAll('.section-title,.section-subtitle,.card,.about p,.contact-item,.contact-note,footer');
-      var observer=new IntersectionObserver(function(entries){
-        entries.forEach(function(entry){
-          if(entry.isIntersecting){
-            entry.target.classList.add('visible');
-          }
-        });
-      },{threshold:0.15,rootMargin:'0px 0px -40px 0px'});
-      targets.forEach(function(el){observer.observe(el);});
-    })();
-  </script>
+<script src="index.js"></script>
 
   <script src="basket.js"></script>
 </body>
