@@ -5331,11 +5331,14 @@ body.page-index .arc-status-page {
 body.page-index .arc-hero {
   text-align: center;
   padding: 48px 0 32px;
-  flex-shrink: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 body.page-index .arc-hero-title {
-  font-size: clamp(56px, 12vw, 88px);
+  font-size: clamp(80px, 18vw, 160px);
   font-weight: 900;
   letter-spacing: -2px;
   line-height: 1;
