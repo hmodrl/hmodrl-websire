@@ -8,52 +8,6 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 
         <link rel="stylesheet" href="styles.css">
-        <style>
-            .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s cubic-bezier(.25,.8,.25,1),transform 0.6s cubic-bezier(.25,.8,.25,1);}
-            .reveal.active{opacity:1;transform:translateY(0);}
-            .card{opacity:0;transform:translateY(24px);transition:opacity 0.5s cubic-bezier(.25,.8,.25,1),transform 0.5s cubic-bezier(.25,.8,.25,1),box-shadow 0.3s ease,border-color 0.3s ease;}
-            .card.visible{opacity:1;transform:translateY(0);}
-            .card:hover{transform:translateY(-6px);box-shadow:0 12px 40px rgba(0,0,0,0.12);}
-            .dark-mode .card:hover{box-shadow:0 12px 40px rgba(0,0,0,0.4);}
-            .card .btn{transition:all 0.3s cubic-bezier(.25,.8,.25,1);}
-            .card .btn:hover{transform:translateY(-2px) scale(1.02);}
-            .card .btn:active{transform:translateY(0) scale(0.98);}
-            .icon{transition:transform 0.3s ease;}
-            .card:hover .icon{transform:scale(1.1) rotate(-3deg);}
-            .section-title{opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;}
-            .section-title.visible{opacity:1;transform:translateY(0);}
-            .accounts-box{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
-            .accounts-box.visible{opacity:1;transform:translateY(0);}
-            .boost-buttons{display:flex;justify-content:center;gap:6px;margin-bottom:48px;}
-            .boost-tab{padding:12px 36px;border:none;background:rgba(255,255,255,0.04);color:#888;font-size:15px;font-weight:600;cursor:pointer;border-radius:10px;transition:all 0.3s cubic-bezier(.25,.8,.25,1);font-family:inherit;}
-            .boost-tab:hover{color:#ccc;background:rgba(255,255,255,0.06);}
-            .boost-tab.active{background:linear-gradient(135deg,#a855f7,#9333ea);color:#fff;box-shadow:0 4px 20px rgba(168,85,247,0.35);}
-            .boost-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:60px;}
-            @media(max-width:900px){.boost-grid{grid-template-columns:repeat(2,1fr);}}
-            @media(max-width:520px){.boost-grid{grid-template-columns:1fr;}}
-            .boost-card{position:relative;background:#0d0d0d;border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px 22px 24px;display:flex;flex-direction:column;opacity:0;transform:translateY(24px);transition:all 0.5s cubic-bezier(.25,.8,.25,1);}
-            .boost-card.visible{opacity:1;transform:translateY(0);}
-            .boost-card:hover{transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,0.3);}
-            .boost-card.popular{background:linear-gradient(170deg,rgba(168,85,247,0.18) 0%,rgba(124,58,237,0.06) 50%,#0d0d0d 100%);border:1px solid rgba(168,85,247,0.3);box-shadow:0 0 40px rgba(168,85,247,0.1);padding-top:40px;z-index:1;}
-            .boost-card.popular:hover{box-shadow:0 0 50px rgba(168,85,247,0.15);}
-            .popular-badge{position:absolute;top:12px;right:20px;background:linear-gradient(135deg,#f472b6,#ec4899);color:#fff;font-size:8px;font-weight:800;padding:4px 10px;border-radius:6px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;}
-            .boost-card h3{font-size:20px;font-weight:800;font-style:italic;letter-spacing:-0.2px;margin:0 0 6px;color:#fff;}
-            .boost-price{font-size:30px;font-weight:800;letter-spacing:-0.5px;margin-bottom:4px;background:linear-gradient(135deg,#f472b6,#e879f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
-            .boost-duration{font-size:13px;color:#666;margin-bottom:28px;}
-            .boost-features{list-style:none;padding:0;margin:0 0 28px;flex:1;display:flex;flex-direction:column;gap:16px;}
-            .boost-features li{display:flex;align-items:center;gap:12px;font-size:13.5px;color:#ccc;font-weight:500;}
-            .bf-icon{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;background:rgba(168,85,247,0.15);color:#a855f7;}
-            .purchase{display:block;width:100%;padding:14px;background:transparent;color:#ccc;border:1.5px solid rgba(168,85,247,0.3);border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.3s cubic-bezier(.25,.8,.25,1);font-family:inherit;margin-top:auto;}
-            .purchase:hover{background:rgba(168,85,247,0.08);border-color:rgba(168,85,247,0.5);transform:translateY(-2px);}
-            .purchase:active{transform:translateY(0) scale(0.98);}
-            .purchase.primary{background:linear-gradient(135deg,#a855f7,#7c3aed);border-color:transparent;color:#fff;box-shadow:0 4px 16px rgba(168,85,247,0.3);}
-            .purchase.primary:hover{box-shadow:0 8px 28px rgba(168,85,247,0.4);transform:translateY(-2px);}
-            footer{opacity:0;transition:opacity 0.5s ease;}
-            footer.visible{opacity:1;}
-        
-.login-link:hover{background:rgba(168,85,247,0.25);border-color:rgba(168,85,247,0.5);transform:translateY(-1px);}
-.dark-mode .login-link:hover{background:rgba(168,85,247,0.25);}
-</style>
 </head>
 <body class="page-discord">
 
@@ -297,70 +251,9 @@
     © 2025 AERIALARC. All rights reserved.
 </footer>
 
-<script>
-function showBoosts(type, btnElem){
-
-    document.getElementById("month1").style.display = "none";
-    document.getElementById("month3").style.display = "none";
-
-    document.getElementById(type).style.display = "grid";
-
-    document.querySelectorAll(".boost-tab").forEach(btn=>{
-        btn.classList.remove("active");
-    });
-
-    if(btnElem) btnElem.classList.add("active");
-}
-</script>
+<script src="discord.js"></script>
 
 <script src="scripts.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-    var sections=document.querySelectorAll('.section-title');
-    var cards=document.querySelectorAll('.card');
-    var boostCards=document.querySelectorAll('.boost-card');
-    var boostBtns=document.querySelector('.boost-buttons');
-    var accountsBox=document.querySelector('.accounts-box');
-    var footer=document.querySelector('footer');
-
-    function staggerReveal(els,delay){
-        els.forEach(function(el,i){
-            el.style.transitionDelay=(i*delay)+'s';
-            el.classList.add('reveal');
-        });
-    }
-
-    staggerReveal(sections,0);
-    staggerReveal(cards,0.08);
-    staggerReveal(boostCards,0.08);
-    if(boostBtns)boostBtns.classList.add('reveal');
-    if(accountsBox)accountsBox.classList.add('reveal');
-    if(footer)footer.classList.add('reveal');
-
-    var io=new IntersectionObserver(function(entries,obs){
-        entries.forEach(function(entry){
-            if(entry.isIntersecting){
-                entry.target.classList.add('active','visible');
-                obs.unobserve(entry.target);
-            }
-        });
-    },{threshold:0.08});
-
-    document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-
-    var boostObserver=new IntersectionObserver(function(entries,obs){
-        entries.forEach(function(entry){
-            if(entry.isIntersecting){
-                entry.target.classList.add('visible');
-                obs.unobserve(entry.target);
-            }
-        });
-    },{threshold:0.1});
-
-    boostCards.forEach(function(c){boostObserver.observe(c);});
-});
-</script>
 
 
 
