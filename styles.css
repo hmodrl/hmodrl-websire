@@ -5668,3 +5668,77 @@ body.page-index footer { display: none; }
   body.page-index .arc-tab svg { width: 20px; height: 20px; }
   body.page-index .arc-tab span { font-size: 9px; }
 }
+/* ── Crystal canvas background ── */
+body.page-index #arcCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body.page-index .arc-home {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Cart badge ── */
+body.page-index .arc-cart-badge {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #a855f7;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ── Nav link tabs (basket, user) ── */
+body.page-index .arc-tab-link {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 16px;
+  min-width: 52px;
+}
+
+body.page-index .arc-tab-link svg {
+  width: 22px;
+  height: 22px;
+  transition: all 0.3s ease;
+}
+
+body.page-index .arc-tab-link span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+body.page-index .arc-tab-link:hover {
+  color: rgba(255,255,255,0.55);
+}
+
+/* Remove old hint style */
+body.page-index .arc-hint { display: none; }
