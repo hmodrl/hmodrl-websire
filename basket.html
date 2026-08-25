@@ -171,6 +171,7 @@
             <h3>Order Summary</h3>
             <p>Review your selections before proceeding.</p>
             <div class="checkout-modal-items" id="modalItems"></div>
+            <div id="modalOrderId" style="display:none;padding:10px 14px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.2);border-radius:10px;margin:12px 0;font-size:13px;color:#a855f7;font-weight:600;text-align:center;"></div>
             <div class="checkout-modal-total"><span>Total</span><span id="modalTotal"></span></div>
             <div class="checkout-modal-note">Please take a screenshot of your order summary. You will need it to confirm your order on Discord.</div>
             <div class="checkout-modal-actions">
@@ -248,8 +249,13 @@
 
         document.getElementById("checkoutBtn").addEventListener("click",function(){
             if(!items.length)return;
+            var orderId="ARC-"+Math.random().toString(36).substring(2,8).toUpperCase();
+            window._currentOrderId=orderId;
             var mItems=document.getElementById("modalItems");
             mItems.innerHTML="";
+            var idRow=document.createElement("div");idRow.className="checkout-modal-item";
+            idRow.innerHTML='<div><span class="nm" style="font-size:12px;color:#888;">Order ID</span></div><span class="pr" style="font-size:13px;font-weight:700;color:#a855f7;">'+orderId+'</span>';
+            mItems.appendChild(idRow);
             items.forEach(function(it){
                 var row=document.createElement("div");row.className="checkout-modal-item";
                 row.innerHTML='<div><span class="nm"></span><span class="mt"></span></div><span class="pr"></span>';
@@ -259,6 +265,9 @@
                 mItems.appendChild(row);
             });
             document.getElementById("modalTotal").textContent=fmt(total);
+            var orderIdEl=document.getElementById("modalOrderId");
+            orderIdEl.textContent="Order ID: "+orderId;
+            orderIdEl.style.display="block";
             document.getElementById("checkoutOverlay").classList.add("open");
         });
     }
@@ -270,29 +279,36 @@
         document.querySelector('[data-step="ticket"]').classList.add("active");
     });
     document.getElementById("modalDone").addEventListener("click",function(){
-        // Save order to admin panel
-        var items=load();
-        if(items.length){
-            var user=localStorage.getItem("aerialarc_current_user")||"Guest";
-            var names=items.map(function(it){return it.name;}).join(", ");
-            var metas=items.map(function(it){return it.meta||"";}).filter(function(m){return m;}).join(" | ");
-            var tot=items.reduce(function(s,it){return s+(Number(it.price)||0);},0);
-            var orders=JSON.parse(localStorage.getItem("aerialarc_orders")||"[]");
-            orders.push({
-                id:Date.now()+"-"+Math.random().toString(36).slice(2,7),
-                customer:user,
-                email:user,
-                items:names,
-                meta:metas,
-                total:tot,
-                status:"pending",
-                timestamp:Date.now()
-            });
-            localStorage.setItem("aerialarc_orders",JSON.stringify(orders));
-            save([]);
-        }
         document.getElementById("checkoutOverlay").classList.remove("open");
     });
+
+    // Save order when Discord link is clicked
+    var discordLink=document.querySelector(".checkout-modal-discord");
+    if(discordLink){
+        discordLink.addEventListener("click",function(){
+            var items=load();
+            if(items.length&&window._currentOrderId){
+                var user=localStorage.getItem("aerialarc_current_user")||"Guest";
+                var names=items.map(function(it){return it.name;}).join(", ");
+                var metas=items.map(function(it){return it.meta||"";}).filter(function(m){return m;}).join(" | ");
+                var tot=items.reduce(function(s,it){return s+(Number(it.price)||0);},0);
+                var orders=JSON.parse(localStorage.getItem("aerialarc_orders")||"[]");
+                orders.push({
+                    id:window._currentOrderId,
+                    customer:user,
+                    email:user,
+                    items:names,
+                    meta:metas,
+                    total:tot,
+                    status:"pending",
+                    timestamp:Date.now()
+                });
+                localStorage.setItem("aerialarc_orders",JSON.stringify(orders));
+                save([]);
+                window._currentOrderId=null;
+            }
+        });
+    }
 
     render();
 })();
