@@ -5255,3 +5255,416 @@ body.page-basket .dark-mode .login-link:hover{background:rgba(168,85,247,0.25);}
       body.page-admin .order-right{text-align:left;}
       body.page-admin .emp-form{flex-direction:column;}
     }
+
+/* ══════════════════════════════════════════════════════
+   index.html — Apple Music-style dark glassmorphism UI
+   ══════════════════════════════════════════════════════ */
+
+body.page-index {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body.page-index .arc-home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+/* ── Top status bar ── */
+body.page-index .arc-top-bar {
+  padding: 20px 0 0;
+  text-align: center;
+}
+
+body.page-index .arc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+body.page-index .arc-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #5eead4;
+  box-shadow: 0 0 8px #5eead4, 0 0 20px rgba(94,234,212,0.3);
+  animation: arcPulse 2s ease-in-out infinite;
+}
+
+@keyframes arcPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+body.page-index .arc-status-label {
+  color: rgba(255,255,255,0.6);
+}
+
+body.page-index .arc-status-divider {
+  color: rgba(255,255,255,0.2);
+}
+
+body.page-index .arc-status-page {
+  color: rgba(255,255,255,0.35);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Hero ── */
+body.page-index .arc-hero {
+  text-align: center;
+  padding: 48px 0 32px;
+  flex-shrink: 0;
+}
+
+body.page-index .arc-hero-title {
+  font-size: clamp(56px, 12vw, 88px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 1;
+  margin: 0 0 12px;
+  background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,0.6) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: opacity 0.3s ease;
+}
+
+body.page-index .arc-hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ── Content panels ── */
+body.page-index .arc-hero-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 0 24px;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+body.page-index .arc-hero-content::-webkit-scrollbar { display: none; }
+
+body.page-index .arc-panel {
+  display: none;
+  animation: arcFadeIn 0.35s ease;
+}
+
+body.page-index .arc-panel.active { display: block; }
+
+@keyframes arcFadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Service cards grid (Home panel) ── */
+body.page-index .arc-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+body.page-index .arc-service-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 24px 18px;
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+body.page-index .arc-service-card:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(168,85,247,0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(168,85,247,0.1);
+}
+
+body.page-index .arc-service-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(168,85,247,0.12);
+  border-radius: 10px;
+  color: #a855f7;
+}
+
+body.page-index .arc-service-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+body.page-index .arc-service-label {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+body.page-index .arc-service-desc {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.3;
+}
+
+/* ── List items (Boosting, Accounts, Discord, Contact panels) ── */
+body.page-index .arc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+body.page-index .arc-list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+body.page-index .arc-list-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+body.page-index .arc-list-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.25);
+  min-width: 24px;
+  font-variant-numeric: tabular-nums;
+}
+
+body.page-index .arc-list-item div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+body.page-index .arc-list-item strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+body.page-index .arc-list-item span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+}
+
+body.page-index .arc-list-arrow {
+  font-size: 20px;
+  color: rgba(255,255,255,0.2);
+  font-weight: 300;
+}
+
+/* ── Contact panel ── */
+body.page-index .arc-contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+body.page-index .arc-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 18px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.2s ease;
+}
+
+body.page-index .arc-contact-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+body.page-index .arc-contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  object-fit: contain;
+  background: rgba(255,255,255,0.06);
+  padding: 6px;
+}
+
+body.page-index .arc-contact-item div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+body.page-index .arc-contact-item strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+body.page-index .arc-contact-item span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+}
+
+body.page-index .arc-contact-note {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  margin-top: 20px;
+}
+
+/* ── Bottom section ── */
+body.page-index .arc-bottom {
+  flex-shrink: 0;
+  padding-bottom: max(env(safe-area-inset-bottom), 12px);
+}
+
+body.page-index .arc-hint {
+  text-align: center;
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+  margin: 0 0 12px;
+}
+
+body.page-index .arc-hint u {
+  color: rgba(94,234,212,0.5);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(94,234,212,0.2);
+}
+
+/* ── Glassmorphism nav bar ── */
+body.page-index .arc-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 8px 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+body.page-index .arc-nav-glow {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(94,234,212,0.25) 0%, rgba(94,234,212,0.08) 50%, transparent 70%);
+  pointer-events: none;
+  transition: left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+  opacity: 0;
+  z-index: 0;
+}
+
+body.page-index .arc-nav-glow.visible { opacity: 1; }
+
+body.page-index .arc-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 12px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: color 0.3s ease;
+  position: relative;
+  z-index: 1;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+  border-radius: 16px;
+  min-width: 52px;
+}
+
+body.page-index .arc-tab svg {
+  width: 22px;
+  height: 22px;
+  transition: all 0.3s ease;
+}
+
+body.page-index .arc-tab span {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+body.page-index .arc-tab.active {
+  color: #5eead4;
+}
+
+body.page-index .arc-tab.active svg {
+  filter: drop-shadow(0 0 6px rgba(94,234,212,0.4));
+}
+
+body.page-index .arc-tab.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(94,234,212,0.2);
+  filter: blur(8px);
+  z-index: -1;
+}
+
+body.page-index .arc-tab:hover:not(.active) {
+  color: rgba(255,255,255,0.55);
+}
+
+/* ── Header override (hide original header on index) ── */
+body.page-index header { display: none; }
+body.page-index .hero { display: none; }
+body.page-index #features { display: none; }
+body.page-index #products { display: none; }
+body.page-index #about { display: none; }
+body.page-index #contact { display: none; }
+body.page-index footer { display: none; }
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  body.page-index .arc-home { padding: 0 16px; }
+  body.page-index .arc-hero-title { font-size: 52px; }
+  body.page-index .arc-services-grid { gap: 10px; }
+  body.page-index .arc-service-card { padding: 20px 14px; }
+  body.page-index .arc-tab { min-width: 46px; padding: 8px 8px; }
+  body.page-index .arc-tab svg { width: 20px; height: 20px; }
+  body.page-index .arc-tab span { font-size: 9px; }
+}
