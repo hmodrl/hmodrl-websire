@@ -183,7 +183,7 @@
         users[email]=pass;
         localStorage.setItem('aerialarc_users',JSON.stringify(users));
         localStorage.setItem('aerialarc_current_user',email);
-        localStorage.setItem('aerialarc_verified','true');
+        localStorage.setItem('aerialarc_verified','true');\n        localStorage.setItem('arcUser',JSON.stringify({email:email}));
         showMsg('Verified! Redirecting...',false);
         setTimeout(function(){body.classList.add('exiting');setTimeout(function(){window.location.href='index.html';},400);},800);
       });
