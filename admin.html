@@ -120,6 +120,7 @@
       <button id="lightModeBtn" class="mode-btn">Light</button>
       <button id="darkModeBtn" class="mode-btn">Dark</button>
       <button class="admin-logout" id="logoutBtn" style="display:none;">Log Out</button>
+      <span id="adminName" style="font-size:13px;font-weight:600;color:#a855f7;margin-left:4px;"></span>
     </div>
   </nav>
 
@@ -157,6 +158,8 @@
 
       <div class="panel" id="panel-employees">
         <div class="emp-form">
+          <input type="text" id="newEmpFirst" placeholder="First name">
+          <input type="text" id="newEmpLast" placeholder="Last name">
           <input type="email" id="newEmpEmail" placeholder="Employee email">
           <input type="password" id="newEmpPass" placeholder="Password">
           <button class="btn-add" id="addEmpBtn">Add Employee</button>
@@ -173,15 +176,17 @@
     var SESS_KEY='aerialarc_admin_session';
 
     // Default admin
+    var OWNER_EMAIL='mohammedfortrade777@gmail.com';
+    function isOwner(){return localStorage.getItem(SESS_KEY)===OWNER_EMAIL;}
     function getEmployees(){
-      var defaults=[{email:'mohammedfortrade777@gmail.com',pass:'00112233Ff#'}];
+      var defaults=[{email:'mohammedfortrade777@gmail.com',pass:'00112233Ff#',first:'Mohammed',last:'Owner'}];
       var raw=localStorage.getItem(EMP_KEY);
       if(!raw){
         localStorage.setItem(EMP_KEY,JSON.stringify(defaults));
         return defaults;
       }
       var list=JSON.parse(raw);
-      var hasOwner=list.some(function(e){return e.email.toLowerCase()==='mohammedfortrade777@gmail.com';});
+      var hasOwner=list.some(function(e){return e.email.toLowerCase()===OWNER_EMAIL.toLowerCase();});
       if(!hasOwner){
         list.push(defaults[0]);
         localStorage.setItem(EMP_KEY,JSON.stringify(list));
@@ -214,10 +219,22 @@
     var logoutBtn=document.getElementById('logoutBtn');
     var loggedUser=localStorage.getItem(SESS_KEY);
 
-    function showDashboard(){loginOverlay.classList.add('hidden');dashboard.style.display='block';logoutBtn.style.display='inline-flex';}
-    function showLogin(){loginOverlay.classList.remove('hidden');dashboard.style.display='none';logoutBtn.style.display='none';}
+    function showDashboard(name){
+      loginOverlay.classList.add('hidden');
+      dashboard.style.display='block';
+      logoutBtn.style.display='inline-flex';
+      if(name){
+        var nameEl=document.getElementById('adminName');
+        if(nameEl)nameEl.textContent=name;
+      }
+    }
+    function showLogin(){loginOverlay.classList.remove('hidden');dashboard.style.display='none';logoutBtn.style.display='none';var n=document.getElementById('adminName');if(n)n.textContent='';}
 
-    if(loggedUser){showDashboard();}
+    if(loggedUser){
+      var emps=getEmployees();
+      var me=emps.find(function(e){return e.email.toLowerCase()===loggedUser.toLowerCase();});
+      showDashboard(me?(me.first+' '+me.last):'');
+    }
 
     document.getElementById('loginBtn').addEventListener('click',function(){
       var email=document.getElementById('loginEmail').value.trim().toLowerCase();
@@ -227,7 +244,7 @@
       if(found){
         localStorage.setItem(SESS_KEY,email);
         loginError.classList.remove('show');
-        showDashboard();
+        showDashboard((found.first||'')+' '+(found.last||''));
         renderAll();
       }else{
         loginError.classList.add('show');
@@ -303,13 +320,21 @@
     function renderEmployees(){
       var emps=getEmployees();
       var list=document.getElementById('empList');
+      var owner=isOwner();
       var html='';
       emps.forEach(function(e){
-        html+='<div class="emp-row"><span class="emp-email">'+e.email+'</span><button class="emp-del" data-email="'+e.email+'">Remove</button></div>';
+        var name=(e.first||'')+' '+(e.last||'');
+        var isOwn=e.email.toLowerCase()===OWNER_EMAIL.toLowerCase();
+        html+='<div class="emp-row"><span class="emp-email">'+name.trim()+'</span>';
+        if(owner&&!isOwn){
+          html+='<button class="emp-del" data-email="'+e.email+'">Remove</button>';
+        }
+        html+='</div>';
       });
       list.innerHTML=html;
       list.querySelectorAll('.emp-del').forEach(function(btn){
         btn.addEventListener('click',function(){
+          if(!isOwner())return;
           var emps=getEmployees().filter(function(e){return e.email!==btn.dataset.email;});
           saveEmployees(emps);
           renderEmployees();
@@ -318,13 +343,18 @@
     }
 
     document.getElementById('addEmpBtn').addEventListener('click',function(){
+      if(!isOwner())return;
+      var first=document.getElementById('newEmpFirst').value.trim();
+      var last=document.getElementById('newEmpLast').value.trim();
       var email=document.getElementById('newEmpEmail').value.trim();
       var pass=document.getElementById('newEmpPass').value;
-      if(!email||!pass)return;
+      if(!email||!pass||!first)return;
       var emps=getEmployees();
       if(emps.find(function(e){return e.email.toLowerCase()===email.toLowerCase();})){return;}
-      emps.push({email:email,pass:pass});
+      emps.push({email:email,pass:pass,first:first,last:last});
       saveEmployees(emps);
+      document.getElementById('newEmpFirst').value='';
+      document.getElementById('newEmpLast').value='';
       document.getElementById('newEmpEmail').value='';
       document.getElementById('newEmpPass').value='';
       renderEmployees();
