@@ -1,11 +1,12 @@
 (function(){
-  var tabs=document.querySelectorAll('.arc-tab');
+  var tabs=document.querySelectorAll('.arc-tab[data-index]');
   var panels=document.querySelectorAll('.arc-panel');
   var glow=document.getElementById('arcGlow');
   var titleEl=document.getElementById('arcHeroTitle');
   var subEl=document.getElementById('arcHeroSub');
   var pageEl=document.getElementById('arcCurrentPage');
   var nav=document.getElementById('arcNav');
+  var totalTabs=tabs.length;
 
   function activateTab(i){
     tabs.forEach(function(t){t.classList.remove('active');});
@@ -29,23 +30,24 @@
   }
 
   tabs.forEach(function(tab,idx){
-    tab.addEventListener('click',function(){activateTab(idx);});
+    tab.addEventListener('click',function(e){
+      if(tab.id==='arcBasketTab'||tab.id==='arcUserTab')return;
+      e.preventDefault();
+      activateTab(idx);
+    });
   });
 
-  // Initialize glow position
   setTimeout(function(){
     var active=document.querySelector('.arc-tab.active');
     if(active) moveGlow(active);
   },100);
 
-  // Glow follows mouse on nav bar
+  // Glow drag
   var isDragging=false;
   nav.addEventListener('mousedown',function(e){isDragging=true;dragGlow(e);});
   nav.addEventListener('mousemove',function(e){if(isDragging)dragGlow(e);});
   nav.addEventListener('mouseup',function(){isDragging=false;});
   nav.addEventListener('mouseleave',function(){isDragging=false;});
-
-  // Touch support
   nav.addEventListener('touchstart',function(e){dragGlow(e.touches[0]);},{passive:true});
   nav.addEventListener('touchmove',function(e){dragGlow(e.touches[0]);},{passive:true});
 
@@ -57,7 +59,6 @@
     glow.style.opacity='1';
     glow.style.transition='left 0.1s ease, opacity 0.3s ease';
 
-    // Snap to closest tab
     var closest=null;var closestDist=Infinity;
     tabs.forEach(function(tab,i){
       var tabRect=tab.getBoundingClientRect();
@@ -69,4 +70,47 @@
       activateTab(closest);
     }
   }
+
+  // ── User login state ──
+  function checkUser(){
+    try{
+      var user=JSON.parse(localStorage.getItem('arcUser')||'null');
+      var label=document.getElementById('arcUserLabel');
+      var icon=document.querySelector('.arc-user-icon');
+      var userTab=document.getElementById('arcUserTab');
+      if(user&&user.email){
+        label.textContent=user.email.split('@')[0];
+        userTab.href='#';
+        userTab.onclick=function(e){
+          e.preventDefault();
+          if(confirm('Log out?')){
+            localStorage.removeItem('arcUser');
+            location.reload();
+          }
+        };
+      }else{
+        label.textContent='Log In';
+        userTab.href='login.html';
+        userTab.onclick=null;
+      }
+    }catch(e){}
+  }
+  checkUser();
+
+  // ── Cart badge ──
+  function updateCartBadge(){
+    try{
+      var cart=JSON.parse(localStorage.getItem('arcCart')||'[]');
+      var badge=document.getElementById('arcCartBadge');
+      if(cart.length>0){
+        badge.textContent=cart.length;
+        badge.style.display='flex';
+      }else{
+        badge.style.display='none';
+      }
+    }catch(e){}
+  }
+  updateCartBadge();
+  window.addEventListener('storage',updateCartBadge);
+  setInterval(updateCartBadge,1000);
 })();
