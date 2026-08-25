@@ -5330,16 +5330,12 @@ body.page-index .arc-status-page {
 /* ── Hero ── */
 body.page-index .arc-hero {
   text-align: center;
-  padding: 48px 0 32px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
+  padding: 60px 0 20px;
+  flex-shrink: 0;
 }
 
 body.page-index .arc-hero-title {
-  font-size: clamp(60px, 12vw, 120px);
+  font-size: clamp(48px, 10vw, 100px);
   font-weight: 900;
   letter-spacing: -2px;
   line-height: 1;
