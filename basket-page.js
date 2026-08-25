@@ -57,6 +57,12 @@
 
         document.getElementById("checkoutBtn").addEventListener("click",function(){
             if(!items.length)return;
+            var user=null;
+            try{user=JSON.parse(localStorage.getItem("arcUser")||"null")}catch(e){}
+            if(!user||!user.email){
+                window.location.href="login.html?redirect=basket.html";
+                return;
+            }
             var orderId="ARC-"+Math.random().toString(36).substring(2,8).toUpperCase();
             window._currentOrderId=orderId;
             var mItems=document.getElementById("modalItems");
