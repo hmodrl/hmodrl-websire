@@ -128,6 +128,40 @@ h1{
 }
 .searchBar .searchInput:focus{border-color:color-mix(in srgb,var(--accent) 60%,transparent);box-shadow:0 0 20px color-mix(in srgb,var(--accent) 12%,transparent)}
 .searchBar .searchInput::placeholder{color:#555}
+.youPanel{
+  display:none;flex-direction:column;align-items:center;gap:16px;
+  margin-bottom:20px;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .35s ease,transform .35s ease;
+}
+.youPanel.show{display:flex;opacity:1;transform:translateY(0);}
+.youAvatar{
+  width:72px;height:72px;border-radius:50%;
+  background:rgba(223,180,93,0.12);border:2px solid rgba(223,180,93,0.3);
+  display:grid;place-items:center;font-size:32px;color:#dfb45d;
+  box-shadow:0 0 20px rgba(223,180,93,0.15);
+}
+.youName{
+  font-size:18px;font-weight:700;color:#fff;
+}
+.youBtns{
+  display:flex;gap:10px;
+}
+.youBtn{
+  padding:10px 24px;border-radius:10px;font-size:12px;font-weight:600;
+  text-decoration:none;cursor:pointer;transition:all .25s ease;
+  font-family:inherit;
+}
+.youBtnPrimary{
+  background:rgba(223,180,93,0.15);color:#dfb45d;
+  border:1px solid rgba(223,180,93,0.3);
+}
+.youBtnPrimary:hover{background:rgba(223,180,93,0.25);transform:translateY(-1px);}
+.youBtnSecondary{
+  background:rgba(255,255,255,0.06);color:#aaa;
+  border:1px solid rgba(255,255,255,0.1);
+}
+.youBtnSecondary:hover{background:rgba(255,255,255,0.1);color:#fff;transform:translateY(-1px);}
 .toast{
   position:absolute;left:50%;bottom:32px;transform:translateX(-50%) translateY(12px);
   opacity:0;color:#777c8b;font-size:9px;transition:.35s;
@@ -144,6 +178,14 @@ h1{
 <div class="app">
   <section class="content">
     <div class="searchBar" id="searchBar"><input class="searchInput" id="homeSearch" placeholder="Search anything"></div>
+    <div class="youPanel" id="youPanel">
+      <div class="youAvatar">♙</div>
+      <div class="youName" id="youName">Guest</div>
+      <div class="youBtns">
+        <a href="login.html" class="youBtn youBtnPrimary">Log In</a>
+        <a href="login.html" class="youBtn youBtnSecondary">Create Account</a>
+      </div>
+    </div>
     <h1 id="title">Home</h1>
     <div class="sub" id="sub">Picked up exactly where you left it.</div>
   </section>
@@ -188,9 +230,24 @@ const app=document.querySelector(".app");
 const toast=document.getElementById("toast");
 const homeSearch=document.getElementById("homeSearch");
 const searchBar=document.getElementById("searchBar");
+const youPanel=document.getElementById("youPanel");
+const youName=document.getElementById("youName");
 
 let current="home";
 let audio;
+
+function updateYouPanel(){
+  try{
+    var user=JSON.parse(localStorage.getItem("arcUser")||"null");
+    if(user&&user.email){
+      youName.textContent=user.email.split("@")[0];
+      youPanel.querySelector(".youBtns").innerHTML='<a href="#" class="youBtn youBtnPrimary" onclick="localStorage.removeItem(\'arcUser\');location.reload();return false;">Log Out</a>';
+    }else{
+      youName.textContent="Guest";
+      youPanel.querySelector(".youBtns").innerHTML='<a href="login.html" class="youBtn youBtnPrimary">Log In</a><a href="login.html" class="youBtn youBtnSecondary">Create Account</a>';
+    }
+  }catch(e){}
+}
 
 function clickSound(page){
   try{
@@ -249,7 +306,9 @@ function select(page,play=true){
   },200);
 
   searchBar.classList.toggle("show",page==="search");
+  youPanel.classList.toggle("show",page==="you");
   if(page==="search") setTimeout(()=>homeSearch.focus(),350);
+  if(page==="you") updateYouPanel();
 
   if(play)clickSound(page);
 }
