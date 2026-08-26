@@ -1,124 +1,280 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>AERIALARC STORE</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ARC UI</title>
+<style>
+:root{--accent:#6fe4f5;--accent2:#38b7ce}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden}
+body{
+  background:#05070d;
+  color:#f5f6fa;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  display:grid;place-items:center;
+}
+.app{
+  position:relative;width:100%;height:100%;
+  min-height:620px;overflow:hidden;
+  background:
+    radial-gradient(ellipse 55% 35% at 50% 43%,color-mix(in srgb,var(--accent) 8%,transparent),transparent 70%),
+    radial-gradient(ellipse 45% 30% at 50% 58%,rgba(77,45,135,.07),transparent 70%),
+    #070a12;
+  transition:background .5s ease;
+}
+.content{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-55%);
+  width:min(760px,90vw);text-align:center;
+}
+.meta{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  font-size:10px;letter-spacing:4px;color:#7c8090;margin-bottom:13px;
+  text-transform:uppercase;
+}
+.meta .light{
+  width:7px;height:7px;border-radius:50%;background:var(--accent);
+  box-shadow:0 0 10px var(--accent),0 0 22px color-mix(in srgb,var(--accent) 50%,transparent);
+}
+.meta .dash{opacity:.35}
+h1{
+  margin:0;font-size:clamp(58px,9vw,96px);line-height:.98;
+  letter-spacing:-5px;font-weight:720;
+  text-shadow:0 0 35px rgba(255,255,255,.12);
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .2s,filter .35s;
+}
+.sub{
+  margin-top:20px;color:#777c8b;font-size:12px;
+  transition:opacity .2s,transform .35s;
+}
+.barWrap{
+  position:absolute;left:50%;top:62%;
+  transform:translateX(-50%);
+  width:min(520px,82vw);
+}
+.nav{
+  height:76px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.075);
+  background:linear-gradient(180deg,rgba(39,44,58,.72),rgba(14,18,29,.83));
+  box-shadow:0 18px 55px rgba(0,0,0,.42),inset 0 1px rgba(255,255,255,.07);
+  backdrop-filter:blur(18px);
+  display:flex;align-items:center;justify-content:space-around;
+  padding:5px 10px;position:relative;
+}
+.nav button{
+  position:relative;border:0;background:transparent;color:#727888;
+  width:19%;height:64px;border-radius:15px;cursor:pointer;
+  font:inherit;outline:none;transition:color .3s,transform .3s;
+}
+.nav button:hover{color:#bfc4d2}
+.nav button.active{color:var(--accent);transform:translateY(-1px)}
+.icon{
+  width:38px;height:38px;margin:0 auto 3px;border-radius:50%;
+  display:grid;place-items:center;font-size:17px;
+  transition:.35s;
+}
+.active .icon{
+  border:1px solid color-mix(in srgb,var(--accent) 85%,transparent);
+  box-shadow:
+    0 0 8px color-mix(in srgb,var(--accent) 70%,transparent),
+    0 0 23px color-mix(in srgb,var(--accent) 30%,transparent),
+    inset 0 0 12px color-mix(in srgb,var(--accent) 14%,transparent);
+}
+.label{font-size:9px;letter-spacing:.2px}
+.indicator{
+  position:absolute;bottom:-11px;left:50%;width:5px;height:5px;border-radius:50%;
+  background:var(--accent);box-shadow:0 0 10px var(--accent);
+  transform:translateX(-50%) scale(0);transition:.3s;
+}
+.active .indicator{transform:translateX(-50%) scale(1)}
+.reflection{
+  position:absolute;left:50%;top:calc(100% + 12px);width:70px;height:25px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse, color-mix(in srgb,var(--accent) 14%,transparent),transparent 70%);
+  filter:blur(4px);opacity:.5;transition:.35s;
+}
+.tip{
+  text-align:center;color:#555b6c;font-size:9px;margin-top:45px;
+  letter-spacing:.1px;
+}
+.ripple{
+  position:absolute;left:50%;top:50%;width:35px;height:35px;border:1px solid var(--accent);
+  border-radius:50%;transform:translate(-50%,-50%) scale(.3);opacity:0;pointer-events:none;
+}
+.active.flash .ripple{animation:ripple .65s ease-out}
+@keyframes ripple{
+  0%{transform:translate(-50%,-50%) scale(.45);opacity:.8}
+  100%{transform:translate(-50%,-50%) scale(2.2);opacity:0}
+}
+.flashTitle{animation:titleIn .55s cubic-bezier(.2,.8,.2,1)}
+@keyframes titleIn{
+  0%{opacity:0;transform:translateY(18px) scale(.97);filter:blur(8px)}
+  100%{opacity:1;transform:none;filter:blur(0)}
+}
+.searchBar{
+  margin-bottom:20px;
+}
+.searchBar .searchInput{
+  height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.1);
+  background:rgba(16,20,31,.8);color:#fff;width:min(360px,70vw);padding:0 16px;
+  outline:none;text-align:center;font-size:12px;
+  box-shadow:inset 0 0 20px rgba(0,0,0,.2);
+  transition:border-color .3s,box-shadow .3s;
+}
+.searchBar .searchInput:focus{border-color:color-mix(in srgb,var(--accent) 60%,transparent);box-shadow:0 0 20px color-mix(in srgb,var(--accent) 12%,transparent)}
+.searchBar .searchInput::placeholder{color:#555}
+.toast{
+  position:absolute;left:50%;bottom:32px;transform:translateX(-50%) translateY(12px);
+  opacity:0;color:#777c8b;font-size:9px;transition:.35s;
+}
+.toast.show{opacity:1;transform:translateX(-50%)}
+@media(max-width:600px){
+  .barWrap{top:61%}.nav{height:70px}.nav button{height:58px}
+  .icon{width:34px;height:34px}.label{font-size:8px}
+  .sub{font-size:10px}
+}
+</style>
 </head>
-<body class="page-index">
+<body>
+<div class="app">
+  <section class="content">
+    <div class="meta"><span class="light"></span><span>ARC</span><span class="dash">—</span><span id="counter">01 / 05</span></div>
+    <div class="searchBar"><input class="searchInput" id="homeSearch" placeholder="Search anything"></div>
+    <h1 id="title">Home</h1>
+    <div class="sub" id="sub">Picked up exactly where you left it.</div>
+  </section>
 
-  <canvas id="arcCanvas" aria-hidden="true"></canvas>
-
-  <div class="arc-home">
-
-    <div class="arc-top-bar">
-      <div class="arc-status">
-        <span class="arc-status-dot"></span>
-        <span class="arc-status-label">ARC</span>
-        <span class="arc-status-divider">—</span>
-        <span class="arc-status-page"><span id="arcCurrentPage">01</span> / 06</span>
-      </div>
-    </div>
-
-    <div class="arc-hero">
-      <h1 class="arc-hero-title" id="arcHeroTitle">Home</h1>
-      <p class="arc-hero-sub" id="arcHeroSub">Picked up exactly where you left it.</p>
-    </div>
-
-    <div class="arc-hero-content" id="arcContent">
-
-      <div class="arc-panel active" data-panel="0">
-      </div>
-
-      <div class="arc-panel" data-panel="1">
-        <div class="arc-list">
-          <a href="rankB.html" class="arc-list-item"><span class="arc-list-num">01</span><div><strong>Ranked Boosting</strong><span>1v1 · 2v2 · 3v3 · Solos</span></div><span class="arc-list-arrow">›</span></a>
-          <a href="rankT.html" class="arc-list-item"><span class="arc-list-num">02</span><div><strong>Tournament Boosting</strong><span>Weekly & special event tournaments</span></div><span class="arc-list-arrow">›</span></a>
-          <a href="rankE.html" class="arc-list-item"><span class="arc-list-num">03</span><div><strong>Extra Modes</strong><span>Rumble · Dropshot · Snowday · Hoops</span></div><span class="arc-list-arrow">›</span></a>
-        </div>
-      </div>
-
-      <div class="arc-panel" data-panel="2">
-        <div class="arc-list">
-          <a href="accR.html" class="arc-list-item"><span class="arc-list-num">01</span><div><strong>Rare Accounts</strong><span>Exclusive items & special cosmetics</span></div><span class="arc-list-arrow">›</span></a>
-          <a href="accS.html" class="arc-list-item"><span class="arc-list-num">02</span><div><strong>Smurf Accounts</strong><span>Low-rank accounts for casual play</span></div><span class="arc-list-arrow">›</span></a>
-          <a href="Steam.html" class="arc-list-item"><span class="arc-list-num">03</span><div><strong>Steam Accounts</strong><span>Full Steam access with RL</span></div><span class="arc-list-arrow">›</span></a>
-        </div>
-      </div>
-
-      <div class="arc-panel" data-panel="3">
-        <div class="arc-list">
-          <a href="discord.html" class="arc-list-item"><span class="arc-list-num">01</span><div><strong>Discord Boosting</strong><span>Server nitro boost services</span></div><span class="arc-list-arrow">›</span></a>
-          <a href="discord.html" class="arc-list-item"><span class="arc-list-num">02</span><div><strong>Server Setup</strong><span>Custom bots, roles & channels</span></div><span class="arc-list-arrow">›</span></a>
-          <a href="discord.html" class="arc-list-item"><span class="arc-list-num">03</span><div><strong>Community Growth</strong><span>Members, engagement & moderation</span></div><span class="arc-list-arrow">›</span></a>
-        </div>
-      </div>
-
-      <div class="arc-panel" data-panel="4">
-        <div class="arc-contact-list">
-          <a href="https://wa.me/97334203541" class="arc-contact-item">
-            <img src="whatsapp.png" alt="WhatsApp" class="arc-contact-icon">
-            <div><strong>WhatsApp</strong><span>+973 3420 3541</span></div>
-          </a>
-          <a href="https://instagram.com/hmodrl" class="arc-contact-item">
-            <img src="insta.webp" alt="Instagram" class="arc-contact-icon">
-            <div><strong>Instagram</strong><span>@hmodrl</span></div>
-          </a>
-          <a href="https://discord.gg/rmzz" class="arc-contact-item">
-            <img src="discord.png" alt="Discord" class="arc-contact-icon">
-            <div><strong>Discord</strong><span>discord.gg/rmzz</span></div>
-          </a>
-        </div>
-        <p class="arc-contact-note">If the Discord link doesn't work, message <strong>h1od</strong></p>
-      </div>
-
-    </div>
-
-    <div class="arc-bottom">
-
-      <nav class="arc-nav" id="arcNav">
-        <div class="arc-nav-glow" id="arcGlow"></div>
-        <button class="arc-tab active" data-index="0" data-title="Home" data-sub="Picked up exactly where you left it.">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          <span>Home</span>
-        </button>
-        <button class="arc-tab" data-index="1" data-title="Boosting" data-sub="Professional rank boosting services.">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          <span>Boosting</span>
-        </button>
-        <button class="arc-tab" data-index="2" data-title="Accounts" data-sub="Premium Rocket League accounts.">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span>Accounts</span>
-        </button>
-        <button class="arc-tab" data-index="3" data-title="Discord" data-sub="Server solutions & community tools.">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <span>Discord</span>
-        </button>
-        <button class="arc-tab" data-index="4" data-title="Contact" data-sub="Reach out through your preferred channel.">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span>Contact</span>
-        </button>
-        <a href="basket.html" class="arc-tab arc-tab-link" id="arcBasketTab">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          <span>Cart</span>
-          <span class="arc-cart-badge" id="arcCartBadge" style="display:none;">0</span>
-        </a>
-        <a href="login.html" class="arc-tab arc-tab-link" id="arcUserTab">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="arc-user-icon"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span id="arcUserLabel">Log In</span>
-        </a>
-      </nav>
-    </div>
-
+  <div class="barWrap">
+    <nav class="nav" id="nav">
+      <button class="active" data-page="home" style="--page:#6fe4f5">
+        <div class="icon">⌂</div><div class="label">Home</div><span class="indicator"></span><span class="ripple"></span>
+      </button>
+      <button data-page="search" style="--page:#91a8ff">
+        <div class="icon">⌕</div><div class="label">Search</div><span class="indicator"></span><span class="ripple"></span>
+      </button>
+      <button data-page="radio" style="--page:#ae76ff">
+        <div class="icon">◉</div><div class="label">Radio</div><span class="indicator"></span><span class="ripple"></span>
+      </button>
+      <button data-page="library" style="--page:#ed7bdb">
+        <div class="icon">▥</div><div class="label">Library</div><span class="indicator"></span><span class="ripple"></span>
+      </button>
+      <button data-page="you" style="--page:#dfb45d">
+        <div class="icon">♙</div><div class="label">You</div><span class="indicator"></span><span class="ripple"></span>
+      </button>
+    </nav>
+    <div class="reflection"></div>
+    <div class="tip">Tap a tab • or drag the light along the bar</div>
   </div>
 
-  <script src="scripts.js"></script>
-  <script src="bg.js"></script>
-  <script src="index.js"></script>
-  <script src="basket.js"></script>
+  <div class="toast" id="toast"></div>
+</div>
+
+<script>
+const pages={
+ home:{title:"Home",sub:"Picked up exactly where you left it.",color:"#6fe4f5",n:1},
+ search:{title:"Search",sub:"Find anything in your library.",color:"#91a8ff",n:2},
+ radio:{title:"Radio",sub:"A station that learns what you play.",color:"#ae76ff",n:3},
+ library:{title:"Library",sub:"Everything you've saved, in one place.",color:"#ed7bdb",n:4},
+ you:{title:"You",sub:"Your year in sound, so far.",color:"#dfb45d",n:5}
+};
+
+const buttons=[...document.querySelectorAll(".nav button")];
+const title=document.getElementById("title");
+const sub=document.getElementById("sub");
+const counter=document.getElementById("counter");
+const app=document.querySelector(".app");
+const toast=document.getElementById("toast");
+const homeSearch=document.getElementById("homeSearch");
+
+let current="home";
+let audio;
+
+function clickSound(page){
+  try{
+    audio ||= new (window.AudioContext||window.webkitAudioContext)();
+    const osc=audio.createOscillator(),gain=audio.createGain();
+    const f={home:520,search:620,radio:760,library:680,you:580}[page];
+    osc.type="sine";
+    osc.frequency.setValueAtTime(f,audio.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(f*1.25,audio.currentTime+.07);
+    gain.gain.setValueAtTime(.0001,audio.currentTime);
+    gain.gain.exponentialRampToValueAtTime(.035,audio.currentTime+.008);
+    gain.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+.13);
+    osc.connect(gain).connect(audio.destination);
+    osc.start();osc.stop(audio.currentTime+.14);
+  }catch(e){}
+}
+
+function select(page,play=true){
+  if(!pages[page])return;
+  const p=pages[page];
+  current=page;
+  document.documentElement.style.setProperty("--accent",p.color);
+
+  buttons.forEach(b=>{
+    b.classList.remove("active","flash");
+    if(b.dataset.page===page){
+      b.classList.add("active");
+      requestAnimationFrame(()=>b.classList.add("flash"));
+    }
+  });
+
+  title.classList.remove("flashTitle");
+  title.style.transition="opacity .2s ease, transform .2s ease, filter .2s";
+  sub.style.transition="opacity .2s ease, transform .2s ease";
+  sub.style.opacity="0";
+  sub.style.transform="translateY(8px)";
+  title.style.opacity="0";
+  title.style.transform="translateY(-10px)";
+  title.style.filter="blur(6px)";
+  setTimeout(()=>{
+    title.textContent=p.title;
+    sub.textContent=p.sub;
+    counter.textContent=String(p.n).padStart(2,"0")+" / 05";
+    title.style.transition="none";
+    title.style.opacity="0";
+    title.style.transform="translateY(10px)";
+    title.style.filter="blur(6px)";
+    requestAnimationFrame(()=>{
+      title.style.transition="opacity .35s ease, transform .35s ease, filter .35s";
+      title.style.opacity="1";
+      title.style.transform="none";
+      title.style.filter="blur(0)";
+      sub.style.transition="opacity .35s ease .1s, transform .35s ease .1s";
+      sub.style.opacity="1";
+      sub.style.transform="none";
+    });
+  },200);
+
+  if(play)clickSound(page);
+}
+
+buttons.forEach(button=>{
+  button.addEventListener("click",()=>select(button.dataset.page));
+});
+
+// Keyboard support mirrors the quick tab switching behavior.
+document.addEventListener("keydown",e=>{
+  const i=buttons.findIndex(b=>b.dataset.page===current);
+  if(e.key==="ArrowRight") select(buttons[(i+1)%buttons.length].dataset.page);
+  if(e.key==="ArrowLeft") select(buttons[(i-1+buttons.length)%buttons.length].dataset.page);
+  if(e.key==="1")select("home");
+  if(e.key==="2")select("search");
+  if(e.key==="3")select("radio");
+  if(e.key==="4")select("library");
+  if(e.key==="5")select("you");
+});
+
+// Small interaction below the original UI: search submit feedback.
+homeSearch.addEventListener("keydown",e=>{
+  if(e.key==="Enter"){
+    toast.textContent=homeSearch.value.trim()?`Searching for "${homeSearch.value.trim()}"`:"Type something to search";
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),1500);
+    clickSound("home");
+  }
+});
+</script>
 </body>
 </html>
