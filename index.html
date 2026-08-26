@@ -143,7 +143,6 @@ h1{
 <body>
 <div class="app">
   <section class="content">
-    <div class="meta"><span class="light"></span><span>ARC</span><span class="dash">—</span><span id="counter">01 / 05</span></div>
     <div class="searchBar" id="searchBar"><input class="searchInput" id="homeSearch" placeholder="Search anything"></div>
     <h1 id="title">Home</h1>
     <div class="sub" id="sub">Picked up exactly where you left it.</div>
@@ -185,7 +184,6 @@ const pages={
 const buttons=[...document.querySelectorAll(".nav button")];
 const title=document.getElementById("title");
 const sub=document.getElementById("sub");
-const counter=document.getElementById("counter");
 const app=document.querySelector(".app");
 const toast=document.getElementById("toast");
 const homeSearch=document.getElementById("homeSearch");
@@ -235,7 +233,6 @@ function select(page,play=true){
   setTimeout(()=>{
     title.textContent=p.title;
     sub.textContent=p.sub;
-    counter.textContent=String(p.n).padStart(2,"0")+" / 05";
     title.style.transition="none";
     title.style.opacity="0";
     title.style.transform="translateY(10px)";
